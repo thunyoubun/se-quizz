@@ -28,7 +28,7 @@ const login = () => {
             <div className="sm:text-sm xl:text-md text-gray-200 font-normal ">
               What is Lorem Ipsum Lorem Ipsum is simply dummy text of the
               printing and typesetting industry Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s when an
+              industry&apos;s standard dummy text ever since the 1500s when an
               unknown printer took a galley of type and scrambled it to make a
               type specimen book it has?
             </div>
@@ -126,7 +126,7 @@ const login = () => {
                 </button>
               </div>
               <p className="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
-                <span>Don't have an account?</span>
+                <span>Don&apos;t have an account?</span>
                 <a
                   href="#"
                   className="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300"
