@@ -20,10 +20,10 @@ const login = () => {
               <BsArrowLeft size={30} />
             </div>
             <div className="sm:text-4xl xl:text-5xl text-violet-500 font-bold leading-tight mb-6">
-              QUIZZ
+              <h1>QUIZZ</h1>
             </div>
             <div className="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">
-              IMPORTER
+              <h1> IMPORTER</h1>
             </div>
             <div className="sm:text-sm xl:text-md text-gray-200 font-normal ">
               What is Lorem Ipsum Lorem Ipsum is simply dummy text of the
@@ -143,7 +143,7 @@ const login = () => {
               <span className="h-px w-16 bg-gray-200"></span>
             </div>
             <div className="flex flex-row justify-center items-center  space-x-3">
-              <a
+              <Link
                 href=""
                 target="_blank"
                 className=" h-11 items-center justify-center mb-6 sm:mb-0 inline-flex rounded-2xl font-bold text-lg   bg-white border-2 border-indigo-500 hover:shadow-lg hover:scale-105 cursor-pointer transition ease-in duration-300"
@@ -152,7 +152,7 @@ const login = () => {
                 <h1 className=" text-ms font-medium pr-6">
                   Continue with Google
                 </h1>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
