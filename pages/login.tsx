@@ -1,6 +1,9 @@
 import React from "react";
+import Router from "next/router";
+
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
+import { BsArrowLeft } from "react-icons/bs";
 
 const login = () => {
   return (
@@ -9,10 +12,19 @@ const login = () => {
         <div className="sm:w-1/2 xl:w-3/5 w-full h-full hidden md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover bg-[url('https://www.freecodecamp.org/news/content/images/size/w2000/2022/02/arnold-francisca-f77Bh3inUpE-unsplash.jpg')] relative">
           <div className="absolute bg-gradient-to-b from-indigo-600 to-blue-500 opacity-75 inset-0 z-0"></div>
           <div className="w-full  max-w-md z-10">
-            <div className="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">
-              QUIZZ IMPORTER
+            <div
+              className=" absolute top-0 left-0 m-4 text-white hover:text-black cursor-pointer hover:border-2 border-blue-500 rounded-full hover:bg-white"
+              onClick={() => Router.back()}
+            >
+              <BsArrowLeft size={30} />
             </div>
-            <div className="sm:text-sm xl:text-md text-gray-200 font-normal">
+            <div className="sm:text-4xl xl:text-5xl text-violet-500 font-bold leading-tight mb-6">
+              QUIZZ
+            </div>
+            <div className="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">
+              IMPORTER
+            </div>
+            <div className="sm:text-sm xl:text-md text-gray-200 font-normal ">
               What is Lorem Ipsum Lorem Ipsum is simply dummy text of the
               printing and typesetting industry Lorem Ipsum has been the
               industry's standard dummy text ever since the 1500s when an
