@@ -59,22 +59,6 @@ const login = () => {
             <form className="mt-8 space-y-6" action="#" method="POST">
               <input type="hidden" name="remember" value="true"></input>
               <div className="relative">
-                {/* <div className="absolute right-3 mt-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-green-500"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                  </svg>
-                </div> */}
                 <label className="ml-3 text-sm font-bold text-gray-700 tracking-wide">
                   Email
                 </label>

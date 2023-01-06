@@ -133,20 +133,20 @@ export default function Home() {
               </p>
             </div>
             <div className="mt-10 gap-5 flex">
-              <a
+              <Link
                 href="/"
                 className=" bg-violet-500 hover:bg-violet-600 hover:scale-105 text-xl py-6 font-normal shadow-lg rounded-xl text-white inline-flex items-center md:px-10 px-5"
               >
                 Get Started
                 <BsArrowRight className="ml-3 " size={30} />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/"
                 className=" bg-white text-xl py-6 hover:scale-105  shadow-lg rounded-xl text-indigo-500 font-semibold inline-flex items-center md:px-8 px-5"
               >
                 <RiBookMarkLine className=" mr-2" />
                 Read Document
-              </a>
+              </Link>
             </div>
           </div>
           {/* Right */}
