@@ -20,7 +20,7 @@ export default function Sidebar() {
         <ul className="space-y-2 mt-2 ">
           <li>
             <Link
-              href="#"
+              href="/dashboard"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
@@ -38,7 +38,7 @@ export default function Sidebar() {
           </li>
           <li>
             <Link
-              href="#"
+              href="/myquizz"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
@@ -52,13 +52,13 @@ export default function Sidebar() {
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap">My Quizz</span>
               <span className="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">
-                1
+                5
               </span>
             </Link>
           </li>
           <li>
             <a
-              href="#"
+              href="/inbox"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
@@ -73,13 +73,13 @@ export default function Sidebar() {
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap">Inbox</span>
               <span className="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">
-                3
+                1
               </span>
             </a>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              href="/user"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
@@ -96,7 +96,7 @@ export default function Sidebar() {
                 ></path>
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap">Users</span>
-            </a>
+            </Link>
           </li>
           <div className=" absolute bottom-5 w-[90%]">
             <hr className="my-2" />

@@ -20,7 +20,7 @@ function Table() {
 
       <td className="p-2 px-6 text-start align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
         <span className="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400">
-          23/04/18
+          01/01/23
         </span>
       </td>
       <td className="p-2 px-10 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">

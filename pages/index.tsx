@@ -25,7 +25,7 @@ export default function Home() {
               </Link>
             </li>
             <li className="p-4  hover:text-gray-900">
-              <Link href="/product">Product</Link>
+              <Link href="/myquizz">Product</Link>
             </li>
             <li className="p-4  hover:text-gray-900">
               <Link href="/document">Document</Link>
@@ -78,7 +78,7 @@ export default function Home() {
                 onClick={handleNav}
                 className="p-4 text-4xl hover:text-gray-500"
               >
-                <Link href="/product">Product</Link>
+                <Link href="/myquizz">Product</Link>
               </li>
               <li
                 onClick={handleNav}
@@ -134,7 +134,7 @@ export default function Home() {
             </div>
             <div className="mt-10 gap-5 flex">
               <Link
-                href="/main"
+                href="/myquizz"
                 className=" bg-violet-500 hover:bg-violet-600 hover:scale-105 text-xl py-6 font-normal shadow-lg rounded-xl text-white inline-flex items-center md:px-10 px-5"
               >
                 Get Started

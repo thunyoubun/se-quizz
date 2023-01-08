@@ -3,7 +3,11 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 
-const Navbar = () => {
+export declare type props = {
+  pathName: string;
+};
+
+const Navbar = ({ pathName }: props) => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
   const [isSideBar, setSideBar] = useState(false);
 
@@ -50,7 +54,7 @@ const Navbar = () => {
         <nav>
           <ol className="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
             <li className="text-sm leading-normal">
-              <Link className="text-white opacity-50" href="javascript:;">
+              <Link className="text-white opacity-50" href="/">
                 Pages
               </Link>
             </li>
@@ -58,10 +62,10 @@ const Navbar = () => {
               className="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']"
               aria-current="page"
             >
-              My Quizz
+              {pathName}
             </li>
           </ol>
-          <h6 className="mb-0 font-bold text-white capitalize">My Quizz</h6>
+          <h6 className="mb-0 font-bold text-white capitalize">{pathName}</h6>
         </nav>
 
         <div className="flex items-center mt-2  sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
