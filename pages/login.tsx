@@ -48,7 +48,7 @@ const login = () => {
           </ul>
         </div>
         <div className="md:flex md:h-screen md:items-center md:justify-center md:my-0 h-full flex items-center justify-center sm:w-2/5 sm:h-screen  w-full xl:w-2/5 sm:p-1  md:p-10 lg:p-14 sm:rounded-lg md:rounded-none md:bg-white bg-blue-500">
-          <div className="max-w-md w-full mx-2 bg-white space-y-8 shadow-lg border sm:border-none rounded-xl px-4 sm:px-0 sm:shadow-none">
+          <div className="max-w-md w-full mx-2 bg-white md:space-y-8 space-y-0  shadow-lg border sm:border-none rounded-xl px-4 sm:px-0 sm:shadow-none">
             <div className="text-center relative items-center">
               <div
                 className=" absolute flex md:hidden left-0 items-center inset-y-0 text-black  hover:scale-105 cursor-pointer "
