@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { ImSwitch } from "react-icons/im";
 import { GoSignOut } from "react-icons/go";
 
@@ -7,19 +8,18 @@ export default function Sidebar() {
     <aside
       className="w-64 h-full hidden md:flex shadow-lg  inset-y-0 flex-wrap items-center justify-between   p-0 my-4 overflow-y-auto antialiased transition-transform duration-300 -translate-x-full bg-white border-0  dark:shadow-none dark:bg-slate-850  max-w-64 ease-nav-brand z-990 rounded-2xl md:left-0 md:translate-x-0"
       aria-label="Sidebar"
-      aria-expanded="false"
     >
       <div className="px-3 w-full py-4 overflow-y-auto rounded-xl bg-white h-full dark:bg-gray-800 relative ">
-        <a href="/" className="flex items-center pl-2.5 mb-5">
+        <Link href="/" className="flex items-center pl-2.5 mb-5">
           <ImSwitch size={30} className=" text-blue-600 h-6 mr-3 sm:h-7" />
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             Deviloper.
           </span>
-        </a>
+        </Link>
         <hr />
         <ul className="space-y-2 mt-2 ">
           <li>
-            <a
+            <Link
               href="#"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -34,10 +34,10 @@ export default function Sidebar() {
                 <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
               </svg>
               <span className="ml-3">Dashboard</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="#"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -54,7 +54,7 @@ export default function Sidebar() {
               <span className="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">
                 1
               </span>
-            </a>
+            </Link>
           </li>
           <li>
             <a
@@ -101,14 +101,14 @@ export default function Sidebar() {
           <div className=" absolute bottom-5 w-[90%]">
             <hr className="my-2" />
             <li>
-              <a
+              <Link
                 href="#"
                 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <GoSignOut size={25} className=" text-gray-500" />
 
                 <span className="flex-1 ml-3 whitespace-nowrap">Sign Out</span>
-              </a>
+              </Link>
             </li>
           </div>
         </ul>

@@ -35,9 +35,9 @@ const Navbar = () => {
         <nav>
           <ol className="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
             <li className="text-sm leading-normal">
-              <a className="text-white opacity-50" href="javascript:;">
+              <Link className="text-white opacity-50" href="javascript:;">
                 Pages
-              </a>
+              </Link>
             </li>
             <li
               className="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']"
@@ -64,13 +64,13 @@ const Navbar = () => {
           </div>
           <ul className="flex justify-end pl-0 mb-0 list-none md-max:w-full">
             <li className="flex  items-center">
-              <a
+              <Link
                 href="/login"
                 className=" flex gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand"
               >
                 <FaUser size={20} />
                 <span className="hidden sm:inline">Sign In</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
