@@ -19,7 +19,7 @@ const main = () => {
       <div className=" z-20 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white">
         <BsPlusLg size={20} />
       </div>
-      <div className="z-10 container w-full overflow-y-scroll  h-full max-h-screen transition-all duration-200 ease-in-out  rounded-xl ">
+      <div className="z-10 container w-full overflow-y-auto  h-full max-h-screen transition-all duration-200 ease-in-out  rounded-xl ">
         <Navbar />
 
         {/* table 1*/}
