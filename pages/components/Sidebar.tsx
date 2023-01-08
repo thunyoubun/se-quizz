@@ -6,7 +6,7 @@ import { GoSignOut } from "react-icons/go";
 export default function Sidebar() {
   return (
     <aside
-      className="w-64 h-full hidden md:flex shadow-lg  inset-y-0 flex-wrap items-center justify-between   p-0 my-4 overflow-y-auto antialiased transition-transform duration-300 -translate-x-full bg-white border-0  dark:shadow-none dark:bg-slate-850  max-w-64 ease-nav-brand z-990 rounded-2xl md:left-0 md:translate-x-0"
+      className="w-64 h-full  shadow-lg  inset-y-0 flex-wrap items-center justify-between   p-0 my-4 overflow-y-auto antialiased transition-transform duration-300   bg-white border-0  dark:shadow-none dark:bg-slate-850  max-w-64 ease-nav-brand z-990 md:translate-x-0 rounded-2xl md:left-0"
       aria-label="Sidebar"
     >
       <div className="px-3 w-full py-4 overflow-y-auto rounded-xl bg-white h-full dark:bg-gray-800 relative ">

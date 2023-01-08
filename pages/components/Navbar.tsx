@@ -4,15 +4,30 @@ import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
-  const [nav, setNav] = useState(false);
-  const [color, setColor] = useState("#0066ff");
-  const [textColor, setTextColor] = useState("white");
+  const [isMenuClicked, setIsMenuClicked] = useState(false);
+  const [isSideBar, setSideBar] = useState(false);
 
-  const handleNav = () => {
-    setNav(!nav);
+  const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
+
+  const updateMenu = () => {
+    if (!isMenuClicked) {
+      setBurgerClass("burger-bar clicked");
+      document.getElementById("nav-sidebar")?.classList.add("nav-expand");
+
+      setSideBar(true);
+    } else {
+      setBurgerClass("burger-bar unclicked");
+      document.getElementById("nav-sidebar")?.classList.remove("nav-expand");
+      setSideBar(false);
+    }
+    setIsMenuClicked(!isMenuClicked);
   };
 
-  useEffect(() => {
+  const handleNav = () => {
+    setIsMenuClicked(!isMenuClicked);
+  };
+
+  /* useEffect(() => {
     const changeColor = () => {
       if (window.scrollY >= 90) {
         setColor("transparent");
@@ -23,7 +38,7 @@ const Navbar = () => {
       }
     };
     window.addEventListener("scroll", changeColor);
-  }, []);
+  }, []); */
 
   return (
     <nav
@@ -71,6 +86,17 @@ const Navbar = () => {
                 <FaUser size={20} />
                 <span className="hidden sm:inline">Sign In</span>
               </Link>
+            </li>
+            <li className=" item-center flex md:hidden ">
+              <button
+                className="burgur-menu w-[4em] flex flex-col items-center py-2 align-middle gap-1 cursor-pointer text-white"
+                onClick={updateMenu}
+                type="button"
+              >
+                <span className={burger_class}></span>
+                <span className={burger_class}></span>
+                <span className={burger_class}></span>
+              </button>
             </li>
           </ul>
         </div>

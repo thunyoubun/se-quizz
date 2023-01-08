@@ -2,6 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (max-width: 1040px) {
+  .nav-expand {
+    display: flex;
+    z-index: 20;
+    position: fixed;
+    height: 95%;
+    margin-left: 2%;
+    animation: sidebar-animate 0.25s linear;
+  }
+}
+
+.burger-bar {
+  width: 35px;
+  height: 5px;
+  background-color: white;
+  border-radius: 0.5em;
+}
+.burger-bar.clicked {
+  width: 50%;
+  height: 5px;
+  background-color: white;
+  border-radius: 0.5em;
+}
+
+.burger-bar.clicked:nth-child(1) {
+  transform: rotate(-45deg) translateY(0.5em) translateX(0em);
+  transition: ease-out 0.5s;
+}
+
+.burger-bar.clicked:nth-child(2) {
+  transform: translateX(-50px);
+  opacity: 0;
+  background: transparent;
+  transition: ease-out 0.5s;
+}
+
+.burger-bar.clicked:nth-child(3) {
+  transform: rotate(45deg) translateY(-0.75em) translateX(-0.25em);
+  transition: ease-out 0.5s;
+}
+
+/* unclicked */
+.burger-bar.unclicked {
+  transform: rotate(0) translateX(0);
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+}
+
 .circles {
   position: absolute;
   top: 0;
@@ -105,5 +152,17 @@
     transform: translateY(-1000px) rotate(720deg);
     opacity: 0;
     border-radius: 100%;
+  }
+}
+
+@keyframes sidebar-animate {
+  0% {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(0%);
+    opacity: 100%;
   }
 }
