@@ -1,10 +1,7 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import {
-  AiOutlineMenu,
-  AiOutlineClose,
-  AiFillGoogleCircle,
-} from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
+import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -29,83 +26,56 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div
-      style={{ backgroundColor: `${color}` }}
-      className=" sticky left-0 top-0 w-full z-10 ease-in duration-300 shadow-md  "
+    <nav
+      className="mt-5 h-max md:right-0 relative flex flex-wrap  z-10 items-center justify-between px-3 md:px-7 py-2  transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start"
+      navbar-main
+      navbar-scroll="false"
     >
-      <div className="max-w-[1240px] m-auto flex justify-between items-center p-4 text-white">
-        <Link href="/">
-          <h1 style={{ color: `${textColor}` }} className="font-bold text-4xl">
-            QUIZZ
-          </h1>
-        </Link>
-        <ul style={{ color: `${textColor}` }} className="hidden sm:flex">
-          <li className="p-4">
-            <Link href="/">Home</Link>
-          </li>
-          <li className="p-4">
-            <Link href="/about">About</Link>
-          </li>
-          <li className="p-4">
-            <Link href="/work">Work</Link>
-          </li>
-          <li className="p-4">
-            <Link href="/contact">Contact</Link>
-          </li>
-          <li className="p-2">
-            <Link href="/login">
-              <button className="border-whites border-2 bg-indigo-600 hover:bg-white hover:text-indigo-600  font-bold py-2 px-4 rounded-md inline-flex items-center">
-                Login
-              </button>
-            </Link>
-          </li>
-        </ul>
+      <div className="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
+        <nav>
+          <ol className="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
+            <li className="text-sm leading-normal">
+              <a className="text-white opacity-50" href="javascript:;">
+                Pages
+              </a>
+            </li>
+            <li
+              className="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']"
+              aria-current="page"
+            >
+              My Quizz
+            </li>
+          </ol>
+          <h6 className="mb-0 font-bold text-white capitalize">My Quizz</h6>
+        </nav>
 
-        {/* Mobile Button */}
-        <div onClick={handleNav} className="block sm:hidden z-10">
-          {nav ? (
-            <AiOutlineClose size={20} style={{ color: `${textColor}` }} />
-          ) : (
-            <AiOutlineMenu size={20} style={{ color: `${textColor}` }} />
-          )}
-        </div>
-        {/* Mobile Menu */}
-        <div
-          className={
-            nav
-              ? "sm:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-blue-400 text-center ease-in duration-300"
-              : "sm:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center w-full h-screen bg-blue-400 text-center ease-in duration-300"
-          }
-        >
-          <ul>
-            <li
-              onClick={handleNav}
-              className="p-4 text-4xl hover:text-gray-500"
-            >
-              <Link href="/">Home</Link>
-            </li>
-            <li
-              onClick={handleNav}
-              className="p-4 text-4xl hover:text-gray-500"
-            >
-              <Link href="/about">About</Link>
-            </li>
-            <li
-              onClick={handleNav}
-              className="p-4 text-4xl hover:text-gray-500"
-            >
-              <Link href="/work">Work</Link>
-            </li>
-            <li
-              onClick={handleNav}
-              className="p-4 text-4xl hover:text-gray-500"
-            >
-              <Link href="/contact">Contact</Link>
+        <div className="flex items-center mt-2  sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
+          <div className=" items-center md:ml-auto md:pr-4 hidden md:flex">
+            <div className="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease">
+              <span className="text-sm ease leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
+                <AiOutlineSearch size={20} />
+              </span>
+              <input
+                type="text"
+                className="pl-9 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 dark:bg-slate-850 dark:text-white bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
+                placeholder="Search..."
+              />
+            </div>
+          </div>
+          <ul className="flex justify-end pl-0 mb-0 list-none md-max:w-full">
+            <li className="flex  items-center">
+              <a
+                href="/login"
+                className=" flex gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand"
+              >
+                <FaUser size={20} />
+                <span className="hidden sm:inline">Sign In</span>
+              </a>
             </li>
           </ul>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
