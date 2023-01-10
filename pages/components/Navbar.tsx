@@ -4,10 +4,11 @@ import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 
 export declare type props = {
+  prePath: string;
   pathName: string;
 };
 
-const Navbar = ({ pathName }: props) => {
+const Navbar = ({ prePath, pathName }: props) => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
   const [isSideBar, setSideBar] = useState(false);
 
@@ -55,7 +56,7 @@ const Navbar = ({ pathName }: props) => {
           <ol className="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
             <li className="text-sm leading-normal">
               <Link className="text-white opacity-50" href="/">
-                Pages
+                {prePath}
               </Link>
             </li>
             <li

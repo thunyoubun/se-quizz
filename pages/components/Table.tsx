@@ -1,6 +1,11 @@
+import Link from "next/link";
 import React from "react";
 
-function Table() {
+export declare type props = {
+  pathName: string;
+};
+
+function Table({ pathName }: props) {
   return (
     <tr>
       <td className="p-2 px-6 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
@@ -32,12 +37,12 @@ function Table() {
         </a>
       </td>
       <td className="p-2  align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-        <a
-          href="#"
+        <Link
+          href={"/admin/quiz/" + pathName}
           className=" text-base font-semibold leading-tight dark:text-green dark:opacity-80 text-white bg-green-500 px-4 py-1 rounded-md hover:bg-green-600"
         >
-          EDIT
-        </a>
+          START
+        </Link>
       </td>
     </tr>
   );

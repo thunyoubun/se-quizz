@@ -20,7 +20,7 @@ export default function Sidebar() {
         <ul className="space-y-2 mt-2 ">
           <li>
             <Link
-              href="/dashboard"
+              href="/pages/dashboard"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
@@ -38,7 +38,7 @@ export default function Sidebar() {
           </li>
           <li>
             <Link
-              href="/myquizz"
+              href="/pages/myquizz"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
@@ -58,7 +58,7 @@ export default function Sidebar() {
           </li>
           <li>
             <Link
-              href="/inbox"
+              href="/pages/inbox"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
@@ -79,7 +79,7 @@ export default function Sidebar() {
           </li>
           <li>
             <Link
-              href="/user"
+              href="/pages/user"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
