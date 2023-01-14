@@ -2,11 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { FaUser } from "react-icons/fa";
 import { RiBookMarkLine } from "react-icons/ri";
 import { BsArrowRight } from "react-icons/bs";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   const [nav, setNav] = useState(false);
+  const { data: session } = useSession();
 
   const handleNav = () => {
     setNav(!nav);
@@ -96,23 +99,43 @@ export default function Home() {
               </li>
             </ul>
           </div>
-
-          <ul className="hidden text-white md:flex">
-            <li className="p-4">
-              <Link href="/login">
-                <button className="  hover:text-black  font-bold py-2 px-4 rounded-md inline-flex align-middle items-center">
-                  Login
-                </button>
-              </Link>
-            </li>
-            <li className="p-4">
-              <Link href="/signin">
-                <button className="border-whites border-2 bg-indigo-600 hover:bg-white hover:text-indigo-600  font-bold py-1 px-4 rounded-md inline-flex items-center">
-                  Sign In
-                </button>
-              </Link>
-            </li>
-          </ul>
+          {session ? (
+            <ul className="hidden text-white md:flex">
+              <li className="flex  items-center">
+                <Link
+                  href="/pages/user"
+                  className=" flex gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand"
+                >
+                  <FaUser size={20} />
+                  <span className="hidden sm:inline">{session.user?.name}</span>
+                  {/* <Image
+                    src={`${session.user?.image}`}
+                    alt="avatar"
+                    width={20}
+                    height={20}
+                    className="hidden sm:inline"
+                  ></Image> */}
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            <ul className="hidden text-white md:flex">
+              <li className="p-4">
+                <Link href="/login">
+                  <button className="  hover:text-black  font-bold py-2 px-4 rounded-md inline-flex align-middle items-center">
+                    Login
+                  </button>
+                </Link>
+              </li>
+              <li className="p-4">
+                <Link href="/signin">
+                  <button className="border-whites border-2 bg-indigo-600 hover:bg-white hover:text-indigo-600  font-bold py-1 px-4 rounded-md inline-flex items-center">
+                    Sign In
+                  </button>
+                </Link>
+              </li>
+            </ul>
+          )}
         </div>
         <div className="px-10 w-full h-fit flex z-10">
           {/* Left */}

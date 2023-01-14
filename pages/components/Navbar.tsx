@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
+import { useSession } from "next-auth/react";
 
 export declare type props = {
   prePath: string;
@@ -11,6 +12,7 @@ export declare type props = {
 const Navbar = ({ prePath, pathName }: props) => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
   const [isSideBar, setSideBar] = useState(false);
+  const { data: session } = useSession();
 
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
 
@@ -26,6 +28,14 @@ const Navbar = ({ prePath, pathName }: props) => {
       setSideBar(false);
     }
     setIsMenuClicked(!isMenuClicked);
+  };
+
+  const navSign = () => {
+    if (!session) {
+      return <Link href="/login">Sign In</Link>;
+    } else {
+      return session.user?.name;
+    }
   };
 
   const handleNav = () => {
@@ -84,13 +94,10 @@ const Navbar = ({ prePath, pathName }: props) => {
           </div>
           <ul className="flex justify-end pl-0 mb-0 list-none md-max:w-full">
             <li className="flex  items-center">
-              <Link
-                href="/login"
-                className=" flex gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand"
-              >
+              <button className=" flex gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
                 <FaUser size={20} />
-                <span className="hidden sm:inline">Sign In</span>
-              </Link>
+                <span className="hidden sm:inline">{navSign()}</span>
+              </button>
             </li>
             <li className=" item-center flex md:hidden ">
               <button

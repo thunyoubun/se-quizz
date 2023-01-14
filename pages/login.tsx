@@ -1,24 +1,38 @@
 import React from "react";
+import { useEffect } from "react";
 import Router from "next/router";
-
+import { GetServerSideProps } from "next";
+import type { Session } from "next-auth";
+import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 import { BsArrowLeft } from "react-icons/bs";
 import Link from "next/link";
 
 const login = () => {
+  const { data: session } = useSession();
+
+  useEffect(() => {}, []);
+
+  const checkLogin = () => {
+    if (session) {
+      Router.replace("/page/myquizz");
+    }
+  };
+
   return (
     <div className="relative min-h-screen flex ">
       <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
         <div className="sm:w-1/2 xl:w-3/5 w-full h-full hidden md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover bg-[url('https://www.freecodecamp.org/news/content/images/size/w2000/2022/02/arnold-francisca-f77Bh3inUpE-unsplash.jpg')] relative">
           <div className="absolute bg-gradient-to-b from-indigo-600 to-blue-500 opacity-75 inset-0 z-0"></div>
           <div className="w-full  max-w-md z-10">
-            <div
+            <Link
+              href="/"
               className=" absolute top-0 left-0 m-4 text-white hover:text-black cursor-pointer hover:border-2 border-blue-500 rounded-full hover:bg-white"
-              onClick={() => Router.back()}
+              /* onClick={() => Router.back()} */
             >
               <BsArrowLeft size={30} />
-            </div>
+            </Link>
             <div className="sm:text-4xl xl:text-5xl text-violet-500 font-bold leading-tight mb-6">
               <h1>QUIZZ</h1>
             </div>
@@ -50,12 +64,13 @@ const login = () => {
         <div className="md:flex md:h-screen md:items-center md:justify-center md:my-0 h-full flex items-center justify-center sm:w-2/5 sm:h-screen  w-full xl:w-2/5 sm:p-1  md:p-10 lg:p-14 sm:rounded-lg md:rounded-none md:bg-white bg-blue-500">
           <div className="max-w-md w-full mx-2 bg-white md:space-y-8 space-y-0  shadow-lg border sm:border-none rounded-xl px-4 sm:px-0 sm:shadow-none">
             <div className="text-center relative items-center">
-              <div
+              <Link
+                href={"/"}
                 className=" absolute flex md:hidden left-0 items-center inset-y-0 text-black  hover:scale-105 cursor-pointer "
-                onClick={() => Router.back()}
+                /* onClick={() => Router.back()} */
               >
                 <BsArrowLeft size={30} />
-              </div>
+              </Link>
               <h2 className="mt-6 text-3xl font-bold text-gray-900">
                 Welcom Back!
               </h2>
@@ -148,17 +163,17 @@ const login = () => {
               </span>
               <span className="h-px w-16 bg-gray-200"></span>
             </div>
+
             <div className="flex flex-row justify-center items-center  space-x-3">
-              <Link
-                href=""
-                target="_blank"
+              <button
+                onClick={() => signIn()}
                 className=" h-11 items-center justify-center mb-6 sm:mb-0 inline-flex rounded-2xl font-bold text-lg   bg-white border-2 border-indigo-500 hover:shadow-lg hover:scale-105 cursor-pointer transition ease-in duration-300"
               >
                 <FcGoogle className="w-12    h-6" />
                 <h1 className=" text-ms font-medium pr-6">
                   Continue with Google
                 </h1>
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -168,3 +183,18 @@ const login = () => {
 };
 
 export default login;
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+  if (session) {
+    return {
+      redirect: {
+        destination: "/pages/myquizz",
+        permant: false,
+      },
+    };
+  }
+  return {
+    props: { session: await getSession(context) },
+  };
+}

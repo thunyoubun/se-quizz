@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ImSwitch } from "react-icons/im";
 import { GoSignOut } from "react-icons/go";
+import { signOut } from "next-auth/react";
 
 export default function Sidebar() {
   return (
@@ -101,14 +102,14 @@ export default function Sidebar() {
           <div className=" absolute bottom-5 w-[90%]">
             <hr className="my-2" />
             <li>
-              <Link
-                href="#"
-                className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              <button
+                onClick={() => signOut()}
+                className="flex items-center text-start w-full p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <GoSignOut size={25} className=" text-gray-500" />
 
                 <span className="flex-1 ml-3 whitespace-nowrap">Sign Out</span>
-              </Link>
+              </button>
             </li>
           </div>
         </ul>
