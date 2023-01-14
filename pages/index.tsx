@@ -50,6 +50,11 @@ export default function Home() {
               </li>
             </ul>
             <ul className=" flex justify-center">
+              <li className="p-4 text-white">
+                <Link href="/login">
+                  <FaUser size={25} />
+                </Link>
+              </li>
               <li
                 onClick={handleNav}
                 className="text-white right-0 z-10 flex items-center"

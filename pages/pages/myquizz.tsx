@@ -8,7 +8,7 @@ import { useSession, getSession } from "next-auth/react";
 
 let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
 
-const myquizz = () => {
+const Myquizz = () => {
   const { data: session, status } = useSession();
   return (
     <div className=" flex leading-default bg-gray-100 h-fit min-h-screen   w-full   ">
@@ -73,7 +73,7 @@ const myquizz = () => {
   );
 };
 
-export default myquizz;
+export default Myquizz;
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);

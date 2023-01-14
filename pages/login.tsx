@@ -9,16 +9,8 @@ import { FaFacebookF } from "react-icons/fa";
 import { BsArrowLeft } from "react-icons/bs";
 import Link from "next/link";
 
-const login = () => {
+const Login = () => {
   const { data: session } = useSession();
-
-  useEffect(() => {}, []);
-
-  const checkLogin = () => {
-    if (session) {
-      Router.replace("/page/myquizz");
-    }
-  };
 
   return (
     <div className="relative min-h-screen flex ">
@@ -182,7 +174,7 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
