@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import Table from "../components/Table";
 import { useSession, getSession } from "next-auth/react";
+import ModalQuiz from "../components/ModalQuiz";
 
 let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
 
@@ -18,9 +19,10 @@ const Myquizz = () => {
       <div id="nav-sidebar" className="z-10 hidden md:flex  md:p-6 mb-2">
         <Sidebar />
       </div>
-      <div className=" z-20 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white">
+      {/* <div className=" z-20 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white">
         <BsPlusLg size={20} />
-      </div>
+      </div> */}
+      <ModalQuiz />
       <div
         className="z-10 container w-full overflow-y-auto relative
         h-full max-h-screen transition-all duration-200 ease-in-out  rounded-xl "
