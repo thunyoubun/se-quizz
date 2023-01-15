@@ -41,7 +41,7 @@ const ModalQuiz = () => {
                     className="bg-transparent border-0 text-black float-right"
                     onClick={() => setShowModal(false)}
                   >
-                    <div className="text-white opacity-7 text-xl block bg-red-500 py-0 rounded-full">
+                    <div className="text-white opacity-7 text-xl block hover:bg-red-600 bg-red-500 py-0 rounded-full">
                       <IoClose size={30} />
                     </div>
                   </button>
@@ -76,6 +76,7 @@ const ModalQuiz = () => {
                       id="file"
                       type="file"
                       accept=".doc,.docx,.xls"
+                      required
                       className="  w-full py-2 px-1 text-black"
                     />
                   </form>

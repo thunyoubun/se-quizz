@@ -158,7 +158,7 @@ const Login = () => {
 
             <div className="flex flex-row justify-center items-center  space-x-3">
               <button
-                onClick={() => signIn()}
+                onClick={() => signIn("google")}
                 className=" h-11 items-center justify-center mb-6 sm:mb-0 inline-flex rounded-2xl font-bold text-lg   bg-white border-2 border-indigo-500 hover:shadow-lg hover:scale-105 cursor-pointer transition ease-in duration-300"
               >
                 <FcGoogle className="w-12    h-6" />

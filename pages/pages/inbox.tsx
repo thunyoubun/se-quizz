@@ -12,7 +12,7 @@ let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
 const Inbox = () => {
   return (
     <div className=" flex leading-default bg-gray-100 h-fit min-h-screen   w-full   ">
-      <div className=" fixed  bg-y-50 w-full bg-center h-80 top-0 bg-[url('https://www.cmu.ac.th/content/organization/7ae5726e-0c18-45f8-ae3c-cdd52e2afd94/15b759ff-b0f7-49d8-afba-6d458ff6cc37.jpg')] min-h-75">
+      <div className=" fixed  bg-y-50 w-full bg-center h-80 top-0 bg-[url('https://www.cmu.ac.th/content/organization/7ae5726e-0c18-45f8-ae3c-cdd52e2afd94/436e7996-fb0f-41f6-a3fd-cf9acd73cf9c.jpg')] min-h-75">
         <span className="absolute top-0 left-0 w-full h-full bg-blue-500 opacity-60"></span>
       </div>
       <div id="nav-sidebar" className="z-10 hidden md:flex  md:p-6 mb-2">
