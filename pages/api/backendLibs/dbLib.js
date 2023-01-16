@@ -16,7 +16,8 @@ export function writeQuizzDB(quizz) {
 }
 
 export function readUsersDB() {
-  const str = fs.readFileSync("db/users.json", {
+  const file = path.join(process.cwd(), "db", "user.json");
+  const str = fs.readFileSync(file, {
     encoding: "utf-8",
   });
   const users = JSON.parse(str);
@@ -25,5 +26,6 @@ export function readUsersDB() {
 
 export function writeUsersDB(users) {
   const str = JSON.stringify(users);
-  fs.writeFileSync("db/users.json", str, { encoding: "utf-8" });
+  const file = path.join(process.cwd(), "db", "user.json");
+  fs.writeFileSync(file, str, { encoding: "utf-8" });
 }
