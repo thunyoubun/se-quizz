@@ -1,11 +1,11 @@
 import { readQuizzDB, writeQuizzDB } from "../backendLibs/dbLib";
 
-export default function quizIdRoute(req, res) {
+export default function quizIdRoute(req: any, res: any) {
   if (req.method === "DELETE") {
     const quiz = readQuizzDB();
     const id = req.query.id;
 
-    const quizIdx = quiz.findIndex((x) => x.id === id);
+    const quizIdx = quiz.findIndex((x: any) => x.id === id);
     if (quizIdx === -1)
       return res
         .status(404)
@@ -23,7 +23,7 @@ export default function quizIdRoute(req, res) {
     if (typeof req.body.completed !== "boolean")
       return res.status(400).json({ ok: false, message: "Invalid Input" });
 
-    const quizIdx = quiz.findIndex((x) => x.id === id);
+    const quizIdx = quiz.findIndex((x: any) => x.id === id);
     if (quizIdx === -1)
       return res
         .status(404)
