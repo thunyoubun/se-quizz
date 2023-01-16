@@ -166,7 +166,7 @@ export default function Home() {
                 className=" bg-violet-500 hover:bg-violet-600 hover:scale-105 text-xl py-6 font-normal shadow-lg rounded-xl text-white inline-flex items-center md:px-10 px-5"
               >
                 Get Started
-                <BsArrowRight className="ml-3 " size={30} />
+                <BsArrowRight className="ml-3 animate-bounceX   " size={30} />
               </Link>
               <Link
                 href="/documents"

@@ -26,6 +26,21 @@ module.exports = {
       },
 
       animation: { modalAnime: "modal 0.5s ease-in-out " },
+
+      keyframes: {
+        bounceX: {
+          "0%": {
+            transform: "translateX(-25%)",
+          },
+          "50%": {
+            transform: "none",
+          },
+          "100%": {
+            transform: "translateX(-25%)",
+          },
+        },
+      },
+      animation: { bounceX: "bounceX 1.5s linear  infinite" },
     },
   },
   plugins: [],
