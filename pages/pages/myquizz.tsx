@@ -129,12 +129,9 @@ export default function Myquizz({ data }: any) {
                             </span>
                           </td>
                           <td className="p-2 px-10 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                            <a
-                              href=""
-                              className="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400"
-                            >
+                            <span className="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400">
                               10/10
-                            </a>
+                            </span>
                           </td>
                           <td className="p-2 gap-2 flex flex-row justify-center  align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                             <Link

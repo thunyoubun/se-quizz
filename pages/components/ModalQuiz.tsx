@@ -6,9 +6,11 @@ import { BsPlusLg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 
 const ModalQuiz = () => {
-  const [showModal, setShowModal] = useState(false);
   const { data: session, status } = useSession();
+
+  const [showModal, setShowModal] = useState(false);
   const [quizText, setQuizText] = useState("");
+  const [quizFile, setQuizFile] = useState("");
   const [quizs, setQuizs] = useState([]);
   const date = new Date().toLocaleDateString("en-US", {
     day: "numeric",
@@ -68,8 +70,8 @@ const ModalQuiz = () => {
           <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-full mx-4   my-6  max-w-lg translate-x-0 transition-transform duration-300 ease-in-out animate-modalAnime ">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
-                  <h3 className="text-3xl font=semibold">Add Quiz</h3>
+                <div className="flex bg-blue-400 text-white items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
+                  <h3 className="text-3xl font-semibold">Import Quiz</h3>
                   <button
                     className="bg-transparent border-0 text-black float-right"
                     onClick={() => setShowModal(false)}
@@ -81,6 +83,7 @@ const ModalQuiz = () => {
                 </div>
                 <div className="relative px-6 flex-auto">
                   <form
+                    action=""
                     className=" rounded px-8 pt-6 pb-8 w-full"
                     method="POST"
                   >
@@ -112,22 +115,26 @@ const ModalQuiz = () => {
                     <input
                       id="file"
                       type="file"
+                      onChange={(e) => setQuizFile(e.target.value)}
+                      value={quizFile}
                       accept=".doc,.docx,.xls"
                       required
                       className="  w-full py-2 px-1 text-black"
                     />
-                  </form>
-                </div>
-                <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
-                  <Link href={"/pages/myquizz"}>
-                    <button
-                      className="text-white w-full bg-blue-500 hover:bg-blue-600 font-bold uppercase text-sm px-6 py-3  rounded-md shadow-md  outline-none focus:outline-none mr-1 mb-1"
-                      type="submit"
-                      onClick={() => callPostQuiz()}
+
+                    <Link
+                      href={"/pages/myquizz"}
+                      className="w-full flex items-center justify-center py-6 border-t border-solid border-blueGray-200 rounded-b"
                     >
-                      Submit
-                    </button>
-                  </Link>
+                      <button
+                        type="submit"
+                        className="text-white w-full bg-blue-500 hover:bg-blue-600 font-bold uppercase text-sm px-6 py-3  rounded-md shadow-md  outline-none focus:outline-none mr-1 mb-1"
+                        onClick={() => callPostQuiz()}
+                      >
+                        Submit
+                      </button>
+                    </Link>
+                  </form>
                 </div>
               </div>
             </div>
