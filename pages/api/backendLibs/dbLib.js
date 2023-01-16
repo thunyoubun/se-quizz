@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 export function readQuizzDB() {
-  const file = path.join(process.cwd(), "public/tmp", "quiz.json");
+  const file = path.join(process.cwd(), "/tmp", "quiz.json");
   const str = fs.readFileSync(file, {
     encoding: "utf-8",
   });
@@ -11,12 +11,12 @@ export function readQuizzDB() {
 
 export function writeQuizzDB(quizz) {
   const str = JSON.stringify(quizz);
-  const file = path.join(process.cwd(), "public/tmp", "quiz.json");
+  const file = path.join(process.cwd(), "/tmp", "quiz.json");
   fs.writeFileSync(file, str, { encoding: "utf-8" });
 }
 
 export function readUsersDB() {
-  const file = path.join(process.cwd(), "public/tmp", "user.json");
+  const file = path.join(process.cwd(), "/tmp", "user.json");
   const str = fs.readFileSync(file, {
     encoding: "utf-8",
   });
@@ -26,6 +26,6 @@ export function readUsersDB() {
 
 export function writeUsersDB(users) {
   const str = JSON.stringify(users);
-  const file = path.join(process.cwd(), "public/tmp", "user.json");
+  const file = path.join(process.cwd(), "/tmp", "user.json");
   fs.writeFileSync(file, str, { encoding: "utf-8" });
 }
