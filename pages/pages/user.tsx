@@ -1,17 +1,22 @@
-import React from "react";
-import { IoSettingsSharp } from "react-icons/io5";
-import { BsPlusLg } from "react-icons/bs";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import Table from "../components/Table";
-import { AiFillSignal, AiOutlineRise } from "react-icons/ai";
+
 import { useSession, getSession } from "next-auth/react";
 import Image from "next/image";
 
-let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
-
 const User = () => {
   const { data: session, status } = useSession();
+
+  const [name, setName] = useState<string | null | undefined | any>("");
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      setName(session?.user?.image);
+    } else if (status === "loading" || status === "unauthenticated") {
+      setName("/assets/empty-profile.png");
+    }
+  }, []);
 
   return (
     <div className=" flex leading-default bg-gray-100 h-fit min-h-screen   w-full   ">
@@ -37,7 +42,14 @@ const User = () => {
                   <div className="  flex flex-col gap-2 justify-center items-center text-center p-2 ">
                     <span className=" bg-white h-2/3 w-full absolute bottom-0 -z-10"></span>
                     <span className=" bg-blue-500 h-2/5 w-full absolute top-0 rounded-t-md "></span>
-                    <div className="border-4  border-white bg-violet-400  h-40 w-40 rounded-full z-20"></div>
+
+                    <Image
+                      src={name}
+                      width={160}
+                      height={160}
+                      alt=""
+                      className="border-4 bg-contain  border-white bg-violet-700  h-40 w-40 rounded-full z-20"
+                    />
                     <h1 className=" font-bold text-3xl text-gray-500 z-20">
                       {session?.user?.name}
                     </h1>

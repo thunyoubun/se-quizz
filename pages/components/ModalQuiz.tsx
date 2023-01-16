@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
@@ -6,6 +7,13 @@ import { IoClose } from "react-icons/io5";
 const ModalQuiz = () => {
   const [showModal, setShowModal] = useState(false);
   const { data: session, status } = useSession();
+  const [quizText, setQuizText] = useState("");
+  const [quizs, setQuizs] = useState([]);
+  const date = new Date().toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+  });
 
   const updateMenu = () => {
     if (!showModal) {
@@ -14,6 +22,41 @@ const ModalQuiz = () => {
     } else {
       setShowModal(false);
       document.getElementById("modal-w")?.classList.remove("modal-expand");
+    }
+  };
+
+  const callGetQuiz = async () => {
+    try {
+      const resp = await axios.get("/api/quiz");
+      if (resp.data.ok) setQuizs(resp.data.quiz);
+    } catch (err: any) {
+      console.log(err.response.data.mesasge);
+    }
+  };
+
+  const callPostQuiz = async () => {
+    try {
+      const resp = await axios.post("/api/quiz", {
+        subject: quizText,
+        date: date,
+        auth: session?.user?.name?.toString(),
+        completed: false,
+      });
+      if (resp.data.ok) await callGetQuiz();
+    } catch (err: any) {
+      alert(err.response.data.message);
+    }
+    setShowModal(false);
+  };
+
+  const callPutQuiz = async (id: any, completed: any) => {
+    try {
+      const resp = await axios.put(`/api/quiz/${id}`, {
+        completed,
+      });
+      if (resp.data.ok) callGetQuiz();
+    } catch (err: any) {
+      alert(err.response.data.message);
     }
   };
 
@@ -47,14 +90,18 @@ const ModalQuiz = () => {
                   </button>
                 </div>
                 <div className="relative px-6 flex-auto">
-                  <form className=" rounded px-8 pt-6 pb-8 w-full">
+                  <form
+                    className=" rounded px-8 pt-6 pb-8 w-full"
+                    method="POST"
+                  >
                     <label className="block text-black text-sm font-bold mb-1">
                       Subject
                     </label>
                     <input
                       id="subject"
                       required
-                      type="string"
+                      onChange={(e) => setQuizText(e.target.value)}
+                      value={quizText}
                       className="appearance-none focus:outline-none focus:shadow-outline focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
                     />
                     <label className="block text-black text-sm font-bold mb-1">
@@ -84,8 +131,8 @@ const ModalQuiz = () => {
                 <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
                   <button
                     className="text-white w-full bg-blue-500 hover:bg-blue-600 font-bold uppercase text-sm px-6 py-3  rounded-md shadow-md  outline-none focus:outline-none mr-1 mb-1"
-                    type="button"
-                    onClick={() => setShowModal(false)}
+                    type="submit"
+                    onClick={() => callPostQuiz()}
                   >
                     Submit
                   </button>

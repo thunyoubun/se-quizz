@@ -70,7 +70,7 @@ const Quizz = () => {
               </div>
             </div>
           </div>
-        </div>{" "}
+        </div>
         <Footer />
       </div>
     </div>
