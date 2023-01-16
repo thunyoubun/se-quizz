@@ -1,7 +1,7 @@
 import { readQuizzDB, writeQuizzDB } from "../../backendLibs/dbLib";
 import { v4 as uuidv4 } from "uuid";
 
-export default function QuizzRoute(req, res) {
+export default function QuizzRoute(req: any, res: any) {
   if (req.method === "GET") {
     //get quizz of that user
     const quiz = readQuizzDB();
