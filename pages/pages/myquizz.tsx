@@ -104,7 +104,10 @@ export default function Myquizz({ data }: any) {
                   {data
                     .map((x: any, index: any) => {
                       return (
-                        <tr>
+                        <tr
+                          key={index}
+                          className=" hover:bg-gray-100 rounded-md "
+                        >
                           <td className="p-2 px-6 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                             <div className="flex  py-1">
                               <div className="flex flex-col justify-center">
@@ -136,14 +139,14 @@ export default function Myquizz({ data }: any) {
                           <td className="p-2 gap-2 flex flex-row justify-center  align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                             <Link
                               href={"/admin/quiz/" + x.pathName}
-                              className="flex gap-1 text-base font-semibold leading-tight dark:text-green dark:opacity-80 text-white bg-gradient-to-r from-green-500 to-green-600  hover:bg-gradient-to-l hover:from-green-500 hover:to-green-600  p-4  tracking-wide  shadow-lg cursor-pointer transition ease-in duration-500 px-4 py-1 rounded-md "
+                              className="hover:scale-105 text-base font-semibold leading-tight dark:text-green dark:opacity-80 text-white bg-gradient-to-r from-green-500 to-green-600  hover:bg-gradient-to-l hover:from-green-500 hover:to-green-600  p-4  tracking-wide  shadow-lg cursor-pointer transition ease-in duration-300 px-4 py-1 rounded-md "
                             >
                               <MdOutlineNotStarted size={25} />
                             </Link>
                             <Link href="/pages/myquizz">
                               <button
                                 onClick={() => callDeleteQuiz(x.id)}
-                                className=" text-base font-semibold leading-tight dark:text-green dark:opacity-80 text-white bg-gradient-to-r from-red-500 to-red-600  hover:bg-gradient-to-l hover:from-red-500 hover:to-red-600  p-4  tracking-wide  shadow-lg cursor-pointer transition ease-in duration-500 px-4 py-1 rounded-md"
+                                className="hover:scale-105 text-base font-semibold leading-tight dark:text-green dark:opacity-80 text-white bg-gradient-to-r from-red-500 to-red-600  hover:bg-gradient-to-l hover:from-red-500 hover:to-red-600  p-4  tracking-wide  shadow-lg cursor-pointer transition ease-in duration-300 px-4 py-1 rounded-md"
                               >
                                 <RiDeleteBin5Line size={25} />
                               </button>
