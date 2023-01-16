@@ -1,4 +1,4 @@
-import { readQuizzDB, writeQuizzDB } from "../../public/backendLibs/dbLib";
+import { readQuizzDB, writeQuizzDB } from "../../backendLibs/dbLib";
 import { v4 as uuidv4 } from "uuid";
 
 export default function QuizzRoute(req: any, res: any) {
