@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import React, { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
@@ -47,17 +48,6 @@ const ModalQuiz = () => {
       alert(err.response.data.message);
     }
     setShowModal(false);
-  };
-
-  const callPutQuiz = async (id: any, completed: any) => {
-    try {
-      const resp = await axios.put(`/api/quiz/${id}`, {
-        completed,
-      });
-      if (resp.data.ok) callGetQuiz();
-    } catch (err: any) {
-      alert(err.response.data.message);
-    }
   };
 
   return (
@@ -129,13 +119,15 @@ const ModalQuiz = () => {
                   </form>
                 </div>
                 <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
-                  <button
-                    className="text-white w-full bg-blue-500 hover:bg-blue-600 font-bold uppercase text-sm px-6 py-3  rounded-md shadow-md  outline-none focus:outline-none mr-1 mb-1"
-                    type="submit"
-                    onClick={() => callPostQuiz()}
-                  >
-                    Submit
-                  </button>
+                  <Link href={"/pages/myquizz"}>
+                    <button
+                      className="text-white w-full bg-blue-500 hover:bg-blue-600 font-bold uppercase text-sm px-6 py-3  rounded-md shadow-md  outline-none focus:outline-none mr-1 mb-1"
+                      type="submit"
+                      onClick={() => callPostQuiz()}
+                    >
+                      Submit
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
