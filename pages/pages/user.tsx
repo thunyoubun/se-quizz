@@ -48,7 +48,7 @@ const User = () => {
                       width={160}
                       height={160}
                       alt=""
-                      className="border-4 bg-contain  border-white bg-violet-700  h-40 w-40 rounded-full z-20"
+                      className="border-4 bg-contain  border-white   h-40 w-40 rounded-full z-20"
                     />
                     <h1 className=" font-bold text-3xl text-gray-500 z-20">
                       {session?.user?.name}

@@ -12,7 +12,16 @@ export declare type props = {
 const Navbar = ({ prePath, pathName }: props) => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
   const [isSideBar, setSideBar] = useState(false);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const [name, setName] = useState<string | null | undefined | any>("");
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      setName(session?.user?.image);
+    } else if (status === "loading" || status === "unauthenticated") {
+      setName("/assets/empty-profile.png");
+    }
+  }, []);
 
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
 
@@ -41,19 +50,6 @@ const Navbar = ({ prePath, pathName }: props) => {
   const handleNav = () => {
     setIsMenuClicked(!isMenuClicked);
   };
-
-  /* useEffect(() => {
-    const changeColor = () => {
-      if (window.scrollY >= 90) {
-        setColor("transparent");
-        setTextColor("white");
-      } else {
-        setColor("#0066ff");
-        setTextColor("white");
-      }
-    };
-    window.addEventListener("scroll", changeColor);
-  }, []); */
 
   return (
     <nav
@@ -92,10 +88,17 @@ const Navbar = ({ prePath, pathName }: props) => {
               />
             </div>
           </div>
-          <ul className="flex justify-end pl-0 mb-0 list-none md-max:w-full">
+          <ul className="flex items-center justify-end pl-0 mb-0 list-none md-max:w-full">
             <li className="flex  items-center">
-              <button className=" flex gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
-                <FaUser size={20} />
+              <button className="  rounded-md flex align-middle justify-center items-center gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
+                <img
+                  src={name}
+                  alt=""
+                  className="bg-contain border-2 hidden md:flex border-white  h-10 w-10 rounded-full z-20"
+                />
+
+                <FaUser size={20} className="md:hidden flex" />
+
                 <span className="hidden sm:inline">{navSign()}</span>
               </button>
             </li>
