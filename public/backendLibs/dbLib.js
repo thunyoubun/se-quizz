@@ -1,7 +1,7 @@
 import fs from "fs";
 
 export function readQuizzDB() {
-  const str = fs.readFileSync("db/quiz.json", {
+  const str = fs.readFileSync("public/db/quiz.json", {
     encoding: "utf-8",
   });
   const quizz = JSON.parse(str);
@@ -10,11 +10,11 @@ export function readQuizzDB() {
 
 export function writeQuizzDB(quizz) {
   const str = JSON.stringify(quizz);
-  fs.writeFileSync("db/quiz.json", str, { encoding: "utf-8" });
+  fs.writeFileSync("public/db/quiz.json", str, { encoding: "utf-8" });
 }
 
 export function readUsersDB() {
-  const str = fs.readFileSync("db/users.json", {
+  const str = fs.readFileSync("public/db/users.json", {
     encoding: "utf-8",
   });
   const users = JSON.parse(str);
@@ -23,5 +23,5 @@ export function readUsersDB() {
 
 export function writeUsersDB(users) {
   const str = JSON.stringify(users);
-  fs.writeFileSync("db/users.json", str, { encoding: "utf-8" });
+  fs.writeFileSync("public/db/users.json", str, { encoding: "utf-8" });
 }
