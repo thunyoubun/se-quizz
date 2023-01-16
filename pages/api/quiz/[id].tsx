@@ -1,4 +1,4 @@
-import { readQuizzDB, writeQuizzDB } from "../backendLibs/dbLib";
+import { readQuizzDB, writeQuizzDB } from "../../../backendLibs/dbLib";
 
 export default function quizIdRoute(req: any, res: any) {
   if (req.method === "DELETE") {
