@@ -1,7 +1,8 @@
 import fs from "fs";
-
+import path from "path";
 export function readQuizzDB() {
-  const str = fs.readFileSync("db/quiz.json", {
+  const file = path.join(process.cwd(), "db", "quiz.json");
+  const str = fs.readFileSync(file, {
     encoding: "utf-8",
   });
   const quizz = JSON.parse(str);
@@ -10,7 +11,8 @@ export function readQuizzDB() {
 
 export function writeQuizzDB(quizz) {
   const str = JSON.stringify(quizz);
-  fs.writeFileSync("db/quiz.json", str, { encoding: "utf-8" });
+  const file = path.join(process.cwd(), "db", "quiz.json");
+  fs.writeFileSync(file, str, { encoding: "utf-8" });
 }
 
 export function readUsersDB() {
