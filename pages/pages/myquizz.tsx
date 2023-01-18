@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import Table from "../components/Table";
-import { useSession, getSession } from "next-auth/react";
+import { useSession, getSession, signIn } from "next-auth/react";
 import ModalQuiz from "../components/ModalQuiz";
 import Link from "next/link";
 import axios from "axios";
@@ -14,6 +14,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 
 export default function Myquizz({ data }: any) {
   const { data: session, status } = useSession();
+  const [authData, setAuthData] = useState(null);
   const [quizs, setQuizs] = useState([]);
 
   const callGetQuiz = async () => {
@@ -165,14 +166,17 @@ export default function Myquizz({ data }: any) {
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/quiz`);
+  const res = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`);
+  console.log(`${process.env.NEXTAUTH_URL}api/quiz`);
+
   const data = await res.json();
   const quiz = data.quiz;
+  console.log(quiz);
 
   if (!session) {
     return {
       redirect: {
-        destination: "/login",
+        destination: "/",
         permant: false,
       },
     };

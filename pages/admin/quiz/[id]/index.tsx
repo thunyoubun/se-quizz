@@ -11,7 +11,7 @@ import { MdOutlineNotStarted } from "react-icons/md";
 import { RiQuestionAnswerFill } from "react-icons/ri";
 import HeadQuizz from "../../../components/HeadQuizz";
 import Footer from "../../../components/Footer";
-import { getSession } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 
 const Quizz = () => {
   const router = useRouter();
@@ -84,7 +84,7 @@ export async function getServerSideProps(context: any) {
   if (!session) {
     return {
       redirect: {
-        destination: "/login",
+        destination: signIn(),
         permant: false,
       },
     };

@@ -39,6 +39,15 @@ let quizz = [
   },
 ];
 
+let users = [
+  {
+    username: "admin1",
+    //raw password is "1234"
+    password: "$2a$12$6lU7JRPa1lbbxnZlGBGJVOWcLxCxKphY2hyhMFydu8Yiyn.kWLAou",
+    isAdmin: true,
+  },
+];
+
 export function readQuizzDB() {
   if (process.env.NODE_ENV === "development") {
     const str = fs.readFileSync("db/quiz.json", {

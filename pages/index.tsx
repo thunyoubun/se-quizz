@@ -5,7 +5,7 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { RiBookMarkLine } from "react-icons/ri";
 import { BsArrowRight } from "react-icons/bs";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 export default function Home() {
   const [nav, setNav] = useState(false);
@@ -51,7 +51,7 @@ export default function Home() {
             </ul>
             <ul className=" flex justify-center">
               <li className="p-4 text-white">
-                <Link href="/login">
+                <Link href="/auth/signin">
                   <FaUser size={25} />
                 </Link>
               </li>
@@ -126,16 +126,17 @@ export default function Home() {
           ) : (
             <ul className="hidden text-white md:flex">
               <li className="p-4">
-                <Link href="/login">
-                  <button className="  hover:text-black  font-bold py-2 px-4 rounded-md inline-flex align-middle items-center">
-                    Login
-                  </button>
-                </Link>
+                <button
+                  onClick={() => signIn()}
+                  className="  hover:text-black  font-bold py-2 px-4 rounded-md inline-flex align-middle items-center"
+                >
+                  Login
+                </button>
               </li>
               <li className="p-4">
-                <Link href="/signin">
+                <Link href="/auth/register">
                   <button className="border-whites border-2 bg-indigo-600 hover:bg-white hover:text-indigo-600  font-bold py-1 px-4 rounded-md inline-flex items-center">
-                    Sign In
+                    Sign Up
                   </button>
                 </Link>
               </li>

@@ -18,7 +18,8 @@ const Navbar = ({ prePath, pathName }: props) => {
   useEffect(() => {
     if (status === "authenticated") {
       setName(session?.user?.image);
-    } else if (status === "loading" || status === "unauthenticated") {
+    }
+    if (name === "") {
       setName("/assets/empty-profile.png");
     }
   }, []);
@@ -41,7 +42,7 @@ const Navbar = ({ prePath, pathName }: props) => {
 
   const navSign = () => {
     if (!session) {
-      return <Link href="/login">Sign In</Link>;
+      return <Link href="/auth/login">Sign In</Link>;
     } else {
       return session.user?.name;
     }

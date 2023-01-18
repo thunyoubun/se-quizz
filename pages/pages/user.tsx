@@ -4,17 +4,31 @@ import Navbar from "../components/Navbar";
 
 import { useSession, getSession } from "next-auth/react";
 import Image from "next/image";
+import axios from "axios";
 
 const User = () => {
   const { data: session, status } = useSession();
 
-  const [name, setName] = useState<string | null | undefined | any>("");
+  const [avatar, setAvatar] = useState<string | null | undefined | any>("");
+  const [username, setUserName] = useState<string | null | undefined | any>("");
+  const [Fname, setFname] = useState<string | null | undefined | any>("");
+  const [Lname, setLname] = useState<string | null | undefined | any>("");
+  console.log(session);
+
+  async function updateUser() {
+    const res = await axios({
+      method: "PUT",
+    });
+  }
 
   useEffect(() => {
-    if (status === "authenticated") {
-      setName(session?.user?.image);
-    } else if (status === "loading" || status === "unauthenticated") {
-      setName("/assets/empty-profile.png");
+    setAvatar(session?.user?.image);
+    setUserName(session?.user?.username);
+    setFname(session?.user?.name);
+    setLname(session?.user?.Lname);
+
+    if (avatar === "" || avatar === null || avatar === undefined) {
+      setAvatar("/assets/empty-profile.png");
     }
   }, []);
 
@@ -44,7 +58,7 @@ const User = () => {
                     <span className=" bg-blue-500 h-2/5 w-full absolute top-0 rounded-t-md "></span>
 
                     <Image
-                      src={name}
+                      src={avatar}
                       width={160}
                       height={160}
                       alt=""
@@ -95,7 +109,7 @@ const User = () => {
                     <h1>User Information</h1>
                   </div>
 
-                  <form className=" space-y-6" action="#" method="POST">
+                  <form className=" space-y-6">
                     <div className="flex gap-2">
                       <div className="w-1/2 ">
                         <label className=" text-sm font-bold text-gray-700 tracking-wide">
@@ -104,9 +118,9 @@ const User = () => {
                         <input
                           className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                           type="text"
-                          placeholder="Enter your email"
+                          placeholder="Enter your username"
                           disabled
-                          value={session?.user?.name?.toString()}
+                          value={username}
                         ></input>
                       </div>
 
@@ -131,6 +145,8 @@ const User = () => {
                         <input
                           className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                           type="text"
+                          onChange={(e) => setFname(e.target.value)}
+                          value={Fname}
                           placeholder="Enter your first name"
                         ></input>
                       </div>
@@ -140,14 +156,16 @@ const User = () => {
                           Last Name
                         </label>
                         <input
+                          onChange={(e) => setLname(e.target.value)}
                           className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                           type="text"
+                          value={Lname}
                           placeholder="Enter your last name"
                         ></input>
                       </div>
                     </div>
                     <button
-                      type="submit"
+                      onClick={() => callPutTodo()}
                       className="w-full flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600  hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
                     >
                       SUBMIT
@@ -177,7 +195,7 @@ export async function getServerSideProps(context: any) {
   if (!session) {
     return {
       redirect: {
-        destination: "/login",
+        destination: "/",
         permant: false,
       },
     };

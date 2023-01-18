@@ -5,7 +5,7 @@ import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import Table from "../components/Table";
 import Footer from "../components/Footer";
-import { getSession } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 
 let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
 
@@ -99,7 +99,7 @@ export async function getServerSideProps(context: any) {
   if (!session) {
     return {
       redirect: {
-        destination: "/login",
+        destination: "/",
         permant: false,
       },
     };
