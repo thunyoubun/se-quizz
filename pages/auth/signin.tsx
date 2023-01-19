@@ -221,12 +221,12 @@ const Login = ({ csrfToken }: any) => {
                   </div>
                   <p className="flex flex-row gap-2 items-center justify-center mt-10 text-center text-md text-gray-500">
                     <span>Don&apos;t have an account?</span>
-                    <a
+                    <Link
                       href="/auth/register"
                       className="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300"
                     >
                       Sign up
-                    </a>
+                    </Link>
                   </p>
                 </form>
               )}

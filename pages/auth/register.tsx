@@ -224,12 +224,12 @@ const Register = () => {
               </div>
               <p className="flex gap-2 items-center justify-center my-5 text-center text-md text-gray-500">
                 <span>Already have an account?</span>
-                <a
+                <Link
                   href="/auth/signin"
                   className="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300"
                 >
                   Sign In
-                </a>
+                </Link>
               </p>
             </form>
             {/* <div className="flex items-center justify-center space-x-2">
