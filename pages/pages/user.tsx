@@ -15,7 +15,7 @@ const User = () => {
   const [username, setUserName] = useState<string | null | undefined | any>("");
   const [Fname, setFname] = useState<string | null | undefined | any>("");
   const [Lname, setLname] = useState<string | null | undefined | any>("");
-  let [user, setUser] = useState([{ name: "name" }]);
+  let [user, setUser] = useState([]);
   const callGetUser = async () => {
     try {
       const resp = await axios.get(`/api/user`, {
