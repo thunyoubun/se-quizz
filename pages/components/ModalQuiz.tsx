@@ -108,16 +108,14 @@ const ModalQuiz = () => {
                     />
                     <label className="block text-black text-sm font-bold mb-1">
                       Files
-                      <span className="ml-2 text-red-500">
-                        (.doc , .docx, .xls)
-                      </span>
+                      <span className="ml-2 text-red-500">(.docx)</span>
                     </label>
                     <input
                       id="file"
                       type="file"
                       onChange={(e) => setQuizFile(e.target.value)}
                       value={quizFile}
-                      accept=".doc,.docx,.xls"
+                      accept=".doc"
                       required
                       className="  w-full py-2 px-1 text-black"
                     />

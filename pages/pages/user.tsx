@@ -27,8 +27,10 @@ const User = () => {
     setFname(session?.user?.name);
     setLname(session?.user?.Lname);
 
-    if (avatar === "" || avatar === null || avatar === undefined) {
+    if (session?.user.image === undefined || session.user.image === null) {
       setAvatar("/assets/empty-profile.png");
+    } else {
+      setAvatar(session?.user.image);
     }
   }, []);
 

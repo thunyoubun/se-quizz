@@ -13,14 +13,13 @@ const Navbar = ({ prePath, pathName }: props) => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
   const [isSideBar, setSideBar] = useState(false);
   const { data: session, status } = useSession();
-  const [name, setName] = useState<string | null | undefined | any>("");
+  const [avatar, setAvatar] = useState<string | null | undefined | any>("");
 
   useEffect(() => {
-    if (status === "authenticated") {
-      setName(session?.user?.image);
-    }
-    if (name === "") {
-      setName("/assets/empty-profile.png");
+    if (session?.user.image === undefined || session.user.image === null) {
+      setAvatar("/assets/empty-profile.png");
+    } else {
+      setAvatar(session?.user.image);
     }
   }, []);
 
@@ -94,7 +93,7 @@ const Navbar = ({ prePath, pathName }: props) => {
               <Link href={"/pages/user"}>
                 <button className="  rounded-md flex align-middle justify-center items-center gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
                   <img
-                    src={name}
+                    src={avatar}
                     alt=""
                     className="bg-contain border-2 hidden md:flex border-white  h-10 w-10 rounded-full z-20"
                   />
