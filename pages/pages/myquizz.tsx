@@ -167,8 +167,6 @@ export default function Myquizz({ data }: any) {
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
   const res = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`);
-  console.log(`${process.env.NEXTAUTH_URL}api/quiz`);
-
   const data = await res.json();
   const quiz = data.quiz;
   console.log(quiz);

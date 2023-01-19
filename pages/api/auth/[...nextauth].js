@@ -41,7 +41,7 @@ export default NextAuth({
         });
 
         const user = await res.json();
-        console.log("userPrint :", user);
+        /*  console.log("userPrint :", user); */
         if (!res.ok) {
           throw new Error(user.message);
         }
@@ -69,7 +69,7 @@ export default NextAuth({
           refreshToken: user.refreshToken,
         };
       }
-      console.log("token = ", token);
+      /* console.log("token = ", token); */
       return token;
     },
 
@@ -82,7 +82,7 @@ export default NextAuth({
       session.user.refreshToken = token.refreshToken;
       session.user.accessTokenExpires = token.accessTokenExpires;
 
-      console.log("session = ", session);
+      /* console.log("session = ", session); */
       return session;
     },
   },

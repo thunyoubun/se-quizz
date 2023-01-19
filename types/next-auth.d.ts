@@ -13,6 +13,7 @@ declare module "next-auth" {
       Lname: string;
       image: string;
       email: string;
+      accessToken: string;
     };
   }
 }

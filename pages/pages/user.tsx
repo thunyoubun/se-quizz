@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import { useSession, getSession } from "next-auth/react";
 import Image from "next/image";
 import axios from "axios";
+import { log } from "console";
+import Footer from "../components/Footer";
 
 const User = () => {
   const { data: session, status } = useSession();
@@ -13,19 +15,44 @@ const User = () => {
   const [username, setUserName] = useState<string | null | undefined | any>("");
   const [Fname, setFname] = useState<string | null | undefined | any>("");
   const [Lname, setLname] = useState<string | null | undefined | any>("");
-  console.log(session);
+  let [user, setUser] = useState([{ name: "name" }]);
+  const callGetUser = async () => {
+    try {
+      const resp = await axios.get(`/api/user`, {
+        headers: {
+          authorization: `Bearer ${session?.user.accessToken}`,
+        },
+      });
 
-  async function updateUser() {
-    const res = await axios({
-      method: "PUT",
-    });
-  }
+      if (resp.data.ok) {
+        setUser(resp.data.user);
+        console.log(user);
+      }
+    } catch (err: any) {
+      console.log(err.response.data.messasge);
+    }
+  };
+  const callPutUser = async () => {
+    try {
+      const resp = await axios.put(`/api/user`, {
+        headers: {
+          Authorization: `Basic ${session?.user.accessToken}`,
+        },
+        body: {
+          name: Fname,
+          Lname: Lname,
+        },
+      });
+      if (resp.data.ok) {
+        await callGetUser();
+      }
+    } catch (err: any) {
+      console.log(err.response.data.message);
+    }
+  };
 
   useEffect(() => {
-    setAvatar(session?.user?.image);
-    setUserName(session?.user?.username);
-    setFname(session?.user?.name);
-    setLname(session?.user?.Lname);
+    callGetUser();
 
     if (session?.user.image === undefined || session.user.image === null) {
       setAvatar("/assets/empty-profile.png");
@@ -45,7 +72,7 @@ const User = () => {
 
       <div
         className="z-10 container w-full overflow-y-auto relative p-4
-        h-full max-h-screen transition-all duration-200 ease-in-out  rounded-xl "
+        h-full max-h-screen transition-all duration-200 ease-in-out   "
       >
         <Navbar prePath="Pages" pathName="profile" />
 
@@ -67,7 +94,7 @@ const User = () => {
                       className="border-4 bg-contain  border-white   h-40 w-40 rounded-full z-20"
                     />
                     <h1 className=" font-bold text-3xl text-gray-500 z-20">
-                      {session?.user?.name}
+                      {user.name}
                     </h1>
                     <div className="flex justify-between gap-10">
                       <div className="flex flex-col">
@@ -84,7 +111,7 @@ const User = () => {
                       </div>
                       <div className="flex flex-col">
                         <span className=" text-2xl font-bold text-gray-800">
-                          3
+                          {3}
                         </span>
                         <span className=" text-gray-400 ">Done</span>
                       </div>
@@ -97,6 +124,7 @@ const User = () => {
 
           <div className="block md:flex md:px-7 px-3 gap-8">
             {/*  Card 2 */}
+
             <div className="w-full md:w-2/3 h-max  mb-4 ">
               <div className="  rounded-md p-4 overflow-x-auto shadow-xl bg-white">
                 <div className="">
@@ -112,7 +140,7 @@ const User = () => {
                   </div>
 
                   <form className=" space-y-6">
-                    <div className="flex gap-2">
+                    <div className="flex  gap-2">
                       <div className="w-1/2 ">
                         <label className=" text-sm font-bold text-gray-700 tracking-wide">
                           Username
@@ -122,7 +150,7 @@ const User = () => {
                           type="text"
                           placeholder="Enter your username"
                           disabled
-                          value={username}
+                          value={user?.username}
                         ></input>
                       </div>
 
@@ -134,7 +162,7 @@ const User = () => {
                           className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                           type="text"
                           placeholder="Enter your email"
-                          value={session?.user?.email?.toString()}
+                          value={user.email}
                           disabled
                         ></input>
                       </div>
@@ -148,7 +176,8 @@ const User = () => {
                           className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                           type="text"
                           onChange={(e) => setFname(e.target.value)}
-                          value={Fname}
+                          value={user.name}
+                          disabled
                           placeholder="Enter your first name"
                         ></input>
                       </div>
@@ -161,16 +190,17 @@ const User = () => {
                           onChange={(e) => setLname(e.target.value)}
                           className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                           type="text"
-                          value={Lname}
+                          disabled
+                          value={user.Lname}
                           placeholder="Enter your last name"
                         ></input>
                       </div>
                     </div>
                     <button
-                      /* onClick={() => callPutTodo()} */
+                      onClick={() => callPutUser()}
                       className="w-full flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600  hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
                     >
-                      SUBMIT
+                      EDIT
                     </button>
                   </form>
                 </div>
@@ -185,6 +215,7 @@ const User = () => {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );

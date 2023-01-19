@@ -4,11 +4,22 @@ import { readUsersDB, writeUsersDB } from "../../backendLibs/dbLib";
 export default function depositRoute(req: any, res: any) {
   if (req.method === "GET") {
     //get quizz of that user
-    const user = readUsersDB();
+    const user = checkToken(req);
+    if (!user) {
+      return res.status(403).json({
+        ok: false,
+        message: "You do not have permission",
+      });
+    }
+    const users = readUsersDB();
+    //find user in DB and get their money value
+    const foundUser = users.find((x: any) => x.username === user.username);
+    if (!foundUser)
+      return res.status(400).json({ ok: false, message: "User not found" });
 
     return res.json({
       ok: true,
-      user,
+      user: foundUser,
     });
   }
   if (req.method === "PUT") {
@@ -17,7 +28,7 @@ export default function depositRoute(req: any, res: any) {
     if (!user) {
       return res.status(403).json({
         ok: false,
-        message: "You do not have permission to deposit",
+        message: "You do not have permission to edit",
       });
     }
     // return res.status(403).json({ ok: false, message: "You do not have permission to deposit" });
@@ -43,6 +54,7 @@ export default function depositRoute(req: any, res: any) {
     userd.name = name;
     userd.Lname = Lname;
     users[userIdx] = userd;
+    console.log(users[userIdx]);
 
     writeUsersDB(users);
 
