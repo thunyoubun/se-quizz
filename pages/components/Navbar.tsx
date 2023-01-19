@@ -91,17 +91,19 @@ const Navbar = ({ prePath, pathName }: props) => {
           </div>
           <ul className="flex items-center justify-end pl-0 mb-0 list-none md-max:w-full">
             <li className="flex  items-center">
-              <button className="  rounded-md flex align-middle justify-center items-center gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
-                <img
-                  src={name}
-                  alt=""
-                  className="bg-contain border-2 hidden md:flex border-white  h-10 w-10 rounded-full z-20"
-                />
+              <Link href={"/pages/user"}>
+                <button className="  rounded-md flex align-middle justify-center items-center gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
+                  <img
+                    src={name}
+                    alt=""
+                    className="bg-contain border-2 hidden md:flex border-white  h-10 w-10 rounded-full z-20"
+                  />
 
-                <FaUser size={20} className="md:hidden flex" />
+                  <FaUser size={20} className="md:hidden flex" />
 
-                <span className="hidden sm:inline">{navSign()}</span>
-              </button>
+                  <span className="hidden sm:inline">{navSign()}</span>
+                </button>
+              </Link>
             </li>
             <li className=" item-center flex md:hidden ">
               <button
