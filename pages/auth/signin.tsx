@@ -24,7 +24,7 @@ const Login = ({ csrfToken }: any) => {
   const [password, SetPassword] = useState("");
   const [error, setError] = useState<string | null | undefined | any>("");
 
-  const onSubmit = async () => {
+  /* const onSubmit = async () => {
     const result = await signIn("credentials", {
       header: { token: session?.user?.accessToken },
       body: {
@@ -33,7 +33,7 @@ const Login = ({ csrfToken }: any) => {
       },
     });
   };
-
+ */
   const callPostUser = async () => {
     try {
       const resp = await axios.post("/api/user/login", {
