@@ -7,6 +7,7 @@ import Image from "next/image";
 import axios from "axios";
 import { log } from "console";
 import Footer from "../components/Footer";
+import { string } from "yup";
 
 const User = () => {
   const { data: session, status } = useSession();
@@ -15,7 +16,12 @@ const User = () => {
   const [username, setUserName] = useState<string | null | undefined | any>("");
   const [Fname, setFname] = useState<string | null | undefined | any>("");
   const [Lname, setLname] = useState<string | null | undefined | any>("");
-  let [user, setUser] = useState([]);
+  const [user, setUser] = useState({
+    name: "name",
+    Lname: "Lname",
+    username: "username",
+    email: "email",
+  });
   const callGetUser = async () => {
     try {
       const resp = await axios.get(`/api/user`, {
@@ -25,8 +31,7 @@ const User = () => {
       });
 
       if (resp.data.ok) {
-        setUser(resp.data.user);
-        console.log(user);
+        setUser({ ...resp.data.user });
       }
     } catch (err: any) {
       console.log(err.response.data.messasge);
@@ -34,20 +39,26 @@ const User = () => {
   };
   const callPutUser = async () => {
     try {
-      const resp = await axios.put(`/api/user`, {
+      const url = `/api/user`;
+      const data = {
+        name: user.name,
+        Lname: user.Lname,
+      };
+      const resp = await fetch(url, {
+        method: "PUT",
         headers: {
-          Authorization: `Basic ${session?.user.accessToken}`,
+          "Content-type": "application/json",
+          authorization: `Bearer ${session?.user.accessToken}`,
         },
-        body: {
-          name: Fname,
-          Lname: Lname,
-        },
+        body: JSON.stringify(data),
       });
-      if (resp.data.ok) {
-        await callGetUser();
+
+      const res = await resp.json();
+      if (res.ok) {
+        callGetUser();
       }
     } catch (err: any) {
-      console.log(err.response.data.message);
+      alert(err);
     }
   };
 
@@ -150,7 +161,7 @@ const User = () => {
                           type="text"
                           placeholder="Enter your username"
                           disabled
-                          value={user?.username}
+                          value={user.username}
                         ></input>
                       </div>
 
@@ -162,7 +173,7 @@ const User = () => {
                           className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                           type="text"
                           placeholder="Enter your email"
-                          value={user.email}
+                          defaultValue={user.email}
                           disabled
                         ></input>
                       </div>
@@ -175,9 +186,10 @@ const User = () => {
                         <input
                           className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                           type="text"
-                          onChange={(e) => setFname(e.target.value)}
                           value={user.name}
-                          disabled
+                          onChange={(e) =>
+                            setUser({ ...user, name: e.target.value })
+                          }
                           placeholder="Enter your first name"
                         ></input>
                       </div>
@@ -187,11 +199,12 @@ const User = () => {
                           Last Name
                         </label>
                         <input
-                          onChange={(e) => setLname(e.target.value)}
-                          className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                           type="text"
-                          disabled
                           value={user.Lname}
+                          onChange={(e) =>
+                            setUser({ ...user, Lname: e.target.value })
+                          }
+                          className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                           placeholder="Enter your last name"
                         ></input>
                       </div>
@@ -200,7 +213,7 @@ const User = () => {
                       onClick={() => callPutUser()}
                       className="w-full flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600  hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
                     >
-                      EDIT
+                      SUBMIT
                     </button>
                   </form>
                 </div>

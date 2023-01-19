@@ -47,6 +47,8 @@ export default function depositRoute(req: any, res: any) {
     )
       return res.status(400).json({ ok: false, message: "Invalid last name" });
 
+    console.log(name);
+
     //find and update name , Lname in DB
     const users = readUsersDB();
     const userIdx = users.findIndex((x: any) => x.username === user.username);
@@ -54,7 +56,7 @@ export default function depositRoute(req: any, res: any) {
     userd.name = name;
     userd.Lname = Lname;
     users[userIdx] = userd;
-    console.log(users[userIdx]);
+    console.log("newData = ", users[userIdx]);
 
     writeUsersDB(users);
 
