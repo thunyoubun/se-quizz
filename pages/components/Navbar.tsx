@@ -66,7 +66,7 @@ const Navbar = ({ prePath, pathName }: props) => {
     if (!session) {
       return <Link href="/auth/login">Sign In</Link>;
     } else {
-      return user.username;
+      return user.name;
     }
   };
 
