@@ -2,15 +2,15 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { BsPlusLg } from "react-icons/bs";
-import Sidebar from "../../../components/Sidebar";
-import Navbar from "../../../components/Navbar";
-import Table from "../../../components/Table";
-import Card from "../../../components/Card";
+import Sidebar from "../../components/Sidebar";
+import Navbar from "../../components/Navbar";
+import Table from "../../components/Table";
+import Card from "../../components/Card";
 
 import { MdOutlineNotStarted } from "react-icons/md";
 import { RiQuestionAnswerFill } from "react-icons/ri";
-import HeadQuizz from "../../../components/HeadQuizz";
-import Footer from "../../../components/Footer";
+import HeadQuizz from "../../components/HeadQuizz";
+import Footer from "../../components/Footer";
 import { getSession, signIn } from "next-auth/react";
 
 const Quizz = () => {
@@ -84,7 +84,7 @@ export async function getServerSideProps(context: any) {
   if (!session) {
     return {
       redirect: {
-        destination: signIn(),
+        destination: "/",
         permant: false,
       },
     };
