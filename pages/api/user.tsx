@@ -2,6 +2,15 @@ import { checkToken } from "../../backendLibs/checkToken";
 import { readUsersDB, writeUsersDB } from "../../backendLibs/dbLib";
 
 export default function depositRoute(req: any, res: any) {
+  if (req.method === "GET") {
+    //get quizz of that user
+    const user = readUsersDB();
+
+    return res.json({
+      ok: true,
+      user,
+    });
+  }
   if (req.method === "PUT") {
     //check authentication
     const user = checkToken(req);

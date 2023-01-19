@@ -41,10 +41,20 @@ let quizz = [
 
 let users = [
   {
-    username: "admin1",
-    //raw password is "1234"
-    password: "$2a$12$6lU7JRPa1lbbxnZlGBGJVOWcLxCxKphY2hyhMFydu8Yiyn.kWLAou",
-    isAdmin: true,
+    id: "1",
+    username: "test1",
+    email: "test1@gmail.com",
+    password: "$2b$12$L15Bi23BOXNUEASUMfyea.IZIBL8VQx43aqtRL1B3Nz9X55/HE74.",
+    isAdmin: false,
+  },
+  {
+    id: "2",
+    username: "test2",
+    name: "Jame",
+    email: "test2@gmail.com",
+    password: "$2b$12$/IZWfdzy0.29eUXZqV8Pw.VCED7T5v6GasLXF5gbK1VlJ/ZoTs5..",
+    isAdmin: false,
+    Lname: "New",
   },
 ];
 

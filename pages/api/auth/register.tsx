@@ -50,18 +50,28 @@ export default function userRegisterRoute(req: any, res: any) {
         .status(400)
         .json({ ok: false, message: "Email is already used" });
 
+    //get last index of users
+    const index = (users.length + 1).toString();
     //send username back when successfully registered
     const newUser = {
+      id: index,
+      name: "Guest" + index,
       username,
       email,
       password: bcrypt.hashSync(password, 12),
       isAdmin,
     };
+
     //create new user and add in db
     users.push(newUser);
     writeUsersDB(users);
 
     //return response
     return res.json({ ok: true, username, email, isAdmin });
+  } else {
+    return res.status(404).json({
+      ok: false,
+      message: "Invalid HTTP Method",
+    });
   }
 }

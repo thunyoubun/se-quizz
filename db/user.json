@@ -14,5 +14,13 @@
     "password": "$2b$12$/IZWfdzy0.29eUXZqV8Pw.VCED7T5v6GasLXF5gbK1VlJ/ZoTs5..",
     "isAdmin": false,
     "Lname": "New"
+  },
+  {
+    "id": "3",
+    "name": "Guest3",
+    "username": "admin",
+    "email": "admin@gmail.com",
+    "password": "$2b$12$nzbR6qhkRoyRFoDA3nTcvuoSKowy5LCRWnSWbVERyoi/3SJ/QRemi",
+    "isAdmin": false
   }
 ]

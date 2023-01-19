@@ -27,11 +27,15 @@ const Register = () => {
 
   const Login = async () => {
     try {
-      const resp = await axios.post("/api/auth/login", {
-        username: username,
+      const res = await signIn("credentials", {
+        email: username,
         password: password,
       });
-      if (resp.data.ok) Router.push("pages/myquizz");
+      console.log(res?.ok);
+      if (res?.ok) {
+      } else {
+        console.log("login err");
+      }
     } catch (err: any) {
       alert(err.response.data.message);
     }
@@ -46,7 +50,10 @@ const Register = () => {
         password: password,
         isAdmin: false,
       });
-      if (resp.data.ok) await Login();
+      if (resp.data.ok) {
+        console.log("go login");
+        await signIn();
+      }
     } catch (err: any) {
       alert(err.response.data.message);
     }
@@ -104,7 +111,7 @@ const Register = () => {
                 <BsArrowLeft size={30} />
               </Link>
               <div>
-                <ImSwitch size={60} className="my-3 text-blue-600 h-16  " />
+                <ImSwitch size={60} className="my-3  text-blue-600 h-16  " />
               </div>
               <h2 className=" text-3xl font-bold text-gray-900">Sign Up</h2>
               <p className="mt-2 text-sm text-gray-500">

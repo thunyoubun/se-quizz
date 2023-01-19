@@ -128,7 +128,7 @@ const Login = ({ csrfToken }: any) => {
                 console.log(res);
 
                 if (res?.error) {
-                  setError(res.ok);
+                  setError(res.error);
                 } else {
                   setError(null);
                 }
