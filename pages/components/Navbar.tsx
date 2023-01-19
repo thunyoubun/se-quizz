@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { useSession } from "next-auth/react";
+import axios from "axios";
 
 export declare type props = {
   prePath: string;
@@ -14,8 +15,30 @@ const Navbar = ({ prePath, pathName }: props) => {
   const [isSideBar, setSideBar] = useState(false);
   const { data: session, status } = useSession();
   const [avatar, setAvatar] = useState<string | null | undefined | any>("");
+  const [user, setUser] = useState({
+    name: "name",
+    Lname: "Lname",
+    username: "username",
+    email: "email",
+  });
+  const callGetUser = async () => {
+    try {
+      const resp = await axios.get(`/api/user`, {
+        headers: {
+          authorization: `Bearer ${session?.user.accessToken}`,
+        },
+      });
+
+      if (resp.data.ok) {
+        setUser({ ...resp.data.user });
+      }
+    } catch (err: any) {
+      console.log(err.response.data.messasge);
+    }
+  };
 
   useEffect(() => {
+    callGetUser();
     if (session?.user.image === undefined || session.user.image === null) {
       setAvatar("/assets/empty-profile.png");
     } else {
@@ -43,7 +66,7 @@ const Navbar = ({ prePath, pathName }: props) => {
     if (!session) {
       return <Link href="/auth/login">Sign In</Link>;
     } else {
-      return session.user?.name;
+      return user.username;
     }
   };
 

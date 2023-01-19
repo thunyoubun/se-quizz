@@ -105,7 +105,7 @@ const User = () => {
                       className="border-4 bg-contain  border-white   h-40 w-40 rounded-full z-20"
                     />
                     <h1 className=" font-bold text-3xl text-gray-500 z-20">
-                      {user.name}
+                      {user.name} {user.Lname}
                     </h1>
                     <div className="flex justify-between gap-10">
                       <div className="flex flex-col">
