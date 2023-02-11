@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ImSwitch } from "react-icons/im";
 import { GoSignOut } from "react-icons/go";
 import { signOut } from "next-auth/react";
+import { FaFileUpload } from "react-icons/fa";
 
 export default function Sidebar() {
   return (
@@ -19,6 +20,15 @@ export default function Sidebar() {
         </Link>
         <hr />
         <ul className="space-y-2 mt-2 ">
+        <li>
+            <Link
+              href="/pages/upload"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+             <FaFileUpload className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></FaFileUpload>
+              <span className="ml-3">Upload</span>
+            </Link>
+          </li>
           <li>
             <Link
               href="/pages/dashboard"
