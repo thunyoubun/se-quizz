@@ -1,13 +1,27 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { getSession } from "next-auth/react";
-
 import axios from "axios";
+import Image from "next/image";
 
 export default function upload() {
   const [file, setFile] = useState<File>();
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const url = "";
+  function imageLoader(src: string) {
+    return `/assets/${src}`;
+  }
+  const OnDrag = () => {
+    console.log("dragenter");
+    wrapperRef.current!.classList.add("dragover");
+  };
+  const OnLeave = () => {
+    wrapperRef.current!.classList.remove("dragover");
+  };
+  const OnDrop = () => {
+    wrapperRef.current!.classList.remove("dragover");
+  };
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setFile(e.target.files[0]);
@@ -54,12 +68,44 @@ export default function upload() {
         <div className="w-full   mt-10 px-7 ">
           {/* Upload zone*/}
           <div className="w-full  h-max px-3 mt-2 md:mt-0  ">
-            <div className="  rounded-md p-4 overflow-x-auto shadow-xl bg-white">
-              <input type="file" onChange={handleFileChange} />
+            <div className="rounded-md p-4 overflow-x-auto shadow-xl bg-white">
+              <div
+                id="fileuploadzone"
+                className="flex flex-col items-center justify-center h-max"
+              >
+                <div
+                  ref={wrapperRef}
+                  onDrop={OnDrop}
+                  onDragEnter={OnDrag}
+                  onDragLeave={OnLeave}
+                  className="uploadbox w-64 h-64 flex items-center justify-center"
+                >
+                  <h1 className="font-bold">
+                    Drag and Drop or Click to Browse files
+                  </h1>
 
-              <div>{file && `${file.name} - ${file.type}`}</div>
+                  <input type="file" className="" onChange={handleFileChange} />
+                </div>
+                <div>
+                  {file && (
+                    <div className="File-preview">
+                      <div className="File-preview-item">
+                        <Image
+                          src={imageLoader("pdf_icon.png")}
+                          alt=""
+                          width={500}
+                          height={500}
+                        ></Image>
+                        <p>{file.name}</p>
+                        <p>{file.type}</p>
+                        <p>{file.size}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
 
-              <button onClick={handleUploadClick}>Upload</button>
+                <button onClick={handleUploadClick}>Upload</button>
+              </div>
             </div>
           </div>
         </div>
