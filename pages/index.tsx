@@ -157,7 +157,7 @@ export default function Home() {
               <h1 className="inline-flex px-4 items-center">Make your Quizz</h1>
             </div>
             <div className="mt-4">
-              <h1 className=" text-white text-6xl font-bold">Importer Quizz</h1>
+              <h1 className=" text-white text-6xl font-bold">Quiz Importer</h1>
               <p className="  text-slate-300 mt-2 text-lg font-medium ">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Distinctio, ea veritatis amet sunt deleniti fugit ipsa expedita
