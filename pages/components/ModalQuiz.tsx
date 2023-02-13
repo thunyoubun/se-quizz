@@ -60,6 +60,7 @@ const ModalQuiz = () => {
         onClick={() => updateMenu()}
       >
         <BsPlusLg size={20} />
+        <p>&nbsp;New Quiz</p>
       </button>
 
       {showModal ? (
