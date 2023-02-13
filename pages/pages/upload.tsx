@@ -7,13 +7,11 @@ import axios from "axios";
 export default function Upload() {
   const [file, setFile] = useState<File>();
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [filetype,setFiletype] = useState<string|undefined>("");
+  const [isExtensionCorrect, setIsExtensionCorrect] = useState(false);
   const url = "";
   function imageLoader(src: string) {
-    if(src==="pdf")
-    return `/assets/pdf_icon.png`;
-    else if(src==="doc"||src==="docx")
-    return `/assets/doc_icon.png`;
+    if (src === "pdf") return `/assets/pdf_icon.png`;
+    else if (src === "doc" || src === "docx") return `/assets/doc_icon.png`;
   }
   const OnDrag = () => {
     console.log("dragenter");
@@ -24,12 +22,6 @@ export default function Upload() {
   };
   const OnDrop = () => {
     wrapperRef.current!.classList.remove("dragover");
-    if(file){
-      let src=imageLoader(file.type.split("/")[1])
-      setFiletype(src)
-    }
-    
-    
   };
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -100,20 +92,18 @@ export default function Upload() {
                     <div className="File-preview">
                       <div className="File-preview-item">
                         <img
-                          src={filetype}
+                          src={imageLoader(file.type.split("/")[1])}
                           alt={file.name}
                           width={50}
                           height={50}
                         ></img>
                         <p>{file.name}</p>
-                        <p>{file.type}</p>
                         <p>{file.size}</p>
                       </div>
                     </div>
                   )}
                 </div>
-
-                <button onClick={handleUploadClick}>Upload</button>
+                {/* <button onClick={handleUploadClick}>Upload</button> */}
               </div>
             </div>
           </div>
