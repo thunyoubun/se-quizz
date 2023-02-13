@@ -24,6 +24,7 @@ export default function Upload() {
     wrapperRef.current!.classList.remove("dragover");
   };
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(process.env.NEXTAUTH_URL);
     if (e.target.files) {
       setFile(e.target.files[0]);
     }
