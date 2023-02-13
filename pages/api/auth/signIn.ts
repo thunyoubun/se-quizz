@@ -153,7 +153,7 @@ export default async function handler(
     secure: process.env.NODE_ENV === "production",
     path: "/",
     //change to your hostname in production
-    domain: "https://se-quizz.vercel.app",
+    domain: `${process.env.NEXTAUTH_URL}`,
   });
 
   return res.json({ ok: true, token: token });

@@ -10,7 +10,7 @@ export default async function handler(
     res,
     path: "/",
     //change to your hostname in production
-    domain: "localhost",
+    domain: `${process.env.NEXTAUTH_URL}`,
   });
 
   return res.json({ ok: true });
