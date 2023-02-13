@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-
-import { useSession, getSession } from "next-auth/react";
 import Image from "next/image";
-import axios from "axios";
-import { log } from "console";
 import Footer from "../components/Footer";
-import { string } from "yup";
 import { useAuth } from "../../contexts/auth";
-import next from "next";
-import { redirect } from "next/dist/server/api-utils";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 const User = () => {
   const [avatar, setAvatar] = useState<string | null | undefined | any>("");
-  const [username, setUserName] = useState<string | null | undefined | any>("");
   const [Fname, setFname] = useState<string | null | undefined | any>("");
   const [Lname, setLname] = useState<string | null | undefined | any>("");
+  const [stdId, setStdId] = useState<string | null | undefined | any>("");
+  const [organize, setOrganize] = useState<string | null | undefined | any>("");
+  const [cmuAccount, setCmuAccount] = useState<string | null | undefined | any>(
+    ""
+  );
+
   const [role, setRole] = useState("");
   const { user, loading, token, isAuthenticated } = useAuth();
   const router = useRouter();
@@ -65,13 +63,19 @@ const User = () => {
 
   useEffect(() => {
     /*  callGetUser(); */
-
-    if (user?.itaccounttype_id === "StdAcc") {
-      setRole("Student");
-    } else {
-      setRole("Teacher");
+    if (isAuthenticated) {
+      setFname(user?.firstName);
+      setLname(user?.lastName);
+      setOrganize(user?.organization_name_EN);
+      setCmuAccount(user?.cmuAccount);
+      setStdId(user?.studentId);
+      setAvatar("/assets/empty-profile.png");
+      if (user?.itaccounttype_id === "StdAcc") {
+        setRole("Student");
+      } else {
+        setRole("Teacher");
+      }
     }
-    setAvatar("/assets/empty-profile.png");
   }, []);
 
   return (
@@ -152,7 +156,7 @@ const User = () => {
                     <h1>User Information</h1>
                   </div>
 
-                  {user.itaccounttype_id === "StdAcc" ? (
+                  {role === "StdAcc" ? (
                     <form className=" space-y-6">
                       <div className="flex  gap-2">
                         <div className="w-1/2 ">
