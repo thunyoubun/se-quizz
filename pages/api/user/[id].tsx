@@ -42,7 +42,9 @@ export default function quizIdRoute(req: any, res: any) {
 
     //find and update name , Lname in DB
     const users = readUsersDB();
-    const userIdx = users.findIndex((x: any) => x.username === user.username);
+    const userIdx = users.findIndex(
+      (x: any) => x.cmuAccount === user.cmuAccount
+    );
     const userd = users[userIdx];
     userd.name = name;
     userd.Lname = Lname;
