@@ -111,7 +111,7 @@ const User = () => {
                       className="border-4 bg-contain  border-white   h-40 w-40 rounded-full z-20"
                     />
                     <h1 className=" font-bold text-3xl text-gray-500 z-20">
-                      {user.firstName} {user.lastName}
+                      {Fname} {Lname}
                     </h1>
                     <div className="flex justify-between gap-10">
                       <div className="flex flex-col">
@@ -168,7 +168,7 @@ const User = () => {
                             type="text"
                             placeholder="Enter your student id"
                             disabled
-                            value={user?.studentId}
+                            value={stdId}
                           ></input>
                         </div>
 
@@ -180,7 +180,7 @@ const User = () => {
                             className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                             type="text"
                             placeholder="Enter your email"
-                            defaultValue={user?.cmuAccount}
+                            defaultValue={cmuAccount}
                             disabled
                           ></input>
                         </div>
@@ -193,7 +193,7 @@ const User = () => {
                           <input
                             className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                             type="text"
-                            value={user?.organization_name_EN}
+                            value={organize}
                             /* onChange={(e) =>
                             setUser({ ...user, name: e.target.value })
                           } */
@@ -210,7 +210,7 @@ const User = () => {
                           <input
                             className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                             type="text"
-                            value={user?.firstName}
+                            value={Fname}
                             disabled
                             /* onChange={(e) =>
                             setUser({ ...user, name: e.target.value })
@@ -225,7 +225,7 @@ const User = () => {
                           </label>
                           <input
                             type="text"
-                            value={user?.lastName}
+                            value={Lname}
                             disabled
                             /* onChange={(e) =>
                             setUser({ ...user, Lname: e.target.value })
@@ -254,7 +254,7 @@ const User = () => {
                             className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                             type="text"
                             placeholder="Enter your email"
-                            defaultValue={user?.cmuAccount}
+                            defaultValue={cmuAccount}
                             disabled
                           ></input>
                         </div>
@@ -280,7 +280,7 @@ const User = () => {
                           <input
                             className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                             type="text"
-                            value={user?.firstName}
+                            value={Fname}
                             disabled
                             /* onChange={(e) =>
                             setUser({ ...user, name: e.target.value })
@@ -295,7 +295,7 @@ const User = () => {
                           </label>
                           <input
                             type="text"
-                            value={user?.lastName}
+                            value={Lname}
                             disabled
                             /* onChange={(e) =>
                             setUser({ ...user, Lname: e.target.value })
