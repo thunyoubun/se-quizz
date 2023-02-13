@@ -8,21 +8,21 @@ import axios from "axios";
 import { log } from "console";
 import Footer from "../components/Footer";
 import { string } from "yup";
+import { useAuth } from "../../contexts/auth";
+import next from "next";
+import { redirect } from "next/dist/server/api-utils";
+import { Router, useRouter } from "next/router";
 
 const User = () => {
-  const { data: session, status } = useSession();
-
   const [avatar, setAvatar] = useState<string | null | undefined | any>("");
   const [username, setUserName] = useState<string | null | undefined | any>("");
   const [Fname, setFname] = useState<string | null | undefined | any>("");
   const [Lname, setLname] = useState<string | null | undefined | any>("");
-  const [user, setUser] = useState({
-    name: "name",
-    Lname: "Lname",
-    username: "username",
-    email: "email",
-  });
-  const callGetUser = async () => {
+  const [role, setRole] = useState("");
+  const { user, loading, token, isAuthenticated } = useAuth();
+  const router = useRouter();
+
+  /* const callGetUser = async () => {
     try {
       const resp = await axios.get(`/api/user`, {
         headers: {
@@ -36,8 +36,9 @@ const User = () => {
     } catch (err: any) {
       console.log(err.response.data.messasge);
     }
-  };
-  const callPutUser = async () => {
+  }; */
+
+  /* onst callPutUser = async () => {
     try {
       const url = `/api/user`;
       const data = {
@@ -60,16 +61,17 @@ const User = () => {
     } catch (err: any) {
       alert(err);
     }
-  };
+  }; */
 
   useEffect(() => {
-    callGetUser();
+    /*  callGetUser(); */
 
-    if (session?.user.image === undefined || session.user.image === null) {
-      setAvatar("/assets/empty-profile.png");
+    if (user?.itaccounttype_id === "StdAcc") {
+      setRole("Student");
     } else {
-      setAvatar(session?.user.image);
+      setRole("Teacher");
     }
+    setAvatar("/assets/empty-profile.png");
   }, []);
 
   return (
@@ -82,7 +84,7 @@ const User = () => {
       </div>
 
       <div
-        className="z-10 container w-full overflow-y-auto relative p-4
+        className="z-10 container w-full overflow-y-auto relative 
         h-full max-h-screen transition-all duration-200 ease-in-out   "
       >
         <Navbar prePath="Pages" pathName="profile" />
@@ -105,7 +107,7 @@ const User = () => {
                       className="border-4 bg-contain  border-white   h-40 w-40 rounded-full z-20"
                     />
                     <h1 className=" font-bold text-3xl text-gray-500 z-20">
-                      {user.name} {user.Lname}
+                      {user.firstName} {user.lastName}
                     </h1>
                     <div className="flex justify-between gap-10">
                       <div className="flex flex-col">
@@ -141,7 +143,7 @@ const User = () => {
                 <div className="">
                   <div className="my-2">
                     <h1 className=" text-xl font-bold text-gray-500">
-                      Edit Profile
+                      User Profile
                     </h1>
                   </div>
                   <hr />
@@ -150,72 +152,164 @@ const User = () => {
                     <h1>User Information</h1>
                   </div>
 
-                  <form className=" space-y-6">
-                    <div className="flex  gap-2">
-                      <div className="w-1/2 ">
-                        <label className=" text-sm font-bold text-gray-700 tracking-wide">
-                          Username
-                        </label>
-                        <input
-                          className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
-                          type="text"
-                          placeholder="Enter your username"
-                          disabled
-                          value={user.username}
-                        ></input>
-                      </div>
+                  {user.itaccounttype_id === "StdAcc" ? (
+                    <form className=" space-y-6">
+                      <div className="flex  gap-2">
+                        <div className="w-1/2 ">
+                          <label className=" text-sm font-bold text-gray-700 tracking-wide">
+                            Student ID
+                          </label>
+                          <input
+                            className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
+                            type="text"
+                            placeholder="Enter your student id"
+                            disabled
+                            value={user?.studentId}
+                          ></input>
+                        </div>
 
-                      <div className="w-1/2">
-                        <label className=" text-sm font-bold text-gray-700 tracking-wide">
-                          Email
-                        </label>
-                        <input
-                          className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
-                          type="text"
-                          placeholder="Enter your email"
-                          defaultValue={user.email}
-                          disabled
-                        ></input>
+                        <div className="w-1/2">
+                          <label className=" text-sm font-bold text-gray-700 tracking-wide">
+                            Email
+                          </label>
+                          <input
+                            className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
+                            type="text"
+                            placeholder="Enter your email"
+                            defaultValue={user?.cmuAccount}
+                            disabled
+                          ></input>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <div className="w-1/2">
-                        <label className=" text-sm font-bold text-gray-700 tracking-wide">
-                          First Name
-                        </label>
-                        <input
-                          className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
-                          type="text"
-                          value={user.name}
-                          onChange={(e) =>
+                      <div className="flex gap-2">
+                        <div className="w-full">
+                          <label className=" text-sm font-bold text-gray-700 tracking-wide">
+                            Faculty
+                          </label>
+                          <input
+                            className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
+                            type="text"
+                            value={user?.organization_name_EN}
+                            /* onChange={(e) =>
                             setUser({ ...user, name: e.target.value })
-                          }
-                          placeholder="Enter your first name"
-                        ></input>
+                          } */
+                            placeholder="Enter your first name"
+                            disabled
+                          ></input>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <div className="w-1/2">
+                          <label className=" text-sm font-bold text-gray-700 tracking-wide">
+                            First Name
+                          </label>
+                          <input
+                            className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
+                            type="text"
+                            value={user?.firstName}
+                            disabled
+                            /* onChange={(e) =>
+                            setUser({ ...user, name: e.target.value })
+                          } */
+                            placeholder="Enter your first name"
+                          ></input>
+                        </div>
+
+                        <div className="w-1/2">
+                          <label className=" text-sm font-bold text-gray-700 tracking-wide">
+                            Last Name
+                          </label>
+                          <input
+                            type="text"
+                            value={user?.lastName}
+                            disabled
+                            /* onChange={(e) =>
+                            setUser({ ...user, Lname: e.target.value })
+                          } */
+                            className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
+                            placeholder="Enter your last name"
+                          ></input>
+                        </div>
                       </div>
 
-                      <div className="w-1/2">
-                        <label className=" text-sm font-bold text-gray-700 tracking-wide">
-                          Last Name
-                        </label>
-                        <input
-                          type="text"
-                          value={user.Lname}
-                          onChange={(e) =>
-                            setUser({ ...user, Lname: e.target.value })
-                          }
-                          className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
-                          placeholder="Enter your last name"
-                        ></input>
+                      <button
+                        /*  onClick={() => callPutUser()} */
+                        className="w-full hidden  justify-center bg-gradient-to-r from-indigo-500 to-blue-600  hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
+                      >
+                        SUBMIT
+                      </button>
+                    </form>
+                  ) : (
+                    <form className=" space-y-6">
+                      <div className="flex  gap-2">
+                        <div className="w-1/2">
+                          <label className=" text-sm font-bold text-gray-700 tracking-wide">
+                            Email
+                          </label>
+                          <input
+                            className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
+                            type="text"
+                            placeholder="Enter your email"
+                            defaultValue={user?.cmuAccount}
+                            disabled
+                          ></input>
+                        </div>
+                        <div className="w-1/2">
+                          <label className=" text-sm font-bold text-gray-700 tracking-wide">
+                            Role
+                          </label>
+                          <input
+                            className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
+                            type="text"
+                            placeholder="Enter your email"
+                            defaultValue={role}
+                            disabled
+                          ></input>
+                        </div>
                       </div>
-                    </div>
-                    <button
-                      onClick={() => callPutUser()}
-                      className="w-full flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600  hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
-                    >
-                      SUBMIT
-                    </button>
-                  </form>
+
+                      <div className="flex gap-2">
+                        <div className="w-1/2">
+                          <label className=" text-sm font-bold text-gray-700 tracking-wide">
+                            First Name
+                          </label>
+                          <input
+                            className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
+                            type="text"
+                            value={user?.firstName}
+                            disabled
+                            /* onChange={(e) =>
+                            setUser({ ...user, name: e.target.value })
+                          } */
+                            placeholder="Enter your first name"
+                          ></input>
+                        </div>
+
+                        <div className="w-1/2">
+                          <label className=" text-sm font-bold text-gray-700 tracking-wide">
+                            Last Name
+                          </label>
+                          <input
+                            type="text"
+                            value={user?.lastName}
+                            disabled
+                            /* onChange={(e) =>
+                            setUser({ ...user, Lname: e.target.value })
+                          } */
+                            className=" w-full text-base px-4 py-2 border border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
+                            placeholder="Enter your last name"
+                          ></input>
+                        </div>
+                      </div>
+
+                      <button
+                        /*  onClick={() => callPutUser()} */
+                        className="w-full opacity-0 flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600  hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
+                      >
+                        SUBMIT
+                      </button>
+                    </form>
+                  )}
                 </div>
               </div>
             </div>
@@ -236,9 +330,14 @@ const User = () => {
 
 export default User;
 
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-  if (!session) {
+/* export async function getServerSideProps() {
+  try {
+    const res = await axios.get(`http://localhost:3000/api/auth/whoAmI`);
+    if (res.data.ok) {
+      next();
+    }
+  } catch (err) {
+    console.log(err);
     return {
       redirect: {
         destination: "/",
@@ -246,7 +345,4 @@ export async function getServerSideProps(context: any) {
       },
     };
   }
-  return {
-    props: { session: await getSession(context) },
-  };
-}
+} */

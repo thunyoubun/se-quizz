@@ -1,9 +1,7 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
-import { useSession } from "next-auth/react";
-import axios from "axios";
+import { useAuth } from "../../contexts/auth";
 
 export declare type props = {
   prePath: string;
@@ -13,37 +11,18 @@ export declare type props = {
 const Navbar = ({ prePath, pathName }: props) => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
   const [isSideBar, setSideBar] = useState(false);
-  const { data: session, status } = useSession();
+  /* const { data: session, status } = useSession(); */
   const [avatar, setAvatar] = useState<string | null | undefined | any>("");
-  const [user, setUser] = useState({
-    name: "name",
-    Lname: "Lname",
-    username: "username",
-    email: "email",
-  });
-  const callGetUser = async () => {
-    try {
-      const resp = await axios.get(`/api/user`, {
-        headers: {
-          authorization: `Bearer ${session?.user.accessToken}`,
-        },
-      });
-
-      if (resp.data.ok) {
-        setUser({ ...resp.data.user });
-      }
-    } catch (err: any) {
-      console.log(err.response.data.messasge);
-    }
-  };
+  const { user, loading, token, isAuthenticated } = useAuth();
+  const [auth, setAuth] = useState(null);
 
   useEffect(() => {
-    callGetUser();
-    if (session?.user.image === undefined || session.user.image === null) {
-      setAvatar("/assets/empty-profile.png");
-    } else {
-      setAvatar(session?.user.image);
+    /* callGetUser(); */
+    if (isAuthenticated) {
+      setAuth(user.firstName);
+      console.log(auth);
     }
+    setAvatar("/assets/empty-profile.png");
   }, []);
 
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
@@ -63,10 +42,8 @@ const Navbar = ({ prePath, pathName }: props) => {
   };
 
   const navSign = () => {
-    if (!session) {
-      return <Link href="/auth/login">Sign In</Link>;
-    } else {
-      return user.name;
+    if (isAuthenticated) {
+      return <p>{auth}</p>;
     }
   };
 
@@ -99,7 +76,8 @@ const Navbar = ({ prePath, pathName }: props) => {
         </nav>
 
         <div className="flex items-center mt-2  sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-          <div className=" items-center md:ml-auto md:pr-4 hidden md:flex">
+          {/*Serch BAR*/}
+          {/* <div className=" items-center md:ml-auto md:pr-4 hidden md:flex">
             <div className="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease">
               <span className="text-sm ease leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
                 <AiOutlineSearch size={20} />
@@ -110,7 +88,7 @@ const Navbar = ({ prePath, pathName }: props) => {
                 placeholder="Search..."
               />
             </div>
-          </div>
+          </div> */}
           <ul className="flex items-center justify-end pl-0 mb-0 list-none md-max:w-full">
             <li className="flex  items-center">
               <Link href={"/pages/user"}>

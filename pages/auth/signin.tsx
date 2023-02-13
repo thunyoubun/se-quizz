@@ -307,7 +307,7 @@ const Login = ({ csrfToken }: any) => {
             </div>
 
             <div className="flex flex-row justify-center items-center  space-x-3">
-              <button
+              {/* <button
                 onClick={() => signIn("google")}
                 className=" h-11 items-center justify-center mb-6 sm:mb-0 inline-flex rounded-2xl font-bold text-lg   bg-white border-2 border-indigo-500 hover:shadow-lg hover:scale-105 cursor-pointer transition ease-in duration-300"
               >
@@ -315,7 +315,20 @@ const Login = ({ csrfToken }: any) => {
                 <h1 className=" text-ms font-medium pr-6">
                   Continue with Google
                 </h1>
-              </button>
+              </button> */}
+              <a href={process.env.NEXT_PUBLIC_CMU_OAUTH_URL}>
+                <button className="px-4 h-11 items-center justify-center mb-6 sm:mb-0 inline-flex rounded-2xl font-bold text-lg   bg-white border-2 border-indigo-500 hover:shadow-lg hover:scale-105 cursor-pointer transition ease-in duration-300">
+                  {/* <img
+                    src={
+                      "https://upload.wikimedia.org/wikipedia/th/thumb/d/db/Chiang_Mai_University.svg/800px-Chiang_Mai_University.svg.png"
+                    }
+                    className="w-12 h-12"
+                  /> */}
+                  <h1 className=" text-ms font-medium ">
+                    Continue with CMU Account
+                  </h1>
+                </button>
+              </a>
             </div>
           </div>
         </div>

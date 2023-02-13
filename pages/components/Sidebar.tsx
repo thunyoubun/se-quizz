@@ -1,10 +1,23 @@
 import React from "react";
 import Link from "next/link";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { useRouter } from "next/router";
 import { ImSwitch } from "react-icons/im";
 import { GoSignOut } from "react-icons/go";
 import { signOut } from "next-auth/react";
+import { useAuth } from "../../contexts/auth";
 
 export default function Sidebar() {
+  const router = useRouter();
+  const { logout } = useAuth();
+  function signOut() {
+    //Call sign out api without caring what is the result
+    //It will fail only in case of client cannot connect to server
+    //This is left as an exercise for you. Good luck.
+    axios.post("/api/auth/signOut").finally(() => {
+      router.push("/");
+    });
+  }
   return (
     <aside
       className="w-64 h-full  shadow-lg  inset-y-0 flex-wrap items-center justify-between   p-0 my-4 overflow-y-auto antialiased transition-transform duration-300   bg-white border-0  dark:shadow-none dark:bg-slate-850  max-w-64 ease-nav-brand z-990 md:translate-x-0 rounded-2xl md:left-0"
@@ -103,7 +116,7 @@ export default function Sidebar() {
             <hr className="my-2" />
             <li>
               <button
-                onClick={() => signOut()}
+                onClick={() => logout()}
                 className="flex items-center text-start w-full p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <GoSignOut size={25} className=" text-gray-500" />

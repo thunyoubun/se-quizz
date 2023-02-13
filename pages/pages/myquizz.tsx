@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import Table from "../components/Table";
-import { useSession, getSession, signIn } from "next-auth/react";
+
 import ModalQuiz from "../components/ModalQuiz";
 import Link from "next/link";
 import axios from "axios";
-import { IoClose } from "react-icons/io5";
-import { BsPlusLg } from "react-icons/bs";
+
 import { MdOutlineNotStarted } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
 export default function Myquizz({ data }: any) {
-  const { data: session, status } = useSession();
   const [authData, setAuthData] = useState(null);
   const [quizs, setQuizs] = useState([]);
 
@@ -34,14 +31,6 @@ export default function Myquizz({ data }: any) {
       alert(err.response.data.message);
     }
   };
-
-  /* useEffect(() => {
-    if (status === "authenticated") {
-      callGetQuiz();
-    } else {
-      setQuizs([]);
-    }
-  }, [quizs]); */
 
   return (
     <div className=" flex leading-default bg-gray-100 h-fit min-h-screen   w-full   ">
@@ -165,36 +154,21 @@ export default function Myquizz({ data }: any) {
 }
 
 export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
+  /* const { token } = useAuth(); */
   const res = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`);
   const data = await res.json();
   const quiz = data.quiz;
-  console.log(quiz);
+  /*  console.log(quiz); */
 
-  if (!session) {
+  /* if (!token) {
     return {
       redirect: {
         destination: "/",
         permant: false,
       },
     };
-  }
+  } */
   return {
-    props: { session: await getSession(context), data: quiz },
+    props: { data: quiz },
   };
 }
-
-/* export async function getStaticProps() {
-  // Call an external API endpoint to get posts
-  const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/quiz`);
-  const quiz = await res.data.quiz;
-
-  // By returning { props: { quiz } }, the Blog component
-  // will receive `quiz` as a prop at build time
-  return {
-    props: {
-      quiz,
-    },
-  };
-}
- */

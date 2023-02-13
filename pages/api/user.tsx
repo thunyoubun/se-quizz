@@ -13,7 +13,7 @@ export default function depositRoute(req: any, res: any) {
     }
     const users = readUsersDB();
     //find user in DB and get their money value
-    const foundUser = users.find((x: any) => x.username === user.username);
+    const foundUser = users.find((x: any) => x.cmuAccount === user.cmuAccount);
     if (!foundUser)
       return res.status(400).json({ ok: false, message: "User not found" });
 
@@ -51,7 +51,7 @@ export default function depositRoute(req: any, res: any) {
 
     //find and update name , Lname in DB
     const users = readUsersDB();
-    const userIdx = users.findIndex((x: any) => x.username === user.username);
+    const userIdx = users.findIndex((x: any) => x.cmuAccount === user.token);
     const userd = users[userIdx];
     userd.name = name;
     userd.Lname = Lname;

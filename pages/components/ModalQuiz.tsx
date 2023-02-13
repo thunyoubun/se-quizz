@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
+import { useAuth } from "../../contexts/auth";
 
 const ModalQuiz = () => {
-  const { data: session, status } = useSession();
-
+  /* const { data: session, status } = useSession(); */
+  const { user, loading, token, isAuthenticated } = useAuth();
+  const [author, setAuthor] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [quizText, setQuizText] = useState("");
   const [quizFile, setQuizFile] = useState("");
@@ -16,6 +18,12 @@ const ModalQuiz = () => {
     day: "numeric",
     month: "numeric",
     year: "numeric",
+  });
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setAuthor(user?.firstName + " " + user?.lastName);
+    }
   });
 
   const updateMenu = () => {
@@ -42,7 +50,7 @@ const ModalQuiz = () => {
       const resp = await axios.post("/api/quiz", {
         subject: quizText,
         date: date,
-        auth: session?.user?.name?.toString(),
+        auth: author,
         completed: false,
       });
       if (resp.data.ok) await callGetQuiz();
@@ -102,7 +110,7 @@ const ModalQuiz = () => {
                     </label>
                     <input
                       id="author"
-                      value={session?.user?.name?.toString()}
+                      value={author}
                       disabled
                       className="appearance-none focus:outline-none focus:shadow-outline focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
                     />

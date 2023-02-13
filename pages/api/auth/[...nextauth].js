@@ -10,6 +10,10 @@ export default NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
+    /* CmuProvider({
+      clientId: process.env.CMU_OAUTH_CLIENT_ID,
+      clientSecret: process.env.CMU_OAUTH_CLIENT_SECRET,
+    }), */
     // ...add more providers here
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')

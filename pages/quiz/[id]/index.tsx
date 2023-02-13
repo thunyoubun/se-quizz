@@ -79,7 +79,7 @@ const Quizz = () => {
 
 export default Quizz;
 
-export async function getServerSideProps(context: any) {
+/* export async function getServerSideProps(context: any) {
   const session = await getSession(context);
   if (!session) {
     return {
@@ -92,4 +92,4 @@ export async function getServerSideProps(context: any) {
   return {
     props: { session: await getSession(context) },
   };
-}
+} */

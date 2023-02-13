@@ -11,8 +11,8 @@ export function checkToken(req) {
   try {
     const result = jwt.verify(token, secret);
     return {
-      username: result.username,
-      isAdmin: result.isAdmin,
+      token: result.token,
+      cmuAccount: result.cmuAccount,
     };
   } catch (e) {
     return null;

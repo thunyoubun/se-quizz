@@ -1,15 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { RiBookMarkLine } from "react-icons/ri";
 import { BsArrowRight } from "react-icons/bs";
 import { signIn, useSession } from "next-auth/react";
+import { useAuth } from "../contexts/auth";
 
 export default function Home() {
   const [nav, setNav] = useState(false);
-  const { data: session } = useSession();
+  /* const { data: session } = useSession(); */
+  const { user, loading, isAuthenticated, login } = useAuth();
 
   const handleNav = () => {
     setNav(!nav);
@@ -57,7 +59,7 @@ export default function Home() {
               </li>
               <li
                 onClick={handleNav}
-                className="text-white right-0 z-10 flex items-center"
+                className="text-white right-0 z-20 cursor-pointer flex items-center"
               >
                 {nav ? (
                   <AiOutlineClose size={40} />
@@ -71,8 +73,8 @@ export default function Home() {
           <div
             className={
               nav
-                ? "sm:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-blue-400 text-center ease-in duration-300"
-                : "sm:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center w-full h-screen bg-blue-400 text-center ease-in duration-300"
+                ? "sm:hidden absolute top-0 left-0 right-0 z-10 bottom-0 flex justify-center items-center w-full h-screen bg-blue-400 text-center ease-in duration-300"
+                : "sm:hidden absolute top-0 left-[-100%] z-10 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-blue-400 text-center ease-in duration-300"
             }
           >
             <ul className=" text-white">
@@ -104,7 +106,7 @@ export default function Home() {
               </li>
             </ul>
           </div>
-          {session ? (
+          {isAuthenticated ? (
             <ul className="hidden text-white md:flex">
               <li className="flex  items-center">
                 <Link
@@ -112,7 +114,7 @@ export default function Home() {
                   className=" flex gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand"
                 >
                   <FaUser size={20} />
-                  <span className="hidden sm:inline">{session.user?.name}</span>
+                  <span className="hidden sm:inline">{user?.firstName}</span>
                   {/* <Image
                     src={`${session.user?.image}`}
                     alt="avatar"
@@ -126,20 +128,22 @@ export default function Home() {
           ) : (
             <ul className="hidden text-white md:flex">
               <li className="p-4">
-                <button
-                  onClick={() => signIn()}
-                  className="  hover:text-black  font-bold py-2 px-4 rounded-md inline-flex align-middle items-center"
-                >
-                  Login
-                </button>
+                <a href={process.env.NEXT_PUBLIC_CMU_OAUTH_URL}>
+                  <button
+                    /* onClick={() => signIn()} */
+                    className=" border-whites  border-2  bg-indigo-600 hover:bg-white hover:text-indigo-600  font-bold py-2 px-4 rounded-md inline-flex align-middle items-center"
+                  >
+                    Sign In
+                  </button>
+                </a>
               </li>
-              <li className="p-4">
+              {/* <li className="p-4">
                 <Link href="/auth/register">
                   <button className="border-whites border-2 bg-indigo-600 hover:bg-white hover:text-indigo-600  font-bold py-1 px-4 rounded-md inline-flex items-center">
                     Sign Up
                   </button>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           )}
         </div>

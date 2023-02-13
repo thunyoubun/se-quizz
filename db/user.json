@@ -1,1 +1,11 @@
-[{"id":"1","username":"test1","email":"test1@gmail.com","password":"$2b$12$L15Bi23BOXNUEASUMfyea.IZIBL8VQx43aqtRL1B3Nz9X55/HE74.","isAdmin":false},{"id":"2","username":"test2","name":"New","email":"test2@gmail.com","password":"$2b$12$/IZWfdzy0.29eUXZqV8Pw.VCED7T5v6GasLXF5gbK1VlJ/ZoTs5..","isAdmin":false,"Lname":"Jeans"},{"id":"3","name":"Guest3","username":"admin","email":"admin@gmail.com","password":"$2b$12$nzbR6qhkRoyRFoDA3nTcvuoSKowy5LCRWnSWbVERyoi/3SJ/QRemi","isAdmin":false}]
+[
+  {
+    "id": "1",
+    "cmuAccount": "thun_a@cmu.ac.th",
+    "firstName": "THUN",
+    "lastName": "ANANTARAT",
+    "studentId": "620610589",
+    "itaccounttype_id": "StdAcc",
+    "organization_name_EN": "Faculty of Engineering"
+  }
+]

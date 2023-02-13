@@ -23,7 +23,11 @@
     "pages/api/auth/login.js",
     "pages/api/auth/login.js",
     "pages/api/auth/[...nextauth].js",
-    "pages/api/auth/[...nextauth].js"
+    "pages/api/auth/[...nextauth].js",
+    "contexts/auth.js",
+    "contexts/auth.js",
+    "middleware/_middleware.jsre.js",
+    "middleware/_middleware.jsre.js"
   ],
   "exclude": ["node_modules"]
 }

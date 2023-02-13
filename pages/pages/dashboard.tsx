@@ -6,11 +6,12 @@ import Navbar from "../components/Navbar";
 import Table from "../components/Table";
 import { AiFillSignal, AiOutlineRise } from "react-icons/ai";
 import { useSession, getSession, signIn } from "next-auth/react";
+import { useAuth } from "../../contexts/auth";
 
 let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
 
 const Dashboard = () => {
-  const { data: session, status } = useSession();
+  const { user, loading, token, isAuthenticated } = useAuth();
   return (
     <div className=" flex leading-default bg-gray-100 h-fit min-h-screen   w-full   ">
       <div className=" fixed  bg-y-50 w-full bg-center h-80 top-0 bg-[url('https://www.cmu.ac.th/content/organization/7ae5726e-0c18-45f8-ae3c-cdd52e2afd94/3baedb35-438f-4e0f-8d1d-2b9724d36951.jpg')] min-h-75">
@@ -26,7 +27,7 @@ const Dashboard = () => {
         className="z-10 container w-full overflow-y-auto relative
         h-full max-h-screen transition-all duration-200 ease-in-out  rounded-xl "
       >
-        <Navbar prePath="Pages" pathName="my quizz" />
+        <Navbar prePath="Pages" pathName="Dashboard" />
 
         <div className="w-full   mt-10 px-7 ">
           <div className="w-full ">
@@ -233,7 +234,7 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-export async function getServerSideProps(context: any) {
+/* export async function getServerSideProps(context: any) {
   const session = await getSession(context);
   if (!session) {
     return {
@@ -246,4 +247,4 @@ export async function getServerSideProps(context: any) {
   return {
     props: { session: await getSession(context) },
   };
-}
+} */
