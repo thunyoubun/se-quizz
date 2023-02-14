@@ -6,7 +6,7 @@ import React, { createContext, useState, useContext, useEffect } from "react";
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(false);
+  const [theme, setTheme] = useState(null);
 
   return (
     <ThemeContext.Provider
