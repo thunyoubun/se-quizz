@@ -245,12 +245,5 @@ export const getServerSideProps = async ({ req, res }: any) => {
         user: user,
       },
     };
-  } else {
-    return {
-      redirect: {
-        destination: `${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`,
-        permant: false,
-      },
-    };
   }
 };
