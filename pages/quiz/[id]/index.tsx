@@ -16,7 +16,7 @@ import { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { getCookie } from "cookies-next";
 
-const Quizz = () => {
+const Quizz = ({ user }: any) => {
   const router = useRouter();
   const id = router.query.id as string;
 
@@ -37,7 +37,7 @@ const Quizz = () => {
         className="z-10 container w-full overflow-y-auto relative
     h-full max-h-screen transition-all duration-200 ease-in-out  rounded-xl "
       >
-        <Navbar prePath={"Quiz"} pathName={"Quiz " + id} />
+        <Navbar prePath={"Quiz"} pathName={"Quiz " + id} user={user} />
         {/* Quizz*/}
         <div className="w-full  mt-10 mb-4  ">
           <div className="w-full  h-max md:px-7 px-3  ">
@@ -82,20 +82,29 @@ const Quizz = () => {
 
 export default Quizz;
 
-export const getServerSideProps = ({ req, res }: any) => {
+export const getServerSideProps = async ({ req, res }: any) => {
   const token = getCookie("cmu-oauth-example-token", { req, res });
 
-  if (!token) {
+  if (token) {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}api/user`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await res.json();
+    const user = data.user;
+
     return {
-      redirect: {
-        destination: `${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`,
-        permant: false,
+      props: {
+        token: token,
+        user: user,
       },
     };
   } else {
     return {
-      props: {
-        token: token,
+      redirect: {
+        destination: `${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`,
+        permant: false,
       },
     };
   }
