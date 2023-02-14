@@ -12,10 +12,12 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { getCookie } from "cookies-next";
+import { useRouter } from "next/router";
 
 export default function Dashboard({ data, user }: any) {
   const [authData, setAuthData] = useState(null);
   const [quizs, setQuizs] = useState([]);
+  const route = useRouter();
 
   const callGetQuiz = async () => {
     try {
@@ -29,7 +31,10 @@ export default function Dashboard({ data, user }: any) {
   const callDeleteQuiz = async (id: any) => {
     try {
       const resp = await axios.delete(`/api/quiz/${id}`);
-      if (resp.data.ok) await callGetQuiz();
+      if (resp.data.ok) {
+        await callGetQuiz();
+        route.reload();
+      }
     } catch (err: any) {
       alert(err.response.data.message);
     }
@@ -144,14 +149,12 @@ export default function Dashboard({ data, user }: any) {
                             >
                               <MdOutlineNotStarted size={25} />
                             </Link>
-                            <Link href="/pages/dashboard">
-                              <button
-                                onClick={() => callDeleteQuiz(x.id)}
-                                className="hover:scale-105 text-base font-semibold leading-tight dark:text-green dark:opacity-80 text-white bg-gradient-to-r from-red-500 to-red-600  hover:bg-gradient-to-l hover:from-red-500 hover:to-red-600  p-4  tracking-wide  shadow-lg cursor-pointer transition ease-in duration-300 px-4 py-1 rounded-md"
-                              >
-                                <RiDeleteBin5Line size={25} />
-                              </button>
-                            </Link>
+                            <button
+                              onClick={() => callDeleteQuiz(x.id)}
+                              className="hover:scale-105 text-base font-semibold leading-tight dark:text-green dark:opacity-80 text-white bg-gradient-to-r from-red-500 to-red-600  hover:bg-gradient-to-l hover:from-red-500 hover:to-red-600  p-4  tracking-wide  shadow-lg cursor-pointer transition ease-in duration-300 px-4 py-1 rounded-md"
+                            >
+                              <RiDeleteBin5Line size={25} />
+                            </button>
                           </td>
                         </tr>
                       );
