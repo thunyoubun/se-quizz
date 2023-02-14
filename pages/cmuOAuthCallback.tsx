@@ -35,6 +35,5 @@ export default function CMUOAuthCallback() {
         }
       });
   }, [code]);
-  console.log("tokennnnnnn = ", token);
   return <div className="p-3">{message || "Redirecting ..."}</div>;
 }

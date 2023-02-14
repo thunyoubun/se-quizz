@@ -134,7 +134,7 @@ export default async function handler(
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "1d", // Token will last for one hour only
+      expiresIn: "1hr", // Token will last for one hour only
     }
   );
 
@@ -150,7 +150,7 @@ export default async function handler(
     httpOnly: true,
     sameSite: "lax",
     //force cookie to use HTTPS only in production code
-    secure: process.env.NODE_ENV === "production",
+    /*    secure: process.env.NODE_ENV === "production", */
     path: "/",
     //change to your hostname in production
     domain: `${process.env.NEXTAUTH_URL}`,
