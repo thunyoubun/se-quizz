@@ -16,15 +16,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(null);
 
-  const callGetCookie = async () => {
-    try {
-      const resp = await axios.get("/api/auth/whoAmI");
-      if (resp.data.ok) {
-        setToken(resp.data.token);
-      }
-    } catch (err) {
-      console.log(err.response.data.mesasge);
-    }
+  const callGetCookie = () => {
+    const token = getCookie("cmu-oauth-example-token", { req, res });
   };
   async function loadUserFromCookies() {
     /* callGetCookie(); */

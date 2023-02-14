@@ -329,21 +329,21 @@ const User = () => {
 
 export default User;
 
-export async function getServerSideProps(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export const getServerSideProps = ({ req, res }: any) => {
   const token = getCookie("cmu-oauth-example-token", { req, res });
-  if (token) {
-    console.log("JSON Web Token", JSON.stringify(token, null, 2));
 
-    return;
-  } else {
+  if (!token) {
     return {
       redirect: {
         destination: `${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`,
         permant: false,
       },
     };
+  } else {
+    return {
+      props: {
+        token: token,
+      },
+    };
   }
-}
+};

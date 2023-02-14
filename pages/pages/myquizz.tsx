@@ -9,8 +9,9 @@ import axios from "axios";
 
 import { MdOutlineNotStarted } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { getCookie } from "cookies-next";
 
 export default function Myquizz({ data }: any) {
   const [authData, setAuthData] = useState(null);
@@ -155,25 +156,25 @@ export default function Myquizz({ data }: any) {
   );
 }
 
-export async function getServerSideProps(req: NextRequest) {
-  const token = await getToken({
-    req,
-    secret: process.env.JWT_SECRET,
-  });
-  console.log("JSON Web Token", JSON.stringify(token, null, 2));
-  if (token) {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`);
-    const data = await res.json();
-    const quiz = data.quiz;
-    return {
-      props: { data: quiz },
-    };
-  } else {
+export const getServerSideProps = async ({ req, res }: any) => {
+  const token = getCookie("cmu-oauth-example-token", { req, res });
+
+  if (!token) {
     return {
       redirect: {
         destination: `${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`,
         permant: false,
       },
     };
+  } else {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`);
+    const data = await res.json();
+    const quiz = data.quiz;
+    return {
+      props: {
+        token: token,
+        data: quiz,
+      },
+    };
   }
-}
+};
