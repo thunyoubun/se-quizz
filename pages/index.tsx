@@ -245,5 +245,11 @@ export const getServerSideProps = async ({ req, res }: any) => {
         user: user,
       },
     };
+  } else {
+    return {
+      props: {
+        user: null,
+      },
+    };
   }
 };

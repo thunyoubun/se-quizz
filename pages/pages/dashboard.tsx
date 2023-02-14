@@ -43,7 +43,7 @@ export default function Dashboard({ data, user }: any) {
       <div id="nav-sidebar" className="z-10 hidden md:flex  md:p-6 mb-2">
         <Sidebar />
       </div>
-      <ModalQuiz />
+      <ModalQuiz user={user} />
       <div
         className="z-10 container w-full overflow-y-auto relative
         h-full max-h-screen transition-all duration-200 ease-in-out  rounded-xl "

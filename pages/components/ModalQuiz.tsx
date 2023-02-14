@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getCookie } from "cookies-next";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -6,9 +7,13 @@ import { BsPlusLg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { useAuth } from "../../contexts/auth";
 
-const ModalQuiz = () => {
+export declare type props = {
+  user: any;
+};
+
+const ModalQuiz = ({ user }: props) => {
   /* const { data: session, status } = useSession(); */
-  const { user, loading, token, isAuthenticated } = useAuth();
+  const { loading, token, isAuthenticated } = useAuth();
   const [author, setAuthor] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [quizText, setQuizText] = useState("");
@@ -22,7 +27,7 @@ const ModalQuiz = () => {
   });
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated || user) {
       setAuthor(user?.firstName + " " + user?.lastName);
     }
   });

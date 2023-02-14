@@ -126,7 +126,7 @@ const Myquiz = ({ user }: any) => {
               <div className=" overflow-x-auto">
                 <table className="items-center w-full mb-4 align-top border-collapse border-gray-200 dark:border-white/40">
                   <tbody>
-                    <tr className="">
+                    <tr className="dark:hover:bg-gray-500 hover:bg-gray-100 rounded-md">
                       <td className="p-2 align-middle bg-transparent border-b w-4/5 whitespace-nowrap dark:border-white/40">
                         <div className="flex items-center gap-2">
                           <div className="flex h-12 w-12">
