@@ -7,7 +7,9 @@ import { useAuth } from "../../contexts/auth";
 import { useRouter } from "next/router";
 
 const User = () => {
-  const [avatar, setAvatar] = useState<string | null | undefined | any>("");
+  const [avatar, setAvatar] = useState<string | null | undefined | any>(
+    "/assets/empty-profile.png"
+  );
   const [Fname, setFname] = useState<string | null | undefined | any>("");
   const [Lname, setLname] = useState<string | null | undefined | any>("");
   const [stdId, setStdId] = useState<string | null | undefined | any>("");
@@ -69,11 +71,13 @@ const User = () => {
       setOrganize(user?.organization_name_EN);
       setCmuAccount(user?.cmuAccount);
       setStdId(user?.studentId);
-      setAvatar("/assets/empty-profile.png");
+
       if (user?.itaccounttype_id === "StdAcc") {
-        setRole("Student");
-      } else {
-        setRole("Teacher");
+        setRole("Student Account");
+      } else if (user?.itaccounttype_id === "AlumAcc") {
+        setRole("Teacher Account");
+      } else if (user?.itaccounttype_id === "MISEmpAcc") {
+        setRole("Staff Account");
       }
     }
   }, []);
@@ -110,27 +114,14 @@ const User = () => {
                       alt=""
                       className="border-4 bg-contain  border-white   h-40 w-40 rounded-full z-20"
                     />
-                    <h1 className=" font-bold text-3xl text-gray-500 z-20">
+                    <h1 className=" font-bold text-3xl text-gray-800 z-20">
                       {Fname} {Lname}
                     </h1>
                     <div className="flex justify-between gap-10">
                       <div className="flex flex-col">
-                        <span className=" text-2xl font-bold text-gray-800">
-                          5
+                        <span className=" text-2xl font-bold text-gray-500">
+                          {role}
                         </span>
-                        <span className=" text-gray-400 ">Quiz</span>
-                      </div>
-                      <div className="flex flex-col">
-                        <span className=" text-2xl font-bold text-gray-800">
-                          70.77%
-                        </span>
-                        <span className=" text-gray-400 ">Accuracy</span>
-                      </div>
-                      <div className="flex flex-col">
-                        <span className=" text-2xl font-bold text-gray-800">
-                          {3}
-                        </span>
-                        <span className=" text-gray-400 ">Done</span>
                       </div>
                     </div>
                   </div>
@@ -156,7 +147,7 @@ const User = () => {
                     <h1>User Information</h1>
                   </div>
 
-                  {role === "StdAcc" ? (
+                  {role === "Student Account" ? (
                     <form className=" space-y-6">
                       <div className="flex  gap-2">
                         <div className="w-1/2 ">
