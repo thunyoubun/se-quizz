@@ -10,7 +10,7 @@ export default async function handler(
     res,
     path: "/",
     //change to your hostname in production
-    domain: `se-quizz.vercel.app`,
+    domain: `${process.env.DOMAIN}`,
   });
 
   return res.json({ ok: true });

@@ -1,26 +1,35 @@
+import axios from "axios";
+import { getCookie } from "cookies-next";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import { useAuth } from "../../contexts/auth";
+import { useTheme } from "../../contexts/theme";
 
 export declare type props = {
   prePath: string;
   pathName: string;
+  user: any;
 };
 
-const Navbar = ({ prePath, pathName }: props) => {
+const Navbar = ({ prePath, pathName, user }: props) => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
   const [isSideBar, setSideBar] = useState(false);
   /* const { data: session, status } = useSession(); */
   const [avatar, setAvatar] = useState<string | null | undefined | any>("");
-  const { user, loading, token, isAuthenticated } = useAuth();
+  const { loading, token, isAuthenticated, setUser } = useAuth();
   const [auth, setAuth] = useState(null);
+
+  const { theme, setTheme } = useTheme();
+
+  const [color, setColor] = useState("");
+  const [switchColor, setSwitchColor] = useState("");
 
   useEffect(() => {
     /* callGetUser(); */
+    setAuth(user.firstName);
     if (isAuthenticated) {
       setAuth(user.firstName);
-      console.log(auth);
     }
     setAvatar("/assets/empty-profile.png");
   }, []);
@@ -42,14 +51,83 @@ const Navbar = ({ prePath, pathName }: props) => {
   };
 
   const navSign = () => {
-    if (isAuthenticated) {
+    if (isAuthenticated || user) {
       return <p>{auth}</p>;
     }
   };
 
-  const handleNav = () => {
-    setIsMenuClicked(!isMenuClicked);
-  };
+  function toggleTheme() {
+    setTheme(!theme);
+    console.log("isDarkMode : ", theme);
+    switchTheme();
+  }
+
+  function loadTheme() {
+    //your code here
+    const dataStr = localStorage.getItem("theme");
+    if (dataStr) {
+      const data = dataStr;
+      setTheme(data);
+
+      switchTheme();
+    }
+  }
+  function changeIcon() {
+    if (theme) {
+      return darkIcon;
+    } else {
+      return lightIcon;
+    }
+  }
+  const darkIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+      />
+    </svg>
+  );
+
+  const lightIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+      />
+    </svg>
+  );
+
+  function switchTheme() {
+    if (theme) {
+      localStorage.setItem("theme", JSON.stringify(!theme));
+      document.documentElement.classList.add("dark");
+      setColor("bg-gray-700 translate-x-full");
+      setSwitchColor("bg-gray-600");
+    } else {
+      localStorage.setItem("theme", JSON.stringify(theme));
+      document.documentElement.classList.remove("dark");
+      setColor("bg-yellow-500 sm:-translate-x-2 -translate-x-1");
+      setSwitchColor("bg-yellow-400");
+    }
+  }
+
+  useEffect(() => {
+    loadTheme();
+  }, []);
 
   return (
     <nav
@@ -89,7 +167,7 @@ const Navbar = ({ prePath, pathName }: props) => {
               />
             </div>
           </div> */}
-          <ul className="flex items-center justify-end pl-0 mb-0 list-none md-max:w-full">
+          <ul className="flex gap-4 items-center justify-end pl-0 mb-0 list-none md-max:w-full">
             <li className="flex  items-center">
               <Link href={"/pages/user"}>
                 <button className="  rounded-md flex align-middle justify-center items-center gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
@@ -104,6 +182,19 @@ const Navbar = ({ prePath, pathName }: props) => {
                   <span className="hidden sm:inline">{navSign()}</span>
                 </button>
               </Link>
+            </li>
+            <li className="flex">
+              <button
+                className={` relative sm:w-20 w-12 sm:h-10 h-7 rounded-full ${switchColor} flex items-center transition duration-300 focus:outline-none shadow`}
+                onClick={toggleTheme}
+              >
+                <div
+                  id="switch-toggle"
+                  className={`flex sm:w-10 w-7 sm:h-10 h-7  ${color} rounded-full transition duration-500 transform p-1 text-white`}
+                >
+                  {changeIcon()}
+                </div>
+              </button>
             </li>
             <li className=" item-center flex md:hidden ">
               <button

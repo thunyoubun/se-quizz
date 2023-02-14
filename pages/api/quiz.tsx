@@ -14,18 +14,22 @@ export default function QuizzRoute(req: any, res: any) {
     const quiz = readQuizzDB();
 
     if (
-      typeof req.body.subject !== "string" ||
-      req.body.subject.length === 0 ||
-      typeof req.body.completed !== "boolean"
+      typeof req.body.title !== "string" ||
+      req.body.title.length === 0 ||
+      typeof req.body.category !== "string" ||
+      req.body.category.length === 0
+      /* ||
+      typeof req.body.status !== "boolean" */
     )
       return res.status(400).json({ ok: false, message: "Invalid Quiz Data" });
 
     const newQuiz = {
       id: uuidv4(),
-      subject: req.body.subject,
+      title: req.body.title,
+      category: req.body.category,
       auth: req.body.auth,
       date: req.body.date,
-      completed: req.body.completed,
+      status: req.body.status,
     };
 
     quiz.push(newQuiz);

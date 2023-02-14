@@ -76,6 +76,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         isAuthenticated: !!user,
         user,
+        setUser,
         login,
         loading,
         logout,

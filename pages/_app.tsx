@@ -6,11 +6,14 @@ import { useRouter } from "next/router";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import { Session } from "inspector";
+import { ThemeProvider } from "../contexts/theme";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <Component {...pageProps} />
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </AuthProvider>
   );
 }

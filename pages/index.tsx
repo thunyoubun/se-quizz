@@ -7,11 +7,13 @@ import { RiBookMarkLine } from "react-icons/ri";
 import { BsArrowRight } from "react-icons/bs";
 import { signIn, useSession } from "next-auth/react";
 import { useAuth } from "../contexts/auth";
+import { spawn } from "child_process";
+import { getCookie } from "cookies-next";
 
-export default function Home() {
+export default function Home({ user }: any) {
   const [nav, setNav] = useState(false);
   /* const { data: session } = useSession(); */
-  const { user, loading, isAuthenticated, login } = useAuth();
+  const { loading, isAuthenticated, login } = useAuth();
 
   const handleNav = () => {
     setNav(!nav);
@@ -24,14 +26,12 @@ export default function Home() {
           <ul className="hidden text-white  text-lg md:flex ">
             <li className="p-1">
               <Link href="/">
-                <h1 className="font-bold text-white text-4xl pr-10">
-                  Deviloper.
-                </h1>
+                <h1 className="font-bold text-white text-4xl pr-10">EasyQ.</h1>
               </Link>
             </li>
-            <li className="p-4  hover:text-gray-900">
+            {/* <li className="p-4  hover:text-gray-900">
               <Link href="/pages/myquizz">Product</Link>
-            </li>
+            </li> */}
             <li className="p-4  hover:text-gray-900">
               <Link href="/pages/document">Document</Link>
             </li>
@@ -46,16 +46,23 @@ export default function Home() {
               <li className="p-1">
                 <Link href="/">
                   <h1 className="font-bold text-white text-4xl pr-10">
-                    Deviloper.
+                    EasyQ.
                   </h1>
                 </Link>
               </li>
             </ul>
             <ul className=" flex justify-center">
               <li className="p-4 text-white">
-                <Link href="/auth/signin">
-                  <FaUser size={25} />
-                </Link>
+                {isAuthenticated ? (
+                  <Link href={"pages/user"} className="flex gap-2">
+                    <FaUser size={25} />
+                    <span className="flex sm:inline">{user?.firstName}</span>
+                  </Link>
+                ) : (
+                  <Link href={`${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`}>
+                    <FaUser size={25} />
+                  </Link>
+                )}{" "}
               </li>
               <li
                 onClick={handleNav}
@@ -84,12 +91,12 @@ export default function Home() {
               >
                 <Link href="/">Home</Link>
               </li>
-              <li
+              {/* <li
                 onClick={handleNav}
                 className="p-4 text-4xl hover:text-gray-500"
               >
                 <Link href="/pages/myquizz">Product</Link>
-              </li>
+              </li> */}
               <li
                 onClick={handleNav}
                 className="p-4 text-4xl hover:text-gray-500"
@@ -128,14 +135,14 @@ export default function Home() {
           ) : (
             <ul className="hidden text-white md:flex">
               <li className="p-4">
-                <a href={process.env.NEXT_PUBLIC_CMU_OAUTH_URL}>
+                <Link href={`${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`}>
                   <button
                     /* onClick={() => signIn()} */
                     className=" border-whites  border-2  bg-indigo-600 hover:bg-white hover:text-indigo-600  font-bold py-2 px-4 rounded-md inline-flex align-middle items-center"
                   >
-                    Sign In
+                    Sign in via CMU Account
                   </button>
-                </a>
+                </Link>
               </li>
               {/* <li className="p-4">
                 <Link href="/auth/register">
@@ -159,15 +166,19 @@ export default function Home() {
             <div className="mt-4">
               <h1 className=" text-white text-6xl font-bold">Quiz Importer</h1>
               <p className="  text-slate-300 mt-2 text-lg font-medium ">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Distinctio, ea veritatis amet sunt deleniti fugit ipsa expedita
-                perferendis nisi temporibus dignissimos facere aut magnam
-                numquam voluptatem accusantium, excepturi, saepe porro.
+                Welcome to ‘EasyQ’, quiz importer for 261111 Internet and Online
+                Community course from Chiang Mai University. Our solution
+                enables the course instructor to upload their quizzes as .doc or
+                .docx file and automatically import them into the LMS. The
+                instructor is no longer required to manually construct quizzes
+                on the LMS platform. As a result, time and workforce are saved,
+                since ‘EasyQ’ handles all the works for you. Enjoy creating your
+                new quizzes with us!!
               </p>
             </div>
             <div className="mt-10 gap-5 flex">
               <Link
-                href="/pages/myquizz"
+                href="/pages/myquiz"
                 className=" bg-violet-500 hover:bg-violet-600 hover:scale-105 text-xl py-6 font-normal shadow-lg rounded-xl text-white inline-flex items-center md:px-10 px-5"
               >
                 Get Started
@@ -215,3 +226,31 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps = async ({ req, res }: any) => {
+  const token = getCookie("cmu-oauth-example-token", { req, res });
+
+  if (token) {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}api/user`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await res.json();
+    const user = data.user;
+
+    return {
+      props: {
+        token: token,
+        user: user,
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: `${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`,
+        permant: false,
+      },
+    };
+  }
+};

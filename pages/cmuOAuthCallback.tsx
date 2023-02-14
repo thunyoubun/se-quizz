@@ -20,7 +20,7 @@ export default function CMUOAuthCallback() {
       .then((resp) => {
         if (resp.data.ok) {
           setToken(resp.data.token);
-          router.push("/");
+          router.push("/pages/myquiz");
         }
       })
       .catch((error: AxiosError<SignInResponse>) => {

@@ -14,6 +14,7 @@ import Footer from "../../components/Footer";
 import { getSession, signIn } from "next-auth/react";
 import { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { getCookie } from "cookies-next";
 
 const Quizz = () => {
   const router = useRouter();
@@ -81,20 +82,21 @@ const Quizz = () => {
 
 export default Quizz;
 
-export async function getServerSideProps(req: NextRequest) {
-  const token = await getToken({
-    req,
-    secret: process.env.JWT_SECRET,
-  });
+export const getServerSideProps = ({ req, res }: any) => {
+  const token = getCookie("cmu-oauth-example-token", { req, res });
 
-  if (token) {
-    return;
-  } else {
+  if (!token) {
     return {
       redirect: {
         destination: `${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`,
         permant: false,
       },
     };
+  } else {
+    return {
+      props: {
+        token: token,
+      },
+    };
   }
-}
+};
