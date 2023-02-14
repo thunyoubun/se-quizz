@@ -5,6 +5,10 @@ import Image from "next/image";
 import Footer from "../components/Footer";
 import { useAuth } from "../../contexts/auth";
 import { useRouter } from "next/router";
+import { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
+import { getCookie } from "cookies-next";
+import { NextApiRequest, NextApiResponse } from "next";
 
 const User = () => {
   const [avatar, setAvatar] = useState<string | null | undefined | any>(
@@ -325,19 +329,21 @@ const User = () => {
 
 export default User;
 
-/* export async function getServerSideProps() {
-  try {
-    const res = await axios.get(`http://localhost:3000/api/auth/whoAmI`);
-    if (res.data.ok) {
-      next();
-    }
-  } catch (err) {
-    console.log(err);
+export async function getServerSideProps(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const token = getCookie("cmu-oauth-example-token", { req, res });
+  if (token) {
+    console.log("JSON Web Token", JSON.stringify(token, null, 2));
+
+    return;
+  } else {
     return {
       redirect: {
-        destination: "/",
+        destination: `${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`,
         permant: false,
       },
     };
   }
-} */
+}

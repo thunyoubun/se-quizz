@@ -12,6 +12,8 @@ import { RiQuestionAnswerFill } from "react-icons/ri";
 import HeadQuizz from "../../components/HeadQuizz";
 import Footer from "../../components/Footer";
 import { getSession, signIn } from "next-auth/react";
+import { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 const Quizz = () => {
   const router = useRouter();
@@ -79,17 +81,20 @@ const Quizz = () => {
 
 export default Quizz;
 
-/* export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-  if (!session) {
+export async function getServerSideProps(req: NextRequest) {
+  const token = await getToken({
+    req,
+    secret: process.env.JWT_SECRET,
+  });
+
+  if (token) {
+    return;
+  } else {
     return {
       redirect: {
-        destination: "/",
+        destination: `${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`,
         permant: false,
       },
     };
   }
-  return {
-    props: { session: await getSession(context) },
-  };
-} */
+}

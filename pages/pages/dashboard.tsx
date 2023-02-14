@@ -7,6 +7,8 @@ import Table from "../components/Table";
 import { AiFillSignal, AiOutlineRise } from "react-icons/ai";
 import { useSession, getSession, signIn } from "next-auth/react";
 import { useAuth } from "../../contexts/auth";
+import { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
 
@@ -234,17 +236,20 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-/* export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-  if (!session) {
+export async function getServerSideProps(req: NextRequest) {
+  const token = await getToken({
+    req,
+    secret: process.env.JWT_SECRET,
+  });
+
+  if (token) {
+    return;
+  } else {
     return {
       redirect: {
-        destination: "/",
+        destination: `${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`,
         permant: false,
       },
     };
   }
-  return {
-    props: { session: await getSession(context) },
-  };
-} */
+}

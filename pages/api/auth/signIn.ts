@@ -134,7 +134,7 @@ export default async function handler(
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "1hr", // Token will last for one hour only
+      expiresIn: "1h", // Token will last for one hour only
     }
   );
 
