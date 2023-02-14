@@ -17,7 +17,8 @@ export default function QuizzRoute(req: any, res: any) {
       typeof req.body.title !== "string" ||
       req.body.title.length === 0 ||
       typeof req.body.category !== "string" ||
-      req.body.category.length === 0
+      req.body.category.length === 0 ||
+      req.body.file.length === 0
       /* ||
       typeof req.body.status !== "boolean" */
     )
@@ -28,6 +29,7 @@ export default function QuizzRoute(req: any, res: any) {
       title: req.body.title,
       category: req.body.category,
       auth: req.body.auth,
+      file: req.body.file,
       date: req.body.date,
       status: req.body.status,
     };

@@ -58,6 +58,7 @@ const ModalQuiz = ({ user }: props) => {
         category: category,
         date: date,
         auth: author,
+        file: quizFile,
         status: "Online",
       });
       if (resp.data.ok) await callGetQuiz();
@@ -141,7 +142,7 @@ const ModalQuiz = ({ user }: props) => {
                       onChange={(e) => setQuizFile(e.target.value)}
                       onDrop={(e) => e.preventDefault()}
                       value={quizFile}
-                      accept=".doc"
+                      accept=".docx"
                       required
                       className="  w-full py-2 px-1 text-black dark:text-white"
                     />
