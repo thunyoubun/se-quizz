@@ -9,6 +9,8 @@ import { useSession, getSession, signIn } from "next-auth/react";
 import { useAuth } from "../../contexts/auth";
 import { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { NextApiRequest, NextApiResponse } from "next";
+import { getCookie } from "cookies-next";
 
 let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
 
@@ -236,13 +238,14 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-export async function getServerSideProps(req: NextRequest) {
-  const token = await getToken({
-    req,
-    secret: process.env.JWT_SECRET,
-  });
-
+export async function getServerSideProps(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const token = getCookie("cmu-oauth-example-token", { req, res });
   if (token) {
+    console.log("JSON Web Token", JSON.stringify(token, null, 2));
+
     return;
   } else {
     return {
