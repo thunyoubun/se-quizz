@@ -2,23 +2,21 @@ import fs from "fs";
 import path from "path";
 
 let quizz = [
-  [
-    {
-      id: "1",
-      title: "Internet ",
-      auth: "THUN ANANTARAT",
-      date: "1/16/2023",
-      status: "Online",
-    },
-    {
-      id: "493b9259-2d68-45b9-b1d2-72ac3cf81a66",
-      title: "Network",
-      category: "Mid Term",
-      auth: "THUN ANANTARAT",
-      date: "2/15/2023",
-      status: "Online",
-    },
-  ],
+  {
+    id: "1",
+    title: "Internet ",
+    auth: "THUN ANANTARAT",
+    date: "1/16/2023",
+    status: "Online",
+  },
+  {
+    id: "493b9259-2d68-45b9-b1d2-72ac3cf81a66",
+    title: "Network",
+    category: "Mid Term",
+    auth: "THUN ANANTARAT",
+    date: "2/15/2023",
+    status: "Online",
+  },
 ];
 
 let users = [
