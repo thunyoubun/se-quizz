@@ -181,7 +181,7 @@ export default function Home({ user }: any) {
               <ul className="mt-10 gap-5 flex">
                 <li>
                   <Link
-                    href="/pages/dashboard"
+                    href={`${process.env.NEXT_PUBLIC_CMU_OAUTH_URL}`}
                     className=" bg-violet-500 hover:bg-violet-600 hover:scale-105 text-xl py-6 font-normal shadow-lg rounded-xl text-white inline-flex items-center md:px-10 px-5"
                   >
                     Get Started
