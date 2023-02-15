@@ -55,7 +55,7 @@ const ModalQuiz = ({ user }: props) => {
 
   const callPostQuiz = async () => {
     try {
-      if(quizFile==null||quizText=="null"||category=="") throw new Error('Parameter is null!');
+      if(quizFile==null||quizFile==undefined||quizText==""||quizText==undefined||category==""||category==undefined) throw new Error('Parameter is empty!');
       const resp = await axios.post("/api/quiz", {
         title: quizText,
         category: category,
@@ -119,6 +119,7 @@ const ModalQuiz = ({ user }: props) => {
                       required
                       onChange={(e) =>{if(e)setQuizText(e.target.value)}}
                       value={quizText}
+                      type="text"
                       className="appearance-none focus:outline-none focus:shadow-outline  focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
                     />
                     <label className="block text-black dark:text-white text-sm font-bold mb-1">
@@ -126,6 +127,7 @@ const ModalQuiz = ({ user }: props) => {
                     </label>
                     <input
                       id="category"
+                      type="text"
                       required
                       onChange={(e) =>{if(e) setCategory(e.target.value)}}
                       value={category}
