@@ -55,6 +55,7 @@ const ModalQuiz = ({ user }: props) => {
 
   const callPostQuiz = async () => {
     try {
+      if(quizFile==null||quizText=="null"||category=="") throw new Error('Parameter is null!');
       const resp = await axios.post("/api/quiz", {
         title: quizText,
         category: category,
@@ -166,7 +167,7 @@ const ModalQuiz = ({ user }: props) => {
                       <button
                         type="submit"
                         className="text-white w-full  bg-blue-500 hover:bg-blue-600 font-bold uppercase text-sm px-6 py-3  rounded-md shadow-md  outline-none focus:outline-none mr-1 mb-1"
-                        onSubmit={()=>callPostQuiz()}
+                        onClick={()=>callPostQuiz()}
                       >
                         Submit
                       </button>
