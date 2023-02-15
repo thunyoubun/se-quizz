@@ -159,12 +159,12 @@ export default function Home({ user }: any) {
           <div className=" w-full md:w-3/6 h-full flex-row justify-start pt-20 ">
             <div className="text-white w-fit flex bg-black/60 rounded-3xl p-1 h-8">
               <h1 className="inline-flex px-4 items-center shadow-lg bg-indigo-500 font-medium rounded-3xl">
-                Quizz
+                Quiz
               </h1>
-              <h1 className="inline-flex px-4 items-center">Make your Quizz</h1>
+              <h1 className="inline-flex px-4 items-center">Make your Quiz</h1>
             </div>
             <div className="mt-4">
-              <h1 className=" text-white text-6xl font-bold">Quiz Importer</h1>
+              <h1 className=" text-white text-6xl font-bold">LMS Quiz Importer</h1>
 
               <p className="  text-slate-300 mt-2 text-lg font-medium ">
                 Welcome to 'EasyQ', quiz importer for 261111 Internet and Online
