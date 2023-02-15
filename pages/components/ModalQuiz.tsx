@@ -146,7 +146,13 @@ const ModalQuiz = ({ user }: props) => {
                     <input
                       id="file"
                       type="file"
-                      onChange={(e) => setQuizFile(e.target.value)}
+                      onChange={(e) => {
+                        if (e) 
+                        {setQuizFile(e.target.value)
+                          console.warn("Upload!!!");
+                          
+                        };
+                      }}
                       onDrop={(e) => e.preventDefault()}
                       value={quizFile}
                       accept=".docx,.doc"
