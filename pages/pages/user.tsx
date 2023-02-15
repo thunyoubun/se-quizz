@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import { useAuth } from "../../contexts/auth";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
+import Head from "next/head";
 const User = ({ user }: any) => {
   const [avatar, setAvatar] = useState<string | null | undefined | any>(
     "/assets/empty-profile.png"
@@ -84,6 +85,9 @@ const User = ({ user }: any) => {
 
   return (
     <div className=" flex leading-default bg-gray-100 dark:bg-gray-600 h-fit min-h-screen   w-full   ">
+      <Head>
+        <title>EasyQ - User</title>
+      </Head>
       <div className=" fixed bg-no-repeat bg-cover  bg-y-50 w-full bg-center h-80 top-0 bg-[url('https://media.tenor.com/An_EgVt-nWoAAAAC/city-lofi.gif')] min-h-75">
         <span className="absolute top-0 left-0 w-full h-full bg-blue-500 opacity-40"></span>
       </div>

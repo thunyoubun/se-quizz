@@ -21,11 +21,12 @@ export default function Home({ user }: any) {
   return (
     <div className=" h-screen w-screen relative overflow-hidden  bg-gradient-to-b from-blue-600 to-blue-500">
       <Head>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.25,user-scalable=0"
-          />
-        </Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.25,user-scalable=0"
+        />
+        <title>EasyQ</title>
+      </Head>
       <div className="relative z-10">
         <div className=" m-auto flex justify-between items-center py-4  px-10">
           <ul className="hidden text-white  text-lg md:flex ">
@@ -50,9 +51,7 @@ export default function Home({ user }: any) {
             <ul className="flex text-white justify-center text-lg ">
               <li className="p-1">
                 <Link href="/">
-                  <h1 className="font-bold text-white text-4xl pr-10">
-                    EasyQ
-                  </h1>
+                  <h1 className="font-bold text-white text-4xl pr-10">EasyQ</h1>
                 </Link>
               </li>
             </ul>
@@ -169,7 +168,9 @@ export default function Home({ user }: any) {
               <h1 className="inline-flex px-4 items-center">Make your Quiz</h1>
             </div>
             <div className="mt-4">
-              <h1 className=" text-white text-6xl font-bold">LMS Quiz Importer</h1>
+              <h1 className=" text-white text-6xl font-bold">
+                LMS Quiz Importer
+              </h1>
 
               <p className="  text-slate-300 mt-2 text-lg font-medium ">
                 Welcome to `EasyQ`, quiz importer for 261111 Internet and Online
