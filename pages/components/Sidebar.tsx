@@ -27,7 +27,7 @@ export default function Sidebar() {
         <Link href="/" className="flex items-center pl-2.5 mb-5">
           <ImSwitch size={30} className=" text-blue-600 h-6 mr-3 sm:h-7" />
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-            EasyQ.
+            EasyQ
           </span>
         </Link>
         <hr />
