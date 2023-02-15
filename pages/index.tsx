@@ -26,7 +26,7 @@ export default function Home({ user }: any) {
           <ul className="hidden text-white  text-lg md:flex ">
             <li className="p-1">
               <Link href="/">
-                <h1 className="font-bold text-white text-4xl pr-10">EasyQ.</h1>
+                <h1 className="font-bold text-white text-4xl pr-10">EasyQ</h1>
               </Link>
             </li>
             {/* <li className="p-4  hover:text-gray-900">
@@ -46,7 +46,7 @@ export default function Home({ user }: any) {
               <li className="p-1">
                 <Link href="/">
                   <h1 className="font-bold text-white text-4xl pr-10">
-                    EasyQ.
+                    EasyQ
                   </h1>
                 </Link>
               </li>
