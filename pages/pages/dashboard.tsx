@@ -171,20 +171,26 @@ export const getServerSideProps = async ({ req, res }: any) => {
   const token = getCookie("cmu-oauth-example-token", { req, res });
 
   if (token) {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}api/user`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await res.json();
-    const user = data.user;
+    try {
+      const res = await fetch(`${process.env.NEXTAUTH_URL}api/user`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
 
-    return {
-      props: {
-        token: token,
-        user: user,
-      },
-    };
+      if (data.ok) {
+        const user = data.user;
+        return {
+          props: {
+            token: token,
+            user: user,
+          },
+        };
+      }
+    } catch (error: any) {
+      alert(error.response.data.message);
+    }
   } else {
     return {
       redirect: {
