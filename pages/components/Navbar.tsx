@@ -59,7 +59,7 @@ const Navbar = ({ prePath, pathName, user }: props) => {
 
   function toggleTheme() {
     setDarkMode(!isDarkMode);
-    console.log("isDarkMode : ", isDarkMode);
+    /*     console.log("isDarkMode : ", isDarkMode); */
     switchTheme();
   }
 
@@ -68,7 +68,7 @@ const Navbar = ({ prePath, pathName, user }: props) => {
     const dataStr = localStorage.getItem("theme");
     if (dataStr) {
       const data = dataStr;
-      console.log(typeof data);
+      /*     console.log(typeof data); */
 
       setTheme(data);
 
@@ -77,17 +77,17 @@ const Navbar = ({ prePath, pathName, user }: props) => {
         document.documentElement.classList.add("dark");
         setColor("bg-gray-700 translate-x-full");
         setSwitchColor("bg-gray-600");
-        console.log("theme : dark");
+        /*         console.log("theme : dark");
         console.log("Local : ", data);
-        console.log("localDark : ", isDarkMode);
+        console.log("localDark : ", isDarkMode); */
       } else {
         setDarkMode(false);
         document.documentElement.classList.remove("dark");
         setColor("bg-yellow-500 sm:-translate-x-2 -translate-x-1");
         setSwitchColor("bg-yellow-400");
-        console.log("theme : light");
+        /*         console.log("theme : light");
         console.log("Local : ", theme);
-        console.log("localDark : ", isDarkMode);
+        console.log("localDark : ", isDarkMode); */
       }
     }
   }
