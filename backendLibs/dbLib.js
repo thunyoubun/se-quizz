@@ -5,6 +5,7 @@ let quizz = [
   {
     id: "1",
     title: "Internet ",
+    category: "Mid Term",
     auth: "THUN ANANTARAT",
     date: "1/16/2023",
     status: "Online",
