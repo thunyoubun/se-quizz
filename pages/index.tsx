@@ -5,9 +5,8 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { RiBookMarkLine } from "react-icons/ri";
 import { BsArrowRight } from "react-icons/bs";
-import { signIn, useSession } from "next-auth/react";
 import { useAuth } from "../contexts/auth";
-import { spawn } from "child_process";
+import Head from "next/head";
 import { getCookie } from "cookies-next";
 
 export default function Home({ user }: any) {
@@ -21,6 +20,12 @@ export default function Home({ user }: any) {
 
   return (
     <div className=" h-screen w-screen relative overflow-hidden  bg-gradient-to-b from-blue-600 to-blue-500">
+      <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.25,user-scalable=0"
+          />
+        </Head>
       <div className="relative z-10">
         <div className=" m-auto flex justify-between items-center py-4  px-10">
           <ul className="hidden text-white  text-lg md:flex ">

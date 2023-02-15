@@ -1,18 +1,13 @@
 import React, { useState } from "react";
-
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-
 import ModalQuiz from "../components/ModalQuiz";
-import Link from "next/link";
 import axios from "axios";
-
 import { MdOutlineNotStarted } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function Dashboard({ data, user }: any) {
   const [authData, setAuthData] = useState(null);
@@ -42,6 +37,12 @@ export default function Dashboard({ data, user }: any) {
 
   return (
     <div className=" flex leading-default bg-gray-100 dark:bg-gray-600 h-fit min-h-screen   w-full   ">
+      <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.25,user-scalable=0"
+          />
+        </Head>
       <div className=" fixed bg-no-repeat bg-cover  bg-y-50 w-full bg-center h-80 top-0 bg-[url('https://www.cmu.ac.th/content/organization/7ae5726e-0c18-45f8-ae3c-cdd52e2afd94/15b759ff-b0f7-49d8-afba-6d458ff6cc37.jpg')] min-h-75">
         <span className="absolute top-0 left-0 w-full h-full bg-blue-500 opacity-60"></span>
       </div>

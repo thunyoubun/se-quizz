@@ -1,17 +1,10 @@
 import React from "react";
-import { IoSettingsSharp } from "react-icons/io5";
-import { BsPlusLg } from "react-icons/bs";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import Table from "../components/Table";
-import { AiFillSignal, AiOutlineRise } from "react-icons/ai";
-import { useSession, getSession, signIn } from "next-auth/react";
+import { AiFillSignal } from "react-icons/ai";
 import { useAuth } from "../../contexts/auth";
-import { NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
-import { NextApiRequest, NextApiResponse } from "next";
+import Head from "next/head";
 import { getCookie } from "cookies-next";
-import axios from "axios";
 
 let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
 
@@ -19,6 +12,12 @@ const Myquiz = ({ user }: any) => {
   const { loading, token, isAuthenticated, setUser } = useAuth();
   return (
     <div className=" flex leading-default bg-gray-100 dark:bg-gray-600 h-fit min-h-screen   w-full   ">
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.25,user-scalable=0"
+        />
+      </Head>
       <div className=" fixed  bg-y-50 w-full bg-center h-80 top-0 bg-[url('https://www.cmu.ac.th/content/organization/7ae5726e-0c18-45f8-ae3c-cdd52e2afd94/3baedb35-438f-4e0f-8d1d-2b9724d36951.jpg')] min-h-75">
         <span className="absolute top-0 left-0 w-full h-full bg-blue-500 opacity-60"></span>
       </div>
