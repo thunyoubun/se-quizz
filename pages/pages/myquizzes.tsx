@@ -60,7 +60,7 @@ export default function Dashboard({ data, user }: any) {
           <div className="w-full  h-max md:px-7 px-3  ">
             <div className=" border-3 border-black rounded-md p-4 overflow-x-auto shadow-xl bg-white dark:bg-gray-800 ">
               <div className=" mt-3 px-6 w-full flex justify-between relative">
-                <h1 className=" text-lg font-semibold text-gray-600">
+                <h1 className=" text-lg font-semibold text-gray-600 dark:text-white">
                   My Quizzes
                 </h1>
               </div>
