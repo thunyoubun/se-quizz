@@ -113,7 +113,7 @@ export default function Home({ user }: any) {
               </li>
             </ul>
           </div>
-          {isAuthenticated ? (
+          {isAuthenticated || user ? (
             <ul className="hidden text-white md:flex">
               <li className="flex  items-center">
                 <Link
@@ -177,20 +177,29 @@ export default function Home({ user }: any) {
               </p>
             </div>
             <div className="mt-10 gap-5 flex">
-              <Link
-                href="/pages/myquizzes"
-                className=" bg-violet-500 hover:bg-violet-600 hover:scale-105 text-xl py-6 font-normal shadow-lg rounded-xl text-white inline-flex items-center md:px-10 px-5"
-              >
-                Get Started
-                <BsArrowRight className="ml-3 animate-bounceX   " size={30} />
-              </Link>
-              <Link
-                href="/documents"
-                className=" bg-white text-xl py-6 hover:scale-105  shadow-lg rounded-xl text-indigo-500 font-semibold inline-flex items-center md:px-8 px-5"
-              >
-                <RiBookMarkLine className=" mr-2" />
-                Read Document
-              </Link>
+              <ul>
+                <li>
+                  <Link
+                    href="/pages/myquizzes"
+                    className=" bg-violet-500 hover:bg-violet-600 hover:scale-105 text-xl py-6 font-normal shadow-lg rounded-xl text-white inline-flex items-center md:px-10 px-5"
+                  >
+                    Get Started
+                    <BsArrowRight
+                      className="ml-3 animate-bounceX   "
+                      size={30}
+                    />
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/documents"
+                    className=" bg-white text-xl py-6 hover:scale-105  shadow-lg rounded-xl text-indigo-500 font-semibold inline-flex items-center md:px-8 px-5"
+                  >
+                    <RiBookMarkLine className=" mr-2" />
+                    Read Document
+                  </Link>
+                </li>
+              </ul>
             </div>
           </div>
           {/* Right */}
