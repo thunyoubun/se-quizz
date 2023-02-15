@@ -55,7 +55,6 @@ const ModalQuiz = ({ user }: props) => {
 
   const callPostQuiz = async () => {
     try {
-      if(quizFile==null||quizFile==undefined||quizText==""||quizText==undefined||category==""||category==undefined) throw new Error('Parameter is empty!');
       const resp = await axios.post("/api/quiz", {
         title: quizText,
         category: category,
@@ -117,7 +116,9 @@ const ModalQuiz = ({ user }: props) => {
                     <input
                       id="subject"
                       required
-                      onChange={(e) =>{if(e)setQuizText(e.target.value)}}
+                      onChange={(e) => {
+                        if (e) setQuizText(e.target.value);
+                      }}
                       value={quizText}
                       type="text"
                       className="appearance-none focus:outline-none focus:shadow-outline  focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
@@ -129,7 +130,9 @@ const ModalQuiz = ({ user }: props) => {
                       id="category"
                       type="text"
                       required
-                      onChange={(e) =>{if(e) setCategory(e.target.value)}}
+                      onChange={(e) => {
+                        if (e) setCategory(e.target.value);
+                      }}
                       value={category}
                       className="appearance-none focus:outline-none focus:shadow-outline focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
                     />
@@ -144,7 +147,7 @@ const ModalQuiz = ({ user }: props) => {
                     />
                     <label className="block text-black dark:text-white text-sm font-bold mb-1">
                       Files
-                    <span className="ml-2 text-red-500">(.doc,.docx)</span>
+                      <span className="ml-2 text-red-500">(.doc,.docx)</span>
                     </label>
                     <input
                       id="file"
@@ -169,7 +172,7 @@ const ModalQuiz = ({ user }: props) => {
                       <button
                         type="submit"
                         className="text-white w-full  bg-blue-500 hover:bg-blue-600 font-bold uppercase text-sm px-6 py-3  rounded-md shadow-md  outline-none focus:outline-none mr-1 mb-1"
-                        onClick={()=>callPostQuiz()}
+                        onClick={() => callPostQuiz()}
                       >
                         Submit
                       </button>
