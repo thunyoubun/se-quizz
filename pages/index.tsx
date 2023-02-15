@@ -167,13 +167,13 @@ export default function Home({ user }: any) {
               <h1 className=" text-white text-6xl font-bold">Quiz Importer</h1>
 
               <p className="  text-slate-300 mt-2 text-lg font-medium ">
-                Welcome to 'EasyQ', quiz importer for 261111 Internet and Online
+                Welcome to `EasyQ`, quiz importer for 261111 Internet and Online
                 Community course from Chiang Mai University. Our solution
                 enables the course instructor to upload their quizzes as .doc or
                 .docx file and automatically import them into the LMS. The
                 instructor is no longer required to manually construct quizzes
                 on the LMS platform. As a result, time and workforce are saved,
-                since 'EasyQ' handles all the works for you. Enjoy creating your
+                since `EasyQ` handles all the works for you. Enjoy creating your
                 new quizzes with us!!
               </p>
             </div>
