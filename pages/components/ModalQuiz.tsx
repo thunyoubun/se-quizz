@@ -116,7 +116,7 @@ const ModalQuiz = ({ user }: props) => {
                     <input
                       id="subject"
                       required
-                      onChange={(e) => setQuizText(e.target.value)}
+                      onChange={(e) =>{if(e)setQuizText(e.target.value)}}
                       value={quizText}
                       className="appearance-none focus:outline-none focus:shadow-outline  focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
                     />
@@ -126,7 +126,7 @@ const ModalQuiz = ({ user }: props) => {
                     <input
                       id="category"
                       required
-                      onChange={(e) => setCategory(e.target.value)}
+                      onChange={(e) =>{if(e) setCategory(e.target.value)}}
                       value={category}
                       className="appearance-none focus:outline-none focus:shadow-outline focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
                     />
@@ -141,23 +141,22 @@ const ModalQuiz = ({ user }: props) => {
                     />
                     <label className="block text-black dark:text-white text-sm font-bold mb-1">
                       Files
-                      <span className="ml-2 text-red-500">(.doc,.docx)</span>
+                    <span className="ml-2 text-red-500">(.doc,.docx)</span>
                     </label>
                     <input
                       id="file"
                       type="file"
                       onChange={(e) => {
-                        if (e) 
-                        {setQuizFile(e.target.value)
+                        if (e) {
+                          setQuizFile(e.target.value);
                           console.warn("Upload!!!");
-                          
-                        };
+                        }
                       }}
                       onDrop={(e) => e.preventDefault()}
                       value={quizFile}
                       accept=".docx,.doc"
-                      required
                       className="  w-full py-2 px-1 text-black dark:text-white"
+                      required
                     />
 
                     <Link
@@ -167,7 +166,7 @@ const ModalQuiz = ({ user }: props) => {
                       <button
                         type="submit"
                         className="text-white w-full  bg-blue-500 hover:bg-blue-600 font-bold uppercase text-sm px-6 py-3  rounded-md shadow-md  outline-none focus:outline-none mr-1 mb-1"
-                        onClick={() => callPostQuiz()}
+                        onSubmit={callPostQuiz}
                       >
                         Submit
                       </button>
