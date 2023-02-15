@@ -178,7 +178,7 @@ export default function Home({ user }: any) {
             </div>
             <div className="mt-10 gap-5 flex">
               <Link
-                href="/pages/myquiz"
+                href="/pages/myquizzes"
                 className=" bg-violet-500 hover:bg-violet-600 hover:scale-105 text-xl py-6 font-normal shadow-lg rounded-xl text-white inline-flex items-center md:px-10 px-5"
               >
                 Get Started
