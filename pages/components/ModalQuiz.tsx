@@ -61,7 +61,7 @@ const ModalQuiz = ({ user }: props) => {
         date: date,
         auth: author,
         file: quizFile,
-        status: "Online",
+        status: "Ready",
       });
       if (resp.data.ok) {
         await callGetQuiz();
@@ -82,6 +82,7 @@ const ModalQuiz = ({ user }: props) => {
         onClick={() => updateMenu()}
       >
         <BsPlusLg size={20} />
+        <p>&nbsp;New Quiz</p>
       </button>
 
       {showModal ? (
@@ -140,7 +141,7 @@ const ModalQuiz = ({ user }: props) => {
                     />
                     <label className="block text-black dark:text-white text-sm font-bold mb-1">
                       Files
-                      <span className="ml-2 text-red-500">(.docx)</span>
+                      <span className="ml-2 text-red-500">(.doc,.docx)</span>
                     </label>
                     <input
                       id="file"
@@ -148,7 +149,7 @@ const ModalQuiz = ({ user }: props) => {
                       onChange={(e) => setQuizFile(e.target.value)}
                       onDrop={(e) => e.preventDefault()}
                       value={quizFile}
-                      accept=".docx"
+                      accept=".docx,.doc"
                       required
                       className="  w-full py-2 px-1 text-black dark:text-white"
                     />
