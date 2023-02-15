@@ -176,8 +176,8 @@ export default function Home({ user }: any) {
                 new quizzes with us!!
               </p>
             </div>
-            <div className="mt-10 gap-5 flex">
-              <ul>
+            <div className="">
+              <ul className="mt-10 gap-5 flex">
                 <li>
                   <Link
                     href="/pages/myquizzes"
