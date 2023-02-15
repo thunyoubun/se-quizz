@@ -187,6 +187,19 @@ const Navbar = ({ prePath, pathName, user }: props) => {
             </div>
           </div> */}
           <ul className="flex gap-4 items-center justify-end pl-0 mb-0 list-none md-max:w-full">
+            <li className="flex">
+              <button
+                className={` relative sm:w-20 w-12 sm:h-10 h-7 rounded-full ${switchColor} flex items-center transition duration-300 focus:outline-none shadow`}
+                onClick={toggleTheme}
+              >
+                <div
+                  id="switch-toggle"
+                  className={`flex sm:w-10 w-7 sm:h-10 h-7  ${color} rounded-full transition duration-500 transform p-1 text-white`}
+                >
+                  {changeIcon()}
+                </div>
+              </button>
+            </li>
             <li className="flex  items-center">
               <Link href={"/pages/user"}>
                 <button className="  rounded-md flex align-middle justify-center items-center gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
@@ -201,19 +214,6 @@ const Navbar = ({ prePath, pathName, user }: props) => {
                   <span className="hidden sm:inline">{navSign()}</span>
                 </button>
               </Link>
-            </li>
-            <li className="flex">
-              <button
-                className={` relative sm:w-20 w-12 sm:h-10 h-7 rounded-full ${switchColor} flex items-center transition duration-300 focus:outline-none shadow`}
-                onClick={toggleTheme}
-              >
-                <div
-                  id="switch-toggle"
-                  className={`flex sm:w-10 w-7 sm:h-10 h-7  ${color} rounded-full transition duration-500 transform p-1 text-white`}
-                >
-                  {changeIcon()}
-                </div>
-              </button>
             </li>
             <li className=" item-center flex md:hidden ">
               <button
