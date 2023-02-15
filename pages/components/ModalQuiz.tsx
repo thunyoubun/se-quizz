@@ -155,7 +155,7 @@ const ModalQuiz = ({ user }: props) => {
                       onDrop={(e) => e.preventDefault()}
                       value={quizFile}
                       accept=".docx,.doc"
-                      className="  w-full py-2 px-1 text-black dark:text-white"
+                      className=" w-full py-2 px-1 text-black dark:text-white"
                       required
                     />
 
@@ -166,7 +166,7 @@ const ModalQuiz = ({ user }: props) => {
                       <button
                         type="submit"
                         className="text-white w-full  bg-blue-500 hover:bg-blue-600 font-bold uppercase text-sm px-6 py-3  rounded-md shadow-md  outline-none focus:outline-none mr-1 mb-1"
-                        onSubmit={callPostQuiz}
+                        onSubmit={()=>callPostQuiz()}
                       >
                         Submit
                       </button>
