@@ -8,7 +8,7 @@ let quizz = [
     category: "Mid Term",
     auth: "THUN ANANTARAT",
     date: "1/16/2023",
-    status: "Online",
+    status: "Ready",
   },
   {
     id: "493b9259-2d68-45b9-b1d2-72ac3cf81a66",
@@ -16,7 +16,7 @@ let quizz = [
     category: "Mid Term",
     auth: "THUN ANANTARAT",
     date: "2/15/2023",
-    status: "Online",
+    status: "Ready",
   },
 ];
 
