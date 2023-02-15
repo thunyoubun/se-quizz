@@ -34,7 +34,7 @@ export default function Sidebar() {
         <ul className="space-y-2 mt-2 ">
           <li>
             <Link
-              href="/pages/myquiz"
+              href="/pages/dashboard"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
@@ -47,12 +47,12 @@ export default function Sidebar() {
                 <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                 <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
               </svg>
-              <span className="ml-3">My Quiz</span>
+              <span className="ml-3">Dashboard</span>
             </Link>
           </li>
           <li>
             <Link
-              href="/pages/dashboard"
+              href="/pages/myquizzes"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
@@ -64,7 +64,7 @@ export default function Sidebar() {
               >
                 <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
               </svg>
-              <span className="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
+              <span className="flex-1 ml-3 whitespace-nowrap">My Quizzes</span>
               <span className="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">
                 2
               </span>

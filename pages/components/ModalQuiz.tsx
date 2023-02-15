@@ -2,6 +2,7 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
@@ -20,6 +21,7 @@ const ModalQuiz = ({ user }: props) => {
   const [category, setCategory] = useState("");
   const [quizFile, setQuizFile] = useState("");
   const [quizs, setQuizs] = useState([]);
+  const route = useRouter();
   const date = new Date().toLocaleDateString("en-US", {
     day: "numeric",
     month: "numeric",
@@ -61,7 +63,11 @@ const ModalQuiz = ({ user }: props) => {
         file: quizFile,
         status: "Online",
       });
-      if (resp.data.ok) await callGetQuiz();
+      if (resp.data.ok) {
+        await callGetQuiz();
+        setQuizFile("");
+        /*    route.reload(); */
+      }
     } catch (err: any) {
       alert(err.response.data.message);
     }
@@ -148,7 +154,7 @@ const ModalQuiz = ({ user }: props) => {
                     />
 
                     <Link
-                      href={"/pages/dashboard"}
+                      href={"/pages/myquizzes"}
                       className="w-full flex items-center justify-center py-6 border-t border-solid border-blueGray-200 rounded-b"
                     >
                       <button
