@@ -14,6 +14,7 @@ const Myquiz = ({ user }: any) => {
     <div className=" flex leading-default bg-gray-100 dark:bg-gray-600 h-fit min-h-screen   w-full   ">
       <Head>
         <title>EasyQ - Dashboard</title>
+        <meta property="og:title" content="EasyQ - Dashboard" key="title" />
       </Head>
       <div className=" fixed  bg-y-50 w-full bg-center h-80 top-0 bg-[url('https://www.cmu.ac.th/content/organization/7ae5726e-0c18-45f8-ae3c-cdd52e2afd94/3baedb35-438f-4e0f-8d1d-2b9724d36951.jpg')] min-h-75">
         <span className="absolute top-0 left-0 w-full h-full bg-blue-500 opacity-60"></span>

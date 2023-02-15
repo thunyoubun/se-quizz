@@ -21,11 +21,8 @@ export default function Home({ user }: any) {
   return (
     <div className=" h-screen w-screen relative overflow-hidden  bg-gradient-to-b from-blue-600 to-blue-500">
       <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.25,user-scalable=0"
-        />
         <title>EasyQ</title>
+        <meta property="og:title" content="EasyQ" key="title" />
       </Head>
       <div className="relative z-10">
         <div className=" m-auto flex justify-between items-center py-4  px-10">
