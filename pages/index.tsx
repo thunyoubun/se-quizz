@@ -243,7 +243,7 @@ export default function Home({ user }: any) {
 export const getServerSideProps = async ({ req, res }: any) => {
   const token = getCookie("cmu-oauth-example-token", { req, res });
 
-  if (token !== null) {
+  if (token) {
     const res = await fetch(`${process.env.NEXTAUTH_URL}api/user`, {
       headers: {
         authorization: `Bearer ${token}`,

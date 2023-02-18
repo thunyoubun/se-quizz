@@ -22,6 +22,7 @@ const ModalQuiz = ({ user }: props) => {
   const [quizFile, setQuizFile] = useState("");
   const [quizs, setQuizs] = useState([]);
   const route = useRouter();
+  const [isLoading, setLoading] = useState(false);
   const date = new Date().toLocaleDateString("en-US", {
     day: "numeric",
     month: "numeric",
@@ -66,12 +67,17 @@ const ModalQuiz = ({ user }: props) => {
       if (resp.data.ok) {
         await callGetQuiz();
         setQuizFile("");
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+          setShowModal(false);
+        }, 3000);
+
         /*    route.reload(); */
       }
     } catch (err: any) {
       alert(err.response.data.message);
     }
-    setShowModal(false);
   };
 
   return (
@@ -104,80 +110,103 @@ const ModalQuiz = ({ user }: props) => {
                     </div>
                   </button>
                 </div>
-                <div className="relative px-6 flex-auto">
-                  <form
-                    action=""
-                    className=" rounded px-8 pt-6 pb-8 w-full"
-                    method="POST"
-                  >
-                    <label className="block text-black dark:text-white text-sm font-bold mb-1">
-                      Title
-                    </label>
-                    <input
-                      id="subject"
-                      required
-                      onChange={(e) => {
-                        if (e) setQuizText(e.target.value);
-                      }}
-                      value={quizText}
-                      type="text"
-                      className="appearance-none focus:outline-none focus:shadow-outline  focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
-                    />
-                    <label className="block text-black dark:text-white text-sm font-bold mb-1">
-                      Category
-                    </label>
-                    <input
-                      id="category"
-                      type="text"
-                      required
-                      onChange={(e) => {
-                        if (e) setCategory(e.target.value);
-                      }}
-                      value={category}
-                      className="appearance-none focus:outline-none focus:shadow-outline focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
-                    />
-                    <label className="block text-black dark:text-white text-sm font-bold mb-1">
-                      Author
-                    </label>
-                    <input
-                      id="author"
-                      value={author}
-                      disabled
-                      className="appearance-none focus:outline-none  focus:shadow-outline focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
-                    />
-                    <label className="block text-black dark:text-white text-sm font-bold mb-1">
-                      Files
-                      <span className="ml-2 text-red-500">(.doc,.docx)</span>
-                    </label>
-                    <input
-                      id="file"
-                      type="file"
-                      onChange={(e) => {
-                        if (e) {
-                          setQuizFile(e.target.value);
-                          console.warn("Upload!!!");
-                        }
-                      }}
-                      onDrop={(e) => e.preventDefault()}
-                      value={quizFile}
-                      accept=".docx,.doc"
-                      className=" w-full py-2 px-1 text-black dark:text-white"
-                      required
-                    />
-
-                    <Link
-                      href={"/pages/myquizzes"}
-                      className="w-full flex items-center justify-center py-6 border-t border-solid border-blueGray-200 rounded-b"
+                <div className="relative px-6 flex-auto ">
+                  {!isLoading ? (
+                    <form
+                      action=""
+                      className=" rounded px-8 pt-6 pb-8 w-full"
+                      method="POST"
                     >
-                      <button
-                        type="submit"
-                        className="text-white w-full  bg-blue-500 hover:bg-blue-600 font-bold uppercase text-sm px-6 py-3  rounded-md shadow-md  outline-none focus:outline-none mr-1 mb-1"
-                        onClick={() => callPostQuiz()}
+                      <label className="block text-black dark:text-white text-sm font-bold mb-1">
+                        Title
+                      </label>
+                      <input
+                        id="subject"
+                        required
+                        onChange={(e) => {
+                          if (e) setQuizText(e.target.value);
+                        }}
+                        value={quizText}
+                        type="text"
+                        className="appearance-none focus:outline-none focus:shadow-outline  focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
+                      />
+                      <label className="block text-black dark:text-white text-sm font-bold mb-1">
+                        Category
+                      </label>
+                      <input
+                        id="category"
+                        type="text"
+                        required
+                        onChange={(e) => {
+                          if (e) setCategory(e.target.value);
+                        }}
+                        value={category}
+                        className="appearance-none focus:outline-none focus:shadow-outline focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
+                      />
+                      <label className="block text-black dark:text-white text-sm font-bold mb-1">
+                        Author
+                      </label>
+                      <input
+                        id="author"
+                        value={author}
+                        disabled
+                        className="appearance-none focus:outline-none  focus:shadow-outline focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
+                      />
+                      <label className="block text-black dark:text-white text-sm font-bold mb-1">
+                        Files
+                        <span className="ml-2 text-red-500">(.doc,.docx)</span>
+                      </label>
+                      <input
+                        id="file"
+                        type="file"
+                        onChange={(e) => {
+                          if (e) {
+                            setQuizFile(e.target.value);
+                            console.warn("Upload!!!");
+                          }
+                        }}
+                        onDrop={(e) => e.preventDefault()}
+                        value={quizFile}
+                        accept=".docx,.doc"
+                        className=" w-full py-2 px-1 text-black dark:text-white"
+                        required
+                      />
+
+                      <Link
+                        href={"/pages/myquizzes"}
+                        className="w-full flex items-center justify-center py-6 border-t border-solid border-blueGray-200 rounded-b"
                       >
-                        Submit
-                      </button>
-                    </Link>
-                  </form>
+                        <button
+                          type="submit"
+                          className="text-white w-full  bg-blue-500 hover:bg-blue-600 font-bold uppercase text-sm px-6 py-3  rounded-md shadow-md  outline-none focus:outline-none mr-1 mb-1"
+                          onClick={() => callPostQuiz()}
+                        >
+                          Submit
+                        </button>
+                      </Link>
+                    </form>
+                  ) : (
+                    <div className=" flex flex-col my-4 justify-center items-center">
+                      <div className="loadingio-spinner-spinner-dtn99hj0z25">
+                        <div className="ldio-6w467ibr0lr">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                        </div>
+                      </div>
+                      <p className=" text-5xl font-semibold text-gray-600">
+                        Converting
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
