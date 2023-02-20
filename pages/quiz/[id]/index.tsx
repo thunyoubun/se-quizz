@@ -16,6 +16,7 @@ import { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { getCookie } from "cookies-next";
 import { QuizPayload } from "../../../types/QuizPayload";
+import Head from "next/head";
 
 const Quizz = ({ user, quiz }: any) => {
   const router = useRouter();
@@ -33,6 +34,14 @@ const Quizz = ({ user, quiz }: any) => {
 
   return (
     <div className=" flex leading-default bg-gray-100 dark:bg-gray-600 h-fit min-h-screen    w-full   ">
+      <Head>
+        <title>EasyQ - {myquizz?.title}</title>
+        <meta
+          property="og:title"
+          content={`EasyQ - ${myquizz?.title}`}
+          key="title"
+        />
+      </Head>
       <div className=" fixed  bg-y-50 w-full bg-center h-80 top-0 bg-[url('https://www.cmu.ac.th/content/organization/7ae5726e-0c18-45f8-ae3c-cdd52e2afd94/24364b58-a36f-4590-9108-f56ff9197926..jpg')] min-h-75">
         <span className="absolute top-0 left-0 w-full h-full bg-blue-500 opacity-50 "></span>
       </div>
