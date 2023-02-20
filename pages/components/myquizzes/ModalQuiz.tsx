@@ -1,12 +1,12 @@
 import axios from "axios";
-import { getCookie } from "cookies-next";
+// import { getCookie } from "cookies-next";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
-import { useAuth } from "../../contexts/auth";
+import { useAuth } from "../../../contexts/auth";
 
 export declare type props = {
   user: any;
