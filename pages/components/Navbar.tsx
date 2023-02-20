@@ -215,9 +215,9 @@ const Navbar = ({ prePath, pathName, user }: props) => {
                 </button>
               </Link>
             </li>
-            <li className=" item-center flex md:hidden ">
+            <li className=" item-center flex md:hidden z-50 ">
               <button
-                className="burgur-menu w-[4em] flex flex-col items-center py-2 align-middle gap-1 cursor-pointer text-white"
+                className="burgur-menu w-[4em]  flex flex-col items-center py-2 align-middle gap-1 cursor-pointer text-white"
                 onClick={updateMenu}
                 type="button"
               >

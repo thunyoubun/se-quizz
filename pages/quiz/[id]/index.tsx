@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { BsPlusLg } from "react-icons/bs";
@@ -15,12 +15,21 @@ import { getSession, signIn } from "next-auth/react";
 import { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { getCookie } from "cookies-next";
+import { QuizPayload } from "../../../types/QuizPayload";
 
-const Quizz = ({ user }: any) => {
+const Quizz = ({ user, quiz }: any) => {
   const router = useRouter();
+  const [myquizz, Setmyquizz] = useState<QuizPayload>();
   const id = router.query.id as string;
 
   const choice = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+
+  useEffect(() => {
+    if (quiz) {
+      Setmyquizz({ ...quiz[id] });
+      console.log(quiz);
+    }
+  }, []);
 
   return (
     <div className=" flex leading-default bg-gray-100 dark:bg-gray-600 h-fit min-h-screen    w-full   ">
@@ -37,26 +46,34 @@ const Quizz = ({ user }: any) => {
         className="z-10 container w-full overflow-y-auto relative
     h-full max-h-screen transition-all duration-200 ease-in-out  rounded-xl "
       >
-        <Navbar prePath={"Quiz"} pathName={"Quiz " + id} user={user} />
+        <Navbar
+          prePath={"My Quizzes"}
+          pathName={"Quiz " + myquizz?.title}
+          user={user}
+        />
         {/* Quizz*/}
         <div className="w-full  mt-10 mb-4  ">
           <div className="w-full  h-max md:px-7 px-3  ">
-            <div className="  rounded-md p-4 overflow-x-auto flex flex-col gap-4 bg-gray-200  ">
+            <div className="  rounded-md p-4 overflow-x-auto flex flex-col gap-4 bg-gray-200 dark:bg-gray-800  ">
               {/* <div className=" mt-3 px-6 w-full flex justify-between relative">
                 <h1 className=" text-lg font-semibold text-gray-600">
                   Quizz {id}
                 </h1>
               </div> */}
 
-              <HeadQuizz />
+              <HeadQuizz
+                title={myquizz?.title}
+                auth={myquizz?.auth}
+                category={myquizz?.category}
+              />
               <div className="flex flex-row gap-2">
                 <button className=" bg-indigo-600 flex text-center justify-center hover:bg-indigo-500 border-b-4 border-indigo-800 rounded-md p-4 w-1/2 text-white text-xl">
                   <MdOutlineNotStarted size={30} className="mr-2" />
-                  เริ่มทำข้อสอบ
+                  ไปที่ควิช
                 </button>
                 <button className=" bg-indigo-600 hover:bg-indigo-500 flex text-center justify-center border-b-4 border-indigo-800 rounded-md p-4 w-1/2 text-white text-xl">
                   <RiQuestionAnswerFill size={30} className="mr-2" />
-                  ส่งคำตอบ
+                  แก้ไขควิช
                 </button>
               </div>
 
@@ -94,10 +111,15 @@ export const getServerSideProps = async ({ req, res }: any) => {
     const data = await res.json();
     const user = data.user;
 
+    const res1 = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`);
+    const data1 = await res1.json();
+    const quiz = data1.quiz;
+
     return {
       props: {
         token: token,
         user: user,
+        quiz: quiz,
       },
     };
   } else {

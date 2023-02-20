@@ -83,7 +83,7 @@ const ModalQuiz = ({ user }: props) => {
   return (
     <>
       <button
-        className="z-20 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white"
+        className="z-10 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white"
         type="button"
         onClick={() => updateMenu()}
       >

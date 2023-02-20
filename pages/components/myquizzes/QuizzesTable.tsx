@@ -3,6 +3,8 @@ import axios from "axios";
 import { MdOutlineNotStarted } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { useRouter } from "next/router";
+import { FaRegEdit } from "react-icons/fa";
+import Link from "next/link";
 
 export default function QuizzesTable({ data }: any) {
   const [quizs, setQuizs] = useState([]);
@@ -115,12 +117,11 @@ export default function QuizzesTable({ data }: any) {
                         </span>
                       </td>
                       <td className="p-2 gap-2 flex flex-row justify-center  align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                        <button
-                          disabled
-                          className="hover:scale-105 text-base font-semibold leading-tight dark:text-green dark:opacity-80 text-white bg-gradient-to-r from-green-500 to-green-600  hover:bg-gradient-to-l hover:from-green-500 hover:to-green-600  p-4  tracking-wide  shadow-lg cursor-pointer transition ease-in duration-300 px-4 py-1 rounded-md "
-                        >
-                          <MdOutlineNotStarted size={25} />
-                        </button>
+                        <Link href={`/quiz/${index}`}>
+                          <button className="hover:scale-105 text-base font-semibold leading-tight dark:text-green dark:opacity-80 text-white bg-gradient-to-r from-green-500 to-green-600  hover:bg-gradient-to-l hover:from-green-500 hover:to-green-600  p-4  tracking-wide  shadow-lg cursor-pointer transition ease-in duration-300 px-4 py-1 rounded-md ">
+                            <FaRegEdit size={25} />
+                          </button>
+                        </Link>
                         <button
                           onClick={() => callDeleteQuiz(x.id)}
                           className="hover:scale-105 text-base font-semibold leading-tight dark:text-green dark:opacity-80 text-white bg-gradient-to-r from-red-500 to-red-600  hover:bg-gradient-to-l hover:from-red-500 hover:to-red-600  p-4  tracking-wide  shadow-lg cursor-pointer transition ease-in duration-300 px-4 py-1 rounded-md"
