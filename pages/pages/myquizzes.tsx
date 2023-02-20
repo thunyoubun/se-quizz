@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import ModalQuiz from "../components/ModalQuiz";
+import ModalQuiz from "../components/myquizzes/ModalQuiz";
 import axios from "axios";
 import { MdOutlineNotStarted } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import QuizzesTable from "../components/myquizzes/QuizzesTable";
 
 export default function Dashboard({ data, user }: any) {
   const [authData, setAuthData] = useState(null);
@@ -55,7 +56,7 @@ export default function Dashboard({ data, user }: any) {
         <Navbar prePath="Pages" pathName="My Quizzes" user={user} />
 
         {/* table 1*/}
-        <div className="w-full  mt-10 ">
+        {/* <div className="w-full  mt-10 ">
           <div className="w-full  h-max md:px-7 px-3  ">
             <div className=" border-3 border-black rounded-md p-4 overflow-x-auto shadow-xl bg-white dark:bg-gray-800 ">
               <div className=" mt-3 px-6 w-full flex justify-between relative">
@@ -163,7 +164,9 @@ export default function Dashboard({ data, user }: any) {
               </table>
             </div>
           </div>
-        </div>
+        </div> */}
+
+        <QuizzesTable data={data}></QuizzesTable>
       </div>
     </div>
   );
