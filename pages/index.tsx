@@ -217,7 +217,7 @@ export default function Home({ user }: any) {
                 height={500}
               ></Image>
             </div>
-            <div className="h-[200%] w-[20%] mr-4  right-0 bg-white rotate-45 shadow-lg  absolute text-white">
+            <div className="h-[200%] w-[20%] mr-4 -z-10  right-0 bg-white rotate-45 shadow-lg  absolute text-white">
               5
             </div>
           </div>

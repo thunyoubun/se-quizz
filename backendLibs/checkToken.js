@@ -10,9 +10,12 @@ export function checkToken(req) {
 
   try {
     const result = jwt.verify(token, secret);
+
     return {
       token: result.token,
       cmuAccount: result.cmuAccount,
+      firstName: result.firstName,
+      lastName: result.lastName,
     };
   } catch (e) {
     return null;

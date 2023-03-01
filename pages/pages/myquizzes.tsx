@@ -25,7 +25,7 @@ export default function Dashboard({ data, user }: any) {
         <span className="absolute top-0 left-0 w-full h-full bg-blue-500 opacity-60"></span>
       </div>
       <div id="nav-sidebar" className="z-10 hidden md:flex  md:p-6 mb-2">
-        <Sidebar />
+        <Sidebar quizCount={data.length.toString()} />
       </div>
       <ModalQuiz user={user} />
       <div
@@ -35,7 +35,7 @@ export default function Dashboard({ data, user }: any) {
         <Navbar prePath="Pages" pathName="My Quizzes" user={user} />
 
         {/* table 1*/}
-        
+
         <QuizzesTable data={data}></QuizzesTable>
       </div>
     </div>
@@ -53,9 +53,13 @@ export const getServerSideProps = async ({ req, res }: any) => {
       },
     };
   } else {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`);
+    const res = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
     const data = await res.json();
-    const quiz = data.quiz;
+    const quiz = data.findQuiz;
 
     const res2 = await fetch(`${process.env.NEXTAUTH_URL}api/user`, {
       headers: {

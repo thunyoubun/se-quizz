@@ -46,7 +46,7 @@ const Quizz = ({ user, quiz }: any) => {
         <span className="absolute top-0 left-0 w-full h-full bg-blue-500 opacity-50 "></span>
       </div>
       <div id="nav-sidebar" className="z-10 hidden md:flex  md:p-6 mb-2">
-        <Sidebar />
+        <Sidebar quizCount={quiz.length.toString()} />
       </div>
       {/* <div className=" z-20 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white">
         <BsPlusLg size={20} />
@@ -94,7 +94,7 @@ const Quizz = ({ user, quiz }: any) => {
 
               <div className=" flex flex-col gap-4">
                 {choice.map((value, index) => {
-                  return <Card key={index} />;
+                  return <Card key={index} id={index + 1} />;
                 })}
               </div>
             </div>
@@ -120,9 +120,13 @@ export const getServerSideProps = async ({ req, res }: any) => {
     const data = await res.json();
     const user = data.user;
 
-    const res1 = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`);
+    const res1 = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
     const data1 = await res1.json();
-    const quiz = data1.quiz;
+    const quiz = data1.findQuiz;
 
     return {
       props: {

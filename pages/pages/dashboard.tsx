@@ -6,10 +6,15 @@ import { useAuth } from "../../contexts/auth";
 import { getCookie } from "cookies-next";
 import Head from "next/head";
 
-let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
+const colors = ["red", "green", "blue", "yellow", "violet"];
 
-const Myquiz = ({ user }: any) => {
+const Myquiz = ({ user, quiz }: any) => {
   const { loading, token, isAuthenticated, setUser } = useAuth();
+
+  function rand(colors: any) {
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
   return (
     <div className=" flex leading-default bg-gray-100 dark:bg-gray-600 h-fit min-h-screen   w-full   ">
       <Head>
@@ -20,7 +25,7 @@ const Myquiz = ({ user }: any) => {
         <span className="absolute top-0 left-0 w-full h-full bg-blue-500 opacity-60"></span>
       </div>
       <div id="nav-sidebar" className="z-10 hidden md:flex  md:p-6 mb-2">
-        <Sidebar />
+        <Sidebar quizCount={quiz.length.toString()} />
       </div>
       {/* <div className=" z-20 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white">
         <BsPlusLg size={20} />
@@ -33,60 +38,59 @@ const Myquiz = ({ user }: any) => {
 
         <div className="w-full   mt-10 px-7 ">
           <div className="w-full ">
-            <div className="w-full flex md:flex-row flex-col ">
+            <div className="w-full flex md:flex-row flex-col md:gap-1 gap-1 ">
               {/*  card1 */}
               <div className="w-full md:w-1/2 md:my-4 my-2">
-                <div className="px-3">
-                  <div className="flex rounded-md p-4 shadow-xl bg-white dark:bg-gray-800  ">
-                    <div className="w-2/3 text-start">
+                <div className="px-3 flex ">
+                  <div className="  flex justify-center align-middle ">
+                    <div className="bg-green-400 shadow-green-600 shadow-xl h-full w-4 rounded-tl-md rounded-bl-md"></div>
+                  </div>
+                  <div className="w-full  flex rounded-tr-md rounded-br-md p-4 shadow-xl bg-white dark:bg-gray-800  ">
+                    <div className=" text-start w-2/3 md:w-full">
                       <h1 className=" text-slate-400 dark:text-white text-md">
                         Subject
                       </h1>
-                      <h1 className=" font-semibold text-xl truncate dark:text-white ">
+                      <p className=" font-semibold text-xl truncate dark:text-white ">
                         261111 Internet and Online Community
-                      </h1>
-                    </div>
-                    <div className=" w-1/3 flex justify-center align-middle">
-                      <div className="bg-blue-400 h-12 w-12 rounded-full"></div>
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/*  card 2 */}
-              <div className="w-full md:w-1/4 md:my-4 my-2">
-                <div className="px-3">
-                  <div className="flex rounded-md p-4 shadow-xl bg-white dark:bg-gray-800  ">
+              <div className="w-full md:w-1/2 md:my-4 my-2">
+                <div className="px-3 flex justify-center ">
+                  <div className="  flex justify-center align-middle ">
+                    <div className="bg-red-400 shadow-red-600 shadow-xl h-full w-4 rounded-tl-md rounded-bl-md"></div>
+                  </div>
+                  <div className="w-full flex rounded-tr-md rounded-br-md p-4 shadow-xl bg-white dark:bg-gray-800  ">
                     <div className="w-2/3 text-start">
                       <h1 className=" text-slate-400 dark:text-white text-md">
-                        All Category
+                        Category
                       </h1>
-                      <h1 className=" font-semibold text-xl dark:text-white">
+                      <p className=" font-semibold text-xl truncate dark:text-white ">
                         1
-                      </h1>
-                    </div>
-                    <div className=" w-1/3 flex justify-center align-middle">
-                      <div className="bg-red-400 h-12 w-12 rounded-full"></div>
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
+
               {/*  card 3*/}
-              <div className="w-full md:w-1/4 md:my-4 my-2">
-                <div className="px-3">
-                  <div className="flex rounded-md p-4 shadow-xl bg-white dark:bg-gray-800 ">
-                    <div className="w-2/3 text-start">
+              <div className="w-full md:w-1/2 md:my-4 my-2">
+                <div className="px-3 flex justify-center ">
+                  <div className="  flex justify-center align-middle ">
+                    <div className="bg-yellow-400 shadow-yellow-600 shadow-xl h-full w-4 rounded-tl-md rounded-bl-md"></div>
+                  </div>
+                  <div className="w-full flex rounded-tr-md rounded-br-md p-4 shadow-xl bg-white dark:bg-gray-800  ">
+                    <div className=" text-start">
                       <h1 className=" text-slate-400 dark:text-white text-md">
                         All Quiz
                       </h1>
-                      <h1 className=" font-semibold text-xl dark:text-white">
+                      <p className=" font-semibold text-xl truncate dark:text-white ">
                         2
-                      </h1>
-                    </div>
-                    <div className=" w-1/3 flex justify-center align-middle">
-                      <div className="bg-yellow-400 h-12 w-12 rounded-full flex items-center align-middle  text-justify">
-                        {/* <AiOutlineRise size={42} /> */}
-                      </div>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -119,7 +123,7 @@ const Myquiz = ({ user }: any) => {
                   Category
                 </h1>
               </div>
-
+              {/*Category lists*/}
               <div className=" overflow-x-auto">
                 <table className="items-center w-full mb-4 align-top border-collapse border-gray-200 dark:border-white/40">
                   <tbody>
@@ -127,7 +131,11 @@ const Myquiz = ({ user }: any) => {
                       <td className="p-2 align-middle bg-transparent border-b w-4/5 whitespace-nowrap dark:border-white/40">
                         <div className="flex items-center gap-2">
                           <div className="flex h-12 w-12">
-                            <span className=" bg-violet-400 rounded-full h-full w-full"></span>
+                            <span
+                              className={` bg-${rand(
+                                colors
+                              )}-400  rounded-full h-full w-full`}
+                            ></span>
                           </div>
                           <div className="text-start">
                             <h1 className=" text-slate-400 text-sm">
@@ -179,10 +187,19 @@ export const getServerSideProps = async ({ req, res }: any) => {
     const data = await res.json();
     const user = data.user;
 
+    const res1 = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    const data1 = await res1.json();
+    const quiz = data1.findQuiz;
+
     return {
       props: {
         token: token,
         user: user,
+        quiz: quiz,
       },
     };
   } else {

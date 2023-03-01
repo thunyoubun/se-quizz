@@ -54,6 +54,7 @@ async function getCMUBasicInfoAsync(accessToken: string) {
       }
     );
     console.log(response.data);
+    console.log(accessToken);
 
     return response.data as CmuOAuthBasicInfo;
   } catch (err) {

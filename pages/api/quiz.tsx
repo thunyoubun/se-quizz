@@ -1,14 +1,26 @@
 import { readQuizzDB, writeQuizzDB } from "../../backendLibs/dbLib";
 import { v4 as uuidv4 } from "uuid";
+import { checkToken } from "../../backendLibs/checkToken";
 
 export default function QuizzRoute(req: any, res: any) {
   if (req.method === "GET") {
-    //get quizz of that user
+    //get quiz of that user
     const quiz = readQuizzDB();
+    const user = checkToken(req);
+    if (!user) {
+      return res.status(403).json({
+        ok: false,
+        message: "You do not have permission",
+      });
+    }
+
+    const findQuiz = quiz.filter(
+      (x: any) => x.auth === user.firstName + " " + user.lastName
+    );
 
     return res.json({
       ok: true,
-      quiz,
+      findQuiz,
     });
   } else if (req.method === "POST") {
     const quiz = readQuizzDB();

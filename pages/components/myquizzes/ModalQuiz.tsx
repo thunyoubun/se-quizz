@@ -72,8 +72,6 @@ const ModalQuiz = ({ user }: props) => {
           setLoading(false);
           setShowModal(false);
         }, 3000);
-
-        /*    route.reload(); */
       }
     } catch (err: any) {
       alert(err.response.data.message);

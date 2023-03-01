@@ -7,7 +7,7 @@ import { useAuth } from "../../contexts/auth";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
 import Head from "next/head";
-const User = ({ user }: any) => {
+const User = ({ user, quiz }: any) => {
   const [avatar, setAvatar] = useState<string | null | undefined | any>(
     "/assets/empty-profile.png"
   );
@@ -93,7 +93,7 @@ const User = ({ user }: any) => {
         <span className="absolute top-0 left-0 w-full h-full bg-blue-500 opacity-40"></span>
       </div>
       <div id="nav-sidebar" className="z-10 hidden md:flex  md:p-6 mb-2">
-        <Sidebar />
+        <Sidebar quizCount={quiz.length.toString()} />
       </div>
 
       <div
@@ -342,10 +342,19 @@ export const getServerSideProps = async ({ req, res }: any) => {
     const data = await res.json();
     const user = data.user;
 
+    const res1 = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    const data1 = await res1.json();
+    const quiz = data1.findQuiz;
+
     return {
       props: {
         token: token,
         user: user,
+        quiz: quiz,
       },
     };
   } else {

@@ -1,11 +1,15 @@
 import React from "react";
 import { BsCheckCircle, BsListCheck } from "react-icons/bs";
 
-const Card = () => {
+export declare type props = {
+  id: any;
+};
+
+const Card = ({ id }: props) => {
   return (
     <div className=" bg-white dark:bg-gray-600  rounded-md p-4 shadow-lg">
       <div className=" flex justify-between text-sm dark:text-white font-semibold">
-        <h1>1. ปรนัย</h1>
+        <h1>{id}. ปรนัย</h1>
         <div className="flex align-middle items-center dark:text-black gap-2 bg-slate-100 rounded-md p-2">
           <BsCheckCircle />
           <h1>

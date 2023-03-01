@@ -7,7 +7,11 @@ import { GoSignOut } from "react-icons/go";
 import { signOut } from "next-auth/react";
 import { useAuth } from "../../contexts/auth";
 
-export default function Sidebar() {
+export declare type props = {
+  quizCount: string;
+};
+
+export default function Sidebar({ quizCount }: props) {
   const router = useRouter();
   const { logout } = useAuth();
   function signOut() {
@@ -66,7 +70,7 @@ export default function Sidebar() {
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap">My Quizzes</span>
               <span className="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">
-                2
+                {quizCount}
               </span>
             </Link>
           </li>
