@@ -21,13 +21,14 @@ import Head from "next/head";
 const Quizz = ({ user, quiz }: any) => {
   const router = useRouter();
   const [myquizz, Setmyquizz] = useState<QuizPayload>();
-  const id = router.query.id as string;
+  const id = router.query.id;
 
   const choice = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
   useEffect(() => {
     if (quiz) {
-      Setmyquizz({ ...quiz[id] });
+      const quizIdx = quiz.findIndex((x: any) => x.id === id);
+      Setmyquizz({ ...quiz[quizIdx] });
       console.log(quiz);
     }
   }, []);
@@ -78,11 +79,11 @@ const Quizz = ({ user, quiz }: any) => {
               <div className="flex flex-row gap-2">
                 <button className=" bg-indigo-600 flex text-center justify-center hover:bg-indigo-500 border-b-4 border-indigo-800 rounded-md p-4 w-1/2 text-white text-xl">
                   <MdOutlineNotStarted size={30} className="mr-2" />
-                  ไปที่ควิช
+                  Submit Quiz
                 </button>
                 <button className=" bg-indigo-600 hover:bg-indigo-500 flex text-center justify-center border-b-4 border-indigo-800 rounded-md p-4 w-1/2 text-white text-xl">
                   <RiQuestionAnswerFill size={30} className="mr-2" />
-                  แก้ไขควิช
+                  Edit Quiz
                 </button>
               </div>
 

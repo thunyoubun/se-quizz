@@ -5,6 +5,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { useRouter } from "next/router";
 import { FaRegEdit } from "react-icons/fa";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 export default function QuizzesTable({ data }: any) {
   const [quizs, setQuizs] = useState([]);
@@ -17,16 +18,49 @@ export default function QuizzesTable({ data }: any) {
       console.log(err.response.data.mesasge);
     }
   };
+
   const callDeleteQuiz = async (id: any) => {
-    try {
-      const resp = await axios.delete(`/api/quiz/${id}`);
-      if (resp.data.ok) {
-        await callGetQuiz();
-        route.reload();
-      }
-    } catch (err: any) {
-      alert(err.response.data.message);
-    }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton:
+          "button bg-green-500 hover:bg-green-600 rounded-md px-4 py-4 mx-2 text-white",
+        cancelButton:
+          "button bg-red-500 hover:bg-red-600 rounded-md px-4 py-4 mx-2 text-white",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: false,
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            const resp = await axios.delete(`/api/quiz/${id}`);
+            if (resp.data.ok) {
+              await callGetQuiz();
+              swalWithBootstrapButtons
+                .fire({
+                  title: "Deleted!",
+                  text: "Your quiz has been deleted.",
+                  icon: "success",
+                  showConfirmButton: false,
+                  timer: 1500,
+                })
+                .then(() => route.reload());
+            }
+          } catch (err: any) {
+            alert(err.response.data.message);
+          }
+        }
+      });
   };
 
   return (
@@ -117,7 +151,7 @@ export default function QuizzesTable({ data }: any) {
                         </span>
                       </td>
                       <td className="p-2 gap-2 flex flex-row justify-center  align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                        <Link href={`/quiz/${index}`}>
+                        <Link href={`/quiz/${x.id}`}>
                           <button className="hover:scale-105 text-base font-semibold leading-tight dark:text-green dark:opacity-80 text-white bg-gradient-to-r from-green-500 to-green-600  hover:bg-gradient-to-l hover:from-green-500 hover:to-green-600  p-4  tracking-wide  shadow-lg cursor-pointer transition ease-in duration-300 px-4 py-1 rounded-md ">
                             <FaRegEdit size={25} />
                           </button>

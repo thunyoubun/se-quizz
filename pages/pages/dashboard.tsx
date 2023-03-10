@@ -5,8 +5,9 @@ import { AiFillSignal } from "react-icons/ai";
 import { useAuth } from "../../contexts/auth";
 import { getCookie } from "cookies-next";
 import Head from "next/head";
+import { AskForToken } from "../components/AskForToken";
 
-const colors = ["red", "green", "blue", "yellow", "violet"];
+const colors = ["red", "green", "blue", "yellow"];
 
 const Myquiz = ({ user, quiz }: any) => {
   const { loading, token, isAuthenticated, setUser } = useAuth();

@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import { JWTPayload } from "../types/JWTPayload";
+import { AskForToken } from "../pages/components/AskForToken";
 
 //api here is an axios instance which has the baseURL set according to the env.
 /* import api from "../services/Api"; */

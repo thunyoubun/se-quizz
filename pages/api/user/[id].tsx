@@ -21,13 +21,14 @@ export default function quizIdRoute(req: any, res: any) {
     if (!user) {
       return res.status(403).json({
         ok: false,
-        message: "You do not have permission to deposit",
+        message: "You do not have permission to edit",
       });
     }
     const id = req.query.id;
 
     const name = req.body.name;
     const Lname = req.body.Lname;
+
     //validate body
     if (
       typeof name !== "string" &&
@@ -45,6 +46,12 @@ export default function quizIdRoute(req: any, res: any) {
     const userIdx = users.findIndex(
       (x: any) => x.cmuAccount === user.cmuAccount
     );
+    if (!userIdx) {
+      return res.status(403).json({
+        ok: false,
+        message: "User not found",
+      });
+    }
     const userd = users[userIdx];
     userd.name = name;
     userd.Lname = Lname;

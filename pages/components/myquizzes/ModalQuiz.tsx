@@ -1,6 +1,7 @@
 import axios from "axios";
 // import { getCookie } from "cookies-next";
 import { useSession } from "next-auth/react";
+import Swal from "sweetalert2";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -65,16 +66,32 @@ const ModalQuiz = ({ user }: props) => {
         status: "Ready",
       });
       if (resp.data.ok) {
-        await callGetQuiz();
+        /*  await callGetQuiz(); */
         setQuizFile("");
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
           setShowModal(false);
+          route.push(`/quiz/${resp.data.quiz.id}`);
         }, 3000);
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: "Syntax not correct",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setShowModal(false);
       }
     } catch (err: any) {
-      alert(err.response.data.message);
+      Swal.fire({
+        title: "Error!",
+        text: err.response.data.message,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -200,7 +217,7 @@ const ModalQuiz = ({ user }: props) => {
                           <div></div>
                         </div>
                       </div>
-                      <p className=" text-5xl font-semibold text-gray-600">
+                      <p className=" text-5xl font-semibold text-gray-600 dark:white">
                         Converting
                       </p>
                     </div>

@@ -35,6 +35,7 @@ export default function depositRoute(req: any, res: any) {
 
     const name = req.body.name;
     const Lname = req.body.Lname;
+    const quizToken = req.body.quizToken;
     //validate body
     if (
       typeof name !== "string" &&
@@ -46,8 +47,10 @@ export default function depositRoute(req: any, res: any) {
       Lname.charAt(0).toUpperCase() === Lname.charAt(0)
     )
       return res.status(400).json({ ok: false, message: "Invalid last name" });
-
-    console.log(name);
+    if (typeof quizToken !== "string" || quizToken.length === 0)
+      return res
+        .status(400)
+        .json({ ok: false, message: "Invalid Quiz's Token" });
 
     //find and update name , Lname in DB
     const users = readUsersDB();
@@ -57,8 +60,9 @@ export default function depositRoute(req: any, res: any) {
     const userd = users[userIdx];
     userd.name = name;
     userd.Lname = Lname;
+    userd.quizToken = quizToken;
     users[userIdx] = userd;
-    console.log("newData = ", users[userIdx]);
+    console.log("newData = ", users[userIdx].quizToken);
 
     writeUsersDB(users);
 
