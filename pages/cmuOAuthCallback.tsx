@@ -10,6 +10,10 @@ export default function CMUOAuthCallback() {
   const [message, setMessage] = useState("");
   const { token, setToken } = useAuth();
 
+  const addToken = (token: any) => {
+    setToken(token);
+  };
+
   useEffect(() => {
     //Next.js takes sometime to read parameter from URL
     //So we'll check if "code" is ready before calling sign-in api
@@ -19,7 +23,7 @@ export default function CMUOAuthCallback() {
       .post<SignInResponse>("/api/auth/signIn", { authorizationCode: code })
       .then((resp) => {
         if (resp.data.ok) {
-          setToken(resp.data.token);
+          addToken(resp.data.token);
           router.push("/pages/dashboard");
         }
       })
