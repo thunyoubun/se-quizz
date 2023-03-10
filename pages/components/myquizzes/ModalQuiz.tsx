@@ -31,7 +31,7 @@ const ModalQuiz = ({ user }: props) => {
   });
 
   useEffect(() => {
-    if (isAuthenticated || user) {
+    if (user != null || user != undefined) {
       setAuthor(user?.firstName + " " + user?.lastName);
     }
   });

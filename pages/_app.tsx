@@ -64,11 +64,14 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const handleStart = (url: string) =>
       url !== router.asPath && setLoading(true);
-    const handleComplete = (url: string) =>
-      url === router.asPath &&
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
+    function handleComplete(url: string) {
+      return (
+        url === router.asPath &&
+        setTimeout(() => {
+          setLoading(false);
+        }, 500)
+      );
+    }
 
     router.events.on("routeChangeStart", handleStart);
     router.events.on("routeChangeComplete", handleComplete);

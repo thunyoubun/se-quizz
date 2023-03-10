@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
@@ -203,7 +204,7 @@ const Navbar = ({ prePath, pathName, user }: props) => {
             <li className="flex  items-center">
               <Link href={"/pages/user"}>
                 <button className="  rounded-md flex align-middle justify-center items-center gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
-                  <img
+                  <Image
                     src={avatar}
                     alt=""
                     className="bg-contain border-2 hidden md:flex border-white  h-10 w-10 rounded-full z-20"
