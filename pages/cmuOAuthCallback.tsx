@@ -17,13 +17,16 @@ export default function CMUOAuthCallback() {
   useEffect(() => {
     //Next.js takes sometime to read parameter from URL
     //So we'll check if "code" is ready before calling sign-in api
+
     if (!code) return;
 
     axios
       .post<SignInResponse>("/api/auth/signIn", { authorizationCode: code })
       .then((resp) => {
         if (resp.data.ok) {
-          addToken(resp.data.token);
+          const res = resp.data.ok;
+          addToken(res);
+          const router = useRouter();
           router.push("/pages/dashboard");
         }
       })
