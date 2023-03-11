@@ -42,5 +42,5 @@ export default function CMUOAuthCallback() {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
-  return <div className="p-3">{message || "Redirecting ..."}</div>;
+  return;
 }
