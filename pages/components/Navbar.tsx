@@ -34,6 +34,7 @@ const Navbar = ({ prePath, pathName, user }: props) => {
       setAuth(user.firstName);
     }
     setAvatar("/assets/empty-profile.png");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
@@ -147,6 +148,7 @@ const Navbar = ({ prePath, pathName, user }: props) => {
 
   useEffect(() => {
     loadTheme();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -34,6 +34,7 @@ const ModalQuiz = ({ user }: props) => {
     if (user != null || user != undefined) {
       setAuthor(user?.firstName + " " + user?.lastName);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
   const updateMenu = () => {

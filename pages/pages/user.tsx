@@ -83,6 +83,7 @@ const User = ({ user, quiz, token }: any) => {
         setRole("Staff Account");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
