@@ -26,8 +26,8 @@ export default function CMUOAuthCallback() {
         if (resp.data.ok) {
           const res = resp.data.ok;
           addToken(res);
-          const router = useRouter();
-          router.push("/pages/dashboard");
+          const routers = router;
+          routers.push("/pages/dashboard");
         }
       })
       .catch((error: AxiosError<SignInResponse>) => {
