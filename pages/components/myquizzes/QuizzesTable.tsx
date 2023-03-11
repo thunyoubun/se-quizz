@@ -141,12 +141,12 @@ export default function QuizzesTable({ data }: any) {
                       </td>
 
                       <td className="p-2 px-6 text-start align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                        <span className="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400">
+                        <span className="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 ">
                           {x.date}
                         </span>
                       </td>
                       <td className="p-2 px-6 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                        <span className="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400">
+                        <span className="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 ">
                           {x.status}
                         </span>
                       </td>
