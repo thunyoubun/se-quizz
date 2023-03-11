@@ -217,8 +217,8 @@ const ModalQuiz = ({ user }: props) => {
                           <div></div>
                         </div>
                       </div>
-                      <p className=" text-5xl font-semibold text-gray-600 dark:white">
-                        Converting
+                      <p className=" text-5xl font-semibold text-gray-600 dark:text-white">
+                        Converting...
                       </p>
                     </div>
                   )}

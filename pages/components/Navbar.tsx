@@ -206,6 +206,8 @@ const Navbar = ({ prePath, pathName, user }: props) => {
                 <button className="  rounded-md flex align-middle justify-center items-center gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
                   <Image
                     src={avatar}
+                    width={40}
+                    height={40}
                     alt=""
                     className="bg-contain border-2 hidden md:flex border-white  h-10 w-10 rounded-full z-20"
                   />

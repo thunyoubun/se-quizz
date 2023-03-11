@@ -62,7 +62,6 @@ export default function depositRoute(req: any, res: any) {
     userd.Lname = Lname;
     userd.quizToken = quizToken;
     users[userIdx] = userd;
-    console.log("newData = ", users[userIdx].quizToken);
 
     writeUsersDB(users);
 

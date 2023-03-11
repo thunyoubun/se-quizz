@@ -7,6 +7,7 @@ import { useAuth } from "../../contexts/auth";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
 import Head from "next/head";
+import Swal from "sweetalert2";
 const User = ({ user, quiz, token }: any) => {
   const [avatar, setAvatar] = useState<string | null | undefined | any>(
     "/assets/empty-profile.png"
@@ -45,10 +46,22 @@ const User = ({ user, quiz, token }: any) => {
 
       const res = await resp.json();
       if (res.ok) {
-        console.log(res.name);
+        Swal.fire({
+          title: "Success",
+          text: "Your token has been added",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (err: any) {
-      alert(err);
+      Swal.fire({
+        title: "Error!",
+        text: err.response.data.message,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
