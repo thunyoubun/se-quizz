@@ -18,16 +18,16 @@ export default function CMUOAuthCallback() {
     //Next.js takes sometime to read parameter from URL
     //So we'll check if "code" is ready before calling sign-in api
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!code) return;
 
     axios
       .post<SignInResponse>("/api/auth/signIn", { authorizationCode: code })
       .then((resp) => {
         if (resp.data.ok) {
-          const res = resp.data.ok;
-          addToken(res);
-          const routers = router;
-          routers.push("/pages/dashboard");
+          addToken(resp.data.ok);
+
+          router.push("/pages/dashboard");
         }
       })
       .catch((error: AxiosError<SignInResponse>) => {
