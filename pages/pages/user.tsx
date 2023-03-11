@@ -322,7 +322,7 @@ const User = ({ user, quiz, token }: any) => {
                       <div className="flex gap-2">
                         <div className="w-full">
                           <label className=" text-sm font-bold text-gray-700 dark:text-white tracking-wide">
-                            Quiz's token
+                            Quiz`&apos;s token
                           </label>
                           <input
                             className=" w-full text-base px-4 py-2 border  border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"

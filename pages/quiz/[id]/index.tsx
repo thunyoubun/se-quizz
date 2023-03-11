@@ -30,8 +30,8 @@ const Quizz = ({ user, quiz }: any) => {
       const quizIdx = quiz.findIndex((x: any) => x.id === id);
       Setmyquizz({ ...quiz[quizIdx] });
       console.log(quiz);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
