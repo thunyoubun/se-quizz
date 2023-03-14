@@ -27,7 +27,9 @@
     "contexts/auth.js",
     "contexts/auth.js",
     "middleware/_middleware.jsre.js",
-    "middleware/_middleware.jsre.js"
+    "middleware/_middleware.jsre.js",
+    "pages/components/ChartQuiz.js",
+    "pages/components/ChartQuiz.js"
   ],
   "exclude": ["node_modules"]
 }
