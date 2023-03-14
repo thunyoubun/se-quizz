@@ -62,6 +62,7 @@ const ModalQuiz = ({ user }: props) => {
         category: category,
         author: user?.firstName + "_" + user?.lastName,
         files: quizFile,
+        token: user?.quizToken,
       });
       if (resp.data.status) {
         /*  await callGetQuiz(); */
