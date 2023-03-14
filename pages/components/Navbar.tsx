@@ -33,7 +33,7 @@ const Navbar = ({ prePath, pathName, user }: props) => {
     if (isAuthenticated) {
       setAuth(user.firstName);
     }
-    setAvatar("/assets/empty-profile.png");
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -207,7 +207,7 @@ const Navbar = ({ prePath, pathName, user }: props) => {
               <Link href={"/pages/user"}>
                 <button className="  rounded-md flex align-middle justify-center items-center gap-2 px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
                   <Image
-                    src={avatar}
+                    src={"/assets/empty-profile.png"}
                     width={40}
                     height={40}
                     alt=""

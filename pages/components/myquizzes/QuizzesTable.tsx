@@ -32,7 +32,7 @@ export default function QuizzesTable({ data }: any) {
 
     swalWithBootstrapButtons
       .fire({
-        title: "Are you sure?",
+        title: "Are you sure to deleted?",
 
         icon: "warning",
         showCancelButton: true,
@@ -45,7 +45,6 @@ export default function QuizzesTable({ data }: any) {
           try {
             const resp = await axios.delete(`/api/quiz/${id}`);
             if (resp.data.ok) {
-              await callGetQuiz();
               swalWithBootstrapButtons
                 .fire({
                   title: "Deleted!",
@@ -85,12 +84,12 @@ export default function QuizzesTable({ data }: any) {
                 >
                   Title
                 </th>
-                <th
+                {/* <th
                   scope="col"
                   className="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"
                 >
                   Category
-                </th>
+                </th> */}
                 <th
                   scope="col"
                   className="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"
@@ -124,25 +123,25 @@ export default function QuizzesTable({ data }: any) {
                         <div className="flex  py-1">
                           <div className="flex flex-col justify-center">
                             <h6 className="mb-0 text-sm font-semibold leading-normal dark:text-white">
-                              {x.title}
+                              {x.category}
                             </h6>
                           </div>
                         </div>
                       </td>
-                      <td className="p-2 px-6 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                      {/* <td className="p-2 px-6 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                         <p className="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
-                          {x.category}
+                          แมว
                         </p>
-                      </td>
+                      </td> */}
                       <td className="p-2 px-6 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                         <p className="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
-                          {x.auth}
+                          {x.author}
                         </p>
                       </td>
 
                       <td className="p-2 px-6 text-start align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                         <span className="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 ">
-                          {x.date}
+                          {x.createDate.$date.slice(0, 10)}
                         </span>
                       </td>
                       <td className="p-2 px-6 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
@@ -151,7 +150,7 @@ export default function QuizzesTable({ data }: any) {
                         </span>
                       </td>
                       <td className="p-2 gap-2 flex flex-row justify-center  align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                        <Link href={`/quiz/${x.id}`}>
+                        <Link href={`/quiz/${x._id.$oid}`}>
                           <button className="hover:scale-105 text-base font-semibold leading-tight dark:text-green dark:opacity-80 text-white bg-gradient-to-r from-green-500 to-green-600  hover:bg-gradient-to-l hover:from-green-500 hover:to-green-600  p-4  tracking-wide  shadow-lg cursor-pointer transition ease-in duration-300 px-4 py-1 rounded-md ">
                             <FaRegEdit size={25} />
                           </button>

@@ -58,15 +58,12 @@ const ModalQuiz = ({ user }: props) => {
 
   const callPostQuiz = async () => {
     try {
-      const resp = await axios.post("/api/quiz", {
-        title: quizText,
+      const resp = await axios.post("https://sebackend.vercel.app/api/upload", {
         category: category,
-        date: date,
-        auth: author,
-        file: quizFile,
-        status: "Ready",
+        author: author,
+        files: quizFile,
       });
-      if (resp.data.ok) {
+      if (resp.data.status) {
         /*  await callGetQuiz(); */
         setQuizFile("");
         setLoading(true);

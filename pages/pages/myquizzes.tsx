@@ -53,14 +53,6 @@ export const getServerSideProps = async ({ req, res }: any) => {
       },
     };
   } else {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await res.json();
-    const quiz = data.findQuiz;
-
     const res2 = await fetch(`${process.env.NEXTAUTH_URL}api/user`, {
       headers: {
         authorization: `Bearer ${token}`,
@@ -68,6 +60,12 @@ export const getServerSideProps = async ({ req, res }: any) => {
     });
     const data2 = await res2.json();
     const user = data2.user;
+
+    const res = await fetch(`https://sebackend.vercel.app/api/Quiz/work_zaa`);
+    const data = await res.json();
+    const quiz = data;
+    console.log(quiz);
+
     return {
       props: {
         user: user,
