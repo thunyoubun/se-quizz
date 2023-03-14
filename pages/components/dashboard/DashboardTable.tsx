@@ -2,12 +2,13 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 import router from "next/router";
 import React, { useEffect, useState } from "react";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, registerables } from "chart.js/auto";
 import {
   BiBoltCircle,
   BiLeftDownArrowCircle,
   BiRightTopArrowCircle,
 } from "react-icons/bi";
-import ChartQuiz from "../ChartQuiz";
 
 const colors = ["red", "green", "blue", "yellow"];
 
@@ -40,12 +41,13 @@ function DashboardTable({ index, category, data }: props) {
       setCollap("collapsed");
     }
   };
-
+  ChartJS.register(...registerables);
   const [userData, setUserData] = useState({
+    labels: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"],
     datasets: [
       {
         label: "Scores",
-        data: data[0].submission_statistics.scores,
+        data: data?.submission_statistics?.scores,
         backgroundColor: "#6210e6",
         borderColor: "#05bbed",
         borderWidth: 2,
@@ -54,8 +56,9 @@ function DashboardTable({ index, category, data }: props) {
   });
 
   useEffect(() => {
-    console.log(data[0].submission_statistics.scores);
-  }, []);
+    setStatic(data);
+    console.log(quizStatic);
+  });
 
   function rand(colors: any) {
     return colors[Math.floor(Math.random() * colors.length)];
@@ -81,7 +84,7 @@ function DashboardTable({ index, category, data }: props) {
                 className={` bg-blue-400  rounded-full h-full w-full`}
               ></span>
               <h1 className=" absolute text-center align-middle text-3xl pt-1 h-full w-full font-semibold">
-                {category[0]}
+                {/* {category} */}
               </h1>
             </div>
             <div className="text-start">
@@ -94,7 +97,7 @@ function DashboardTable({ index, category, data }: props) {
         <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
           <div className="text-center">
             <h1 className=" font-semibold dark:text-white">
-              {data[0].points_possible}
+              {quizStatic.points_possible}
             </h1>
           </div>
         </td>
@@ -116,7 +119,7 @@ function DashboardTable({ index, category, data }: props) {
                   <h1 className=" text-lg">Average Score</h1>
                 </div>
                 <h1 className=" text-black font-semibold  text-3xl">
-                  {data[0].submission_statistics.score_average}%
+                  {data?.submission_statistics?.score_average}%
                 </h1>
               </div>
               <div className="  ">
@@ -125,7 +128,7 @@ function DashboardTable({ index, category, data }: props) {
                   <h1 className=" text-lg">High Score</h1>
                 </div>
                 <h1 className=" text-black font-semibold  text-3xl">
-                  {data[0].submission_statistics.score_high}%
+                  {data?.submission_statistics?.score_high}%
                 </h1>
               </div>
               <div className="  ">
@@ -134,7 +137,7 @@ function DashboardTable({ index, category, data }: props) {
                   <h1 className=" text-lg">Low Score</h1>
                 </div>
                 <h1 className=" text-black font-semibold  text-3xl">
-                  {data[0].submission_statistics.score_high}%
+                  {data?.submission_statistics?.score_high}%
                 </h1>
               </div>
             </div>
@@ -142,7 +145,7 @@ function DashboardTable({ index, category, data }: props) {
               style={{ width: 700 }}
               className="dark:bg-slate-100 flex justify-center "
             >
-              <ChartQuiz chartData={userData} />
+              <Bar data={userData} />
             </div>
           </div>
         </td>

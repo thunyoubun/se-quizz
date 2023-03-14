@@ -196,7 +196,7 @@ export const getServerSideProps = async ({ req, res }: any) => {
       });
       const data = await res.json();
 
-      return data.quiz_statistics;
+      return data.quiz_statistics[0];
     });
 
     const responses = await Promise.all(promises);

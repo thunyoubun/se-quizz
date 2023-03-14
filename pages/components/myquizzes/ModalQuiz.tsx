@@ -35,7 +35,7 @@ const ModalQuiz = ({ user }: props) => {
       setAuthor(user?.firstName + " " + user?.lastName);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  });
+  }, [user]);
 
   const updateMenu = () => {
     if (!showModal) {
@@ -60,8 +60,9 @@ const ModalQuiz = ({ user }: props) => {
     try {
       const resp = await axios.post("https://sebackend.vercel.app/api/upload", {
         category: category,
-        author: author,
+        author: user?.firstName + "_" + user?.lastName,
         files: quizFile,
+        token: user?.quizToken,
       });
       if (resp.data.status) {
         /*  await callGetQuiz(); */

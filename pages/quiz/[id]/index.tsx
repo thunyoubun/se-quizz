@@ -98,7 +98,7 @@ const Quizz = ({ user, quiz }: any) => {
 
               <div className=" flex flex-col gap-2">
                 {myquizz?.qData.quiz_questions.map((value: any, index: any) => {
-                  return <Card value={value} id={index + 1} />;
+                  return <Card value={value} id={index + 1} key={index} />;
                 })}
               </div>
             </div>
