@@ -1,9 +1,10 @@
 import React from "react";
 import { BsCheckCircle, BsListCheck } from "react-icons/bs";
+import { QuestionPayload } from "../../../types/QuestionType";
 
 export declare type props = {
   id: any;
-  value: any;
+  value: QuestionPayload;
 };
 
 const Card = ({ id, value }: props) => {

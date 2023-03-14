@@ -148,7 +148,7 @@ const Myquiz = ({ user, quiz, q_static }: any) => {
                         <DashboardTable
                           category={x}
                           key={index}
-                          data={q_static[index]}
+                          data={q_static[index][0]}
                           index={index}
                         />
                       );

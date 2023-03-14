@@ -42,15 +42,21 @@ function DashboardTable({ index, category, data }: props) {
   };
 
   const [userData, setUserData] = useState({
+    label: data.submission_statistics.scores,
     datasets: [
       {
         label: "Scores",
-        data: data[0].submission_statistics.scores,
+        data: data.submission_statistics.scores,
         backgroundColor: "#6210e6",
         borderColor: "#05bbed",
         borderWidth: 2,
       },
     ],
+  });
+
+  useEffect(() => {
+    setStatic(data);
+    console.log(quizStatic);
   });
 
   function rand(colors: any) {
@@ -90,7 +96,7 @@ function DashboardTable({ index, category, data }: props) {
         <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
           <div className="text-center">
             <h1 className=" font-semibold dark:text-white">
-              {data[0].points_possible}
+              {quizStatic.points_possible}
             </h1>
           </div>
         </td>
@@ -112,7 +118,7 @@ function DashboardTable({ index, category, data }: props) {
                   <h1 className=" text-lg">Average Score</h1>
                 </div>
                 <h1 className=" text-black font-semibold  text-3xl">
-                  {data[0].submission_statistics.score_average}%
+                  {data.submission_statistics.score_average}%
                 </h1>
               </div>
               <div className="  ">
@@ -121,7 +127,7 @@ function DashboardTable({ index, category, data }: props) {
                   <h1 className=" text-lg">High Score</h1>
                 </div>
                 <h1 className=" text-black font-semibold  text-3xl">
-                  {data[0].submission_statistics.score_high}%
+                  {data.submission_statistics.score_high}%
                 </h1>
               </div>
               <div className="  ">
@@ -130,7 +136,7 @@ function DashboardTable({ index, category, data }: props) {
                   <h1 className=" text-lg">Low Score</h1>
                 </div>
                 <h1 className=" text-black font-semibold  text-3xl">
-                  {data[0].submission_statistics.score_high}%
+                  {data.submission_statistics.score_high}%
                 </h1>
               </div>
             </div>
