@@ -40,7 +40,7 @@ function DashboardTable({ index, category, data }: props) {
       setCollap("collapsed");
     }
   };
-  let labels = [
+  const labels = [
     "0",
     "10",
     "20",
@@ -55,7 +55,7 @@ function DashboardTable({ index, category, data }: props) {
   ];
 
   const [userData, setUserData] = useState({
-    labels: labels,
+    labels: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"],
     datasets: [
       {
         label: "Scores",
