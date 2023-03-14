@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
 import Head from "next/head";
 import Swal from "sweetalert2";
+import { BiIdCard } from "react-icons/bi";
 const User = ({ user, quiz, token }: any) => {
   const [avatar, setAvatar] = useState<string | null | undefined | any>(
     "/assets/empty-profile.png"
@@ -143,10 +144,9 @@ const User = ({ user, quiz, token }: any) => {
             <div className="w-full md:w-2/3 h-max  mb-4 ">
               <div className="  rounded-md p-4 overflow-x-auto shadow-xl bg-white dark:bg-gray-800 ">
                 <div className="">
-                  <div className="my-2">
-                    <h1 className=" text-xl font-bold text-gray-500 dark:text-white">
-                      User Profile
-                    </h1>
+                  <div className="my-2 flex gap-2 text-gray-500 dark:text-white">
+                    <BiIdCard size={30} />
+                    <h1 className=" text-xl font-bold ">User Profile</h1>
                   </div>
                   <hr />
 

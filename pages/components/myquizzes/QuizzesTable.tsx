@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { FaRegEdit } from "react-icons/fa";
 import Link from "next/link";
 import Swal from "sweetalert2";
+import { BiCodeBlock } from "react-icons/bi";
 
 export default function QuizzesTable({ data }: any) {
   const [quizs, setQuizs] = useState([]);
@@ -66,8 +67,9 @@ export default function QuizzesTable({ data }: any) {
     <div className="w-full  mt-10 ">
       <div className="w-full  h-max md:px-7 px-3  ">
         <div className=" border-3 border-black rounded-md p-4 overflow-x-auto shadow-xl bg-white dark:bg-gray-800 ">
-          <div className=" mt-3 px-6 w-full flex justify-between relative">
-            <h1 className=" text-lg font-semibold text-gray-600 dark:text-white">
+          <div className=" mt-3 px-4 w-full flex justify-between relative">
+            <h1 className="flex gap-2 text-lg font-semibold text-gray-600 dark:text-white">
+              <BiCodeBlock size={30} />
               My Quizzes
             </h1>
           </div>
@@ -146,11 +148,11 @@ export default function QuizzesTable({ data }: any) {
                       </td>
                       <td className="p-2 px-6 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                         {x.status === "ready to import" ? (
-                          <span className="bg-green-500 rounded-lg py-1 px-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-80 ">
+                          <span className="bg-green-500 rounded-lg py-1 px-2 text-xs font-semibold leading-tight text-white dark:opacity-80 ">
                             Ready
                           </span>
                         ) : (
-                          <span className="bg-red-500 rounded-lg p-1 text-xs font-semibold leading-tight dark:text-white dark:opacity-80 ">
+                          <span className="bg-red-500 rounded-lg p-1 text-xs font-semibold leading-tight text-white dark:opacity-80 ">
                             Not Ready
                           </span>
                         )}

@@ -5,6 +5,7 @@ import { AiFillSignal } from "react-icons/ai";
 import { getCookie } from "cookies-next";
 import Head from "next/head";
 import DashboardTable from "../components/dashboard/DashboardTable";
+import { BiBarChartAlt, BiGridAlt } from "react-icons/bi";
 
 const Myquiz = ({ user, quiz, q_static }: any) => {
   return (
@@ -106,8 +107,8 @@ const Myquiz = ({ user, quiz, q_static }: any) => {
           {/* table 2*/}
           <div className="w-full  h-max px-3 mt-2 md:mt-0  ">
             <div className="  rounded-md p-4 overflow-x-auto shadow-xl bg-white dark:bg-gray-800 ">
-              <div className=" my-3 px-6  flex gap-2 justify-start relative dark:text-white">
-                <AiFillSignal size={25} />
+              <div className=" my-3 px-4  flex gap-2 justify-start relative dark:text-white">
+                <BiBarChartAlt size={30} />
                 <h1 className=" text-lg font-semibold text-gray-600 dark:text-white">
                   Quizzes
                 </h1>
