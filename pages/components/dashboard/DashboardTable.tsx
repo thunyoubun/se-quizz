@@ -55,6 +55,8 @@ function DashboardTable({ index, category, data }: props) {
 
   useEffect(() => {
     setStatic(data);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
   function rand(colors: any) {
@@ -116,7 +118,10 @@ function DashboardTable({ index, category, data }: props) {
                   <h1 className=" text-lg">Average Score</h1>
                 </div>
                 <h1 className=" text-black font-semibold dark:text-white  text-3xl">
-                  {data?.submission_statistics?.score_average}%
+                  {(data?.submission_statistics?.score_average /
+                    quizStatic.points_possible) *
+                    100}
+                  %
                 </h1>
               </div>
               <div className="  ">
@@ -125,7 +130,10 @@ function DashboardTable({ index, category, data }: props) {
                   <h1 className=" text-lg">High Score</h1>
                 </div>
                 <h1 className=" text-black font-semibold dark:text-white   text-3xl">
-                  {data?.submission_statistics?.score_high}%
+                  {(data?.submission_statistics?.score_high /
+                    quizStatic.points_possible) *
+                    100}
+                  %
                 </h1>
               </div>
               <div className="  ">
@@ -134,7 +142,10 @@ function DashboardTable({ index, category, data }: props) {
                   <h1 className=" text-lg">Low Score</h1>
                 </div>
                 <h1 className=" text-black font-semibold dark:text-white  text-3xl">
-                  {data?.submission_statistics?.score_high}%
+                  {(data?.submission_statistics?.score_high /
+                    quizStatic.points_possible) *
+                    100}
+                  %
                 </h1>
               </div>
             </div>
