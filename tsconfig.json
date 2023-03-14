@@ -28,8 +28,8 @@
     "contexts/auth.js",
     "middleware/_middleware.jsre.js",
     "middleware/_middleware.jsre.js",
-    "pages/components/ChartQuiz.js",
-    "pages/components/ChartQuiz.js"
+    "pages/components/ChartQuiz.tsxx",
+    "pages/components/ChartQuiz.tsxx"
   ],
   "exclude": ["node_modules"]
 }
