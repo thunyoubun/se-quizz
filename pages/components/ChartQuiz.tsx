@@ -3,7 +3,7 @@ import { Bar, Line } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js/auto";
 
 export declare type props = {
-  chartData: string[];
+  chartData: (number | [number, number] | null)[];
 };
 
 function ChartQuiz({ chartData }: any) {

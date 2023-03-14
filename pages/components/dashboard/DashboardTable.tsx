@@ -2,12 +2,13 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 import router from "next/router";
 import React, { useEffect, useState } from "react";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, registerables } from "chart.js/auto";
 import {
   BiBoltCircle,
   BiLeftDownArrowCircle,
   BiRightTopArrowCircle,
 } from "react-icons/bi";
-import ChartQuiz from "../ChartQuiz";
 
 const colors = ["red", "green", "blue", "yellow"];
 
@@ -40,7 +41,7 @@ function DashboardTable({ index, category, data }: props) {
       setCollap("collapsed");
     }
   };
-
+  ChartJS.register(...registerables);
   const [userData, setUserData] = useState({
     labels: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"],
     datasets: [
@@ -144,7 +145,7 @@ function DashboardTable({ index, category, data }: props) {
               style={{ width: 700 }}
               className="dark:bg-slate-100 flex justify-center "
             >
-              <ChartQuiz chartData={userData} />
+              <Bar data={userData} />
             </div>
           </div>
         </td>
