@@ -40,26 +40,14 @@ function DashboardTable({ index, category, data }: props) {
       setCollap("collapsed");
     }
   };
-  let labels = [
-    "0",
-    "10",
-    "20",
-    "30",
-    "40",
-    "50",
-    "60",
-    "70",
-    "80",
-    "90",
-    "100",
-  ];
+  let labels = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
   const [userData, setUserData] = useState({
-    labels: labels.map((x) => x),
+    labels: null,
     datasets: [
       {
         label: "Scores",
-        data: data?.submission_statistics?.scores,
+        data: [data?.submission_statistics?.scores],
         backgroundColor: "#6210e6",
         borderColor: "#05bbed",
         borderWidth: 2,
