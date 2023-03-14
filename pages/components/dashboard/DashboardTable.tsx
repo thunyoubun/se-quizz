@@ -55,11 +55,11 @@ function DashboardTable({ index, category, data }: props) {
   ];
 
   const [userData, setUserData] = useState({
-    labels: labels,
+    labels: labels.map((x) => x),
     datasets: [
       {
         label: "Scores",
-        data: data.submission_statistics.scores,
+        data: data?.submission_statistics?.scores,
         backgroundColor: "#6210e6",
         borderColor: "#05bbed",
         borderWidth: 2,
@@ -131,7 +131,7 @@ function DashboardTable({ index, category, data }: props) {
                   <h1 className=" text-lg">Average Score</h1>
                 </div>
                 <h1 className=" text-black font-semibold  text-3xl">
-                  {data.submission_statistics.score_average}%
+                  {data?.submission_statistics?.score_average}%
                 </h1>
               </div>
               <div className="  ">
@@ -140,7 +140,7 @@ function DashboardTable({ index, category, data }: props) {
                   <h1 className=" text-lg">High Score</h1>
                 </div>
                 <h1 className=" text-black font-semibold  text-3xl">
-                  {data.submission_statistics.score_high}%
+                  {data?.submission_statistics?.score_high}%
                 </h1>
               </div>
               <div className="  ">
@@ -149,7 +149,7 @@ function DashboardTable({ index, category, data }: props) {
                   <h1 className=" text-lg">Low Score</h1>
                 </div>
                 <h1 className=" text-black font-semibold  text-3xl">
-                  {data.submission_statistics.score_high}%
+                  {data?.submission_statistics?.score_high}%
                 </h1>
               </div>
             </div>
