@@ -53,10 +53,6 @@ function DashboardTable({ index, category, data }: props) {
     ],
   });
 
-  useEffect(() => {
-    console.log(data[0].submission_statistics.scores);
-  }, []);
-
   function rand(colors: any) {
     return colors[Math.floor(Math.random() * colors.length)];
   }

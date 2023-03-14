@@ -31,7 +31,7 @@ const Group = ({ id, value }: props) => {
         {group.map((x: any, index: any) => {
           return (
             <div className="my-2">
-              <Card value={x} id={index} />
+              <Card value={x} id={index} key={index} />
             </div>
           );
         })}
