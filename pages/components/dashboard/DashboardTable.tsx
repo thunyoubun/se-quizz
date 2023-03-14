@@ -56,7 +56,6 @@ function DashboardTable({ index, category, data }: props) {
 
   useEffect(() => {
     setStatic(data);
-    console.log(quizStatic);
   });
 
   function rand(colors: any) {
@@ -67,7 +66,7 @@ function DashboardTable({ index, category, data }: props) {
       <tr
         onClick={changeColor}
         id="accordionExample"
-        className="accordion dark:hover:bg-gray-500    hover:bg-gray-100 rounded-md"
+        className="accordion dark:hover:bg-gray-500 hover:cursor-pointer   hover:bg-gray-100 rounded-md"
         data-bs-toggle="collapse"
         data-bs-target={`#collapse${index}`}
         aria-expanded="true"
@@ -117,7 +116,7 @@ function DashboardTable({ index, category, data }: props) {
                   <BiBoltCircle size={25} />
                   <h1 className=" text-lg">Average Score</h1>
                 </div>
-                <h1 className=" text-black font-semibold  text-3xl">
+                <h1 className=" text-black font-semibold dark:text-white  text-3xl">
                   {data?.submission_statistics?.score_average}%
                 </h1>
               </div>
@@ -126,7 +125,7 @@ function DashboardTable({ index, category, data }: props) {
                   <BiRightTopArrowCircle size={25} />
                   <h1 className=" text-lg">High Score</h1>
                 </div>
-                <h1 className=" text-black font-semibold  text-3xl">
+                <h1 className=" text-black font-semibold dark:text-white   text-3xl">
                   {data?.submission_statistics?.score_high}%
                 </h1>
               </div>
@@ -135,14 +134,14 @@ function DashboardTable({ index, category, data }: props) {
                   <BiLeftDownArrowCircle size={25} />
                   <h1 className=" text-lg">Low Score</h1>
                 </div>
-                <h1 className=" text-black font-semibold  text-3xl">
+                <h1 className=" text-black font-semibold dark:text-white  text-3xl">
                   {data?.submission_statistics?.score_high}%
                 </h1>
               </div>
             </div>
             <div
               style={{ width: 700 }}
-              className="dark:bg-slate-100 flex justify-center "
+              className="dark:bg-slate-100 rounded-md mt-2 flex justify-center "
             >
               <ChartQuiz chartData={userData} />
             </div>

@@ -111,7 +111,7 @@ const ModalQuiz = ({ user }: props) => {
           className=" bg-black/20 w-full h-screen absolute z-30"
         >
           <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-full mx-4   my-6  max-w-lg translate-x-0 transition-transform duration-300 ease-in-out animate-modalAnime ">
+            <div className="relative w-full mx-4   my-6  max-w-lg translate-x-0 transition-transform  duration-300 ease-in-out animate-modalAnimate ">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-gray-800 outline-none focus:outline-none">
                 <div className="flex bg-blue-400 text-white items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
                   <h3 className="text-3xl font-semibold">Upload Quiz</h3>

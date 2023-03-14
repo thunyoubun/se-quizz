@@ -146,7 +146,7 @@ export default async function handler(
   setCookie("cmu-oauth-example-token", token, {
     req,
     res,
-    maxAge: 3600,
+    maxAge: 86400,
     //Set httpOnly to true so that client JavaScript cannot read or modify token
     //And the created token can be read by server side only
     httpOnly: true,

@@ -10,52 +10,6 @@ import { ThemeProvider } from "../contexts/theme";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 
-function Loading() {
-  const router = useRouter();
-
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const handleStart = (url: string) =>
-      url !== router.asPath && setLoading(true);
-    const handleComplete = (url: string) =>
-      url === router.asPath &&
-      setTimeout(() => {
-        setLoading(false);
-      }, 5000);
-
-    router.events.on("routeChangeStart", handleStart);
-    router.events.on("routeChangeComplete", handleComplete);
-    router.events.on("routeChangeError", handleComplete);
-
-    return () => {
-      router.events.off("routeChangeStart", handleStart);
-      router.events.off("routeChangeComplete", handleComplete);
-      router.events.off("routeChangeError", handleComplete);
-    };
-  });
-
-  return (
-    loading && (
-      <div className="loadingio-spinner-spinner-dtn99hj0z25">
-        <div className="ldio-6w467ibr0lr">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    )
-  );
-}
-
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 

@@ -2,20 +2,9 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { AiFillSignal } from "react-icons/ai";
-
-import {
-  BiRightTopArrowCircle,
-  BiLeftDownArrowCircle,
-  BiBoltCircle,
-} from "react-icons/bi";
-
 import { getCookie } from "cookies-next";
 import Head from "next/head";
-import ChartQuiz from "../components/ChartQuiz";
-import axios from "axios";
 import DashboardTable from "../components/dashboard/DashboardTable";
-
-const categorys = ["Mid Term", "Final", "Quiz"];
 
 const Myquiz = ({ user, quiz, q_static }: any) => {
   return (
@@ -143,10 +132,10 @@ const Myquiz = ({ user, quiz, q_static }: any) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {categorys.map((x: any, index: any) => {
+                    {quiz.map((x: any, index: any) => {
                       return (
                         <DashboardTable
-                          category={x}
+                          category={x.title}
                           key={index}
                           data={q_static[index]}
                           index={index}

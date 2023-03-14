@@ -12,7 +12,7 @@ module.exports = {
       },
 
       keyframes: {
-        modal: {
+        modalX: {
           "0%": {
             transform: "scale(50%)",
             transform: "translateX(100%) ",
@@ -24,11 +24,6 @@ module.exports = {
             opacity: "100%",
           },
         },
-      },
-
-      animation: { modalAnime: "modal 0.5s ease-in-out " },
-
-      keyframes: {
         bounceX: {
           "0%": {
             transform: "translateX(-25%)",
@@ -41,7 +36,11 @@ module.exports = {
           },
         },
       },
-      animation: { bounceX: "bounceX 1.5s linear  infinite" },
+
+      animation: {
+        modalAnimate: "modalX 0.5s ease-in-out  ",
+        bounceX: "bounceX 1.5s linear  infinite",
+      },
     },
   },
   plugins: [],
