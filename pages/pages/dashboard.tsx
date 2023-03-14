@@ -36,7 +36,7 @@ const Myquiz = ({ user, quiz, q_static }: any) => {
                   </div>
                   <div className="w-full  flex rounded-tr-md rounded-br-md p-4 shadow-xl bg-white dark:bg-gray-800  ">
                     <div className=" text-start w-2/3 md:w-full">
-                      <h1 className=" text-slate-400 dark:text-white text-md">
+                      <h1 className=" text-slate-400 dark:text-slate-300  text-md">
                         Subject
                       </h1>
                       <p className=" font-semibold text-xl truncate dark:text-white ">
@@ -70,15 +70,15 @@ const Myquiz = ({ user, quiz, q_static }: any) => {
               <div className="w-full md:w-1/2 md:my-4 my-2">
                 <div className="px-3 flex justify-center ">
                   <div className="  flex justify-center align-middle ">
-                    <div className="bg-blue-400 shadow-yellow-600 shadow-xl h-full w-4 rounded-tl-md rounded-bl-md"></div>
+                    <div className="bg-red-500 shadow-red-600 shadow-xl h-full w-4 rounded-tl-md rounded-bl-md"></div>
                   </div>
                   <div className="w-full flex rounded-tr-md rounded-br-md p-4 shadow-xl bg-white dark:bg-gray-800  ">
                     <div className=" text-start">
-                      <h1 className=" text-slate-400 dark:text-white text-md">
+                      <h1 className=" text-slate-400 dark:text-slate-300 text-md">
                         All Quiz
                       </h1>
                       <p className=" font-semibold text-xl truncate dark:text-white ">
-                        3
+                        {quiz.length}
                       </p>
                     </div>
                   </div>

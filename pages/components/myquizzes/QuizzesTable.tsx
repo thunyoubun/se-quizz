@@ -145,9 +145,15 @@ export default function QuizzesTable({ data }: any) {
                         </span>
                       </td>
                       <td className="p-2 px-6 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                        <span className="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 ">
-                          {x.status}
-                        </span>
+                        {x.status === "ready to import" ? (
+                          <span className="bg-green-500 rounded-lg py-1 px-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-80 ">
+                            Ready
+                          </span>
+                        ) : (
+                          <span className="bg-red-500 rounded-lg p-1 text-xs font-semibold leading-tight dark:text-white dark:opacity-80 ">
+                            Not Ready
+                          </span>
+                        )}
                       </td>
                       <td className="p-2 gap-2 flex flex-row justify-center  align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                         <Link href={`/quiz/${x._id.$oid}`}>
