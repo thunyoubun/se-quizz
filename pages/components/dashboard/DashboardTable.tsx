@@ -40,9 +40,22 @@ function DashboardTable({ index, category, data }: props) {
       setCollap("collapsed");
     }
   };
+  let labels = [
+    "0",
+    "10",
+    "20",
+    "30",
+    "40",
+    "50",
+    "60",
+    "70",
+    "80",
+    "90",
+    "100",
+  ];
 
   const [userData, setUserData] = useState({
-    label: data.submission_statistics.scores,
+    labels: labels,
     datasets: [
       {
         label: "Scores",
