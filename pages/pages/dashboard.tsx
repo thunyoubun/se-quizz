@@ -1,20 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { AiFillSignal } from "react-icons/ai";
-import { useAuth } from "../../contexts/auth";
+
+import {
+  BiRightTopArrowCircle,
+  BiLeftDownArrowCircle,
+  BiBoltCircle,
+} from "react-icons/bi";
+
 import { getCookie } from "cookies-next";
 import Head from "next/head";
+import ChartQuiz from "../components/ChartQuiz";
+import axios from "axios";
+import DashboardTable from "../components/dashboard/DashboardTable";
 
-const colors = ["red", "green", "blue", "yellow"];
+const categorys = ["Mid Term", "Final", "Quiz"];
 
-const Myquiz = ({ user, quiz }: any) => {
-  const { loading, token, isAuthenticated, setUser } = useAuth();
-
-  function rand(colors: any) {
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
-
+const Myquiz = ({ user, quiz, q_static }: any) => {
   return (
     <div className=" flex leading-default bg-gray-100 dark:bg-gray-600 h-fit min-h-screen   w-full   ">
       <Head>
@@ -27,9 +30,6 @@ const Myquiz = ({ user, quiz }: any) => {
       <div id="nav-sidebar" className="z-10 hidden md:flex  md:p-6 mb-2">
         <Sidebar quizCount={quiz.length.toString()} />
       </div>
-      {/* <div className=" z-20 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white">
-        <BsPlusLg size={20} />
-      </div> */}
       <div
         className="z-10 container w-full overflow-y-auto relative
         h-full max-h-screen transition-all duration-200 ease-in-out  rounded-xl "
@@ -59,7 +59,7 @@ const Myquiz = ({ user, quiz }: any) => {
               </div>
 
               {/*  card 2 */}
-              <div className="w-full md:w-1/2 md:my-4 my-2">
+              {/* <div className="w-full md:w-1/2 md:my-4 my-2">
                 <div className="px-3 flex justify-center ">
                   <div className="  flex justify-center align-middle ">
                     <div className="bg-red-400 shadow-red-600 shadow-xl h-full w-4 rounded-tl-md rounded-bl-md"></div>
@@ -70,18 +70,18 @@ const Myquiz = ({ user, quiz }: any) => {
                         Category
                       </h1>
                       <p className=" font-semibold text-xl truncate dark:text-white ">
-                        1
+                        {categorys.length}
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/*  card 3*/}
               <div className="w-full md:w-1/2 md:my-4 my-2">
                 <div className="px-3 flex justify-center ">
                   <div className="  flex justify-center align-middle ">
-                    <div className="bg-yellow-400 shadow-yellow-600 shadow-xl h-full w-4 rounded-tl-md rounded-bl-md"></div>
+                    <div className="bg-blue-400 shadow-yellow-600 shadow-xl h-full w-4 rounded-tl-md rounded-bl-md"></div>
                   </div>
                   <div className="w-full flex rounded-tr-md rounded-br-md p-4 shadow-xl bg-white dark:bg-gray-800  ">
                     <div className=" text-start">
@@ -89,7 +89,7 @@ const Myquiz = ({ user, quiz }: any) => {
                         All Quiz
                       </h1>
                       <p className=" font-semibold text-xl truncate dark:text-white ">
-                        2
+                        3
                       </p>
                     </div>
                   </div>
@@ -120,48 +120,39 @@ const Myquiz = ({ user, quiz }: any) => {
               <div className=" my-3 px-6  flex gap-2 justify-start relative dark:text-white">
                 <AiFillSignal size={25} />
                 <h1 className=" text-lg font-semibold text-gray-600 dark:text-white">
-                  Category
+                  Quizzes
                 </h1>
               </div>
               {/*Category lists*/}
               <div className=" overflow-x-auto">
                 <table className="items-center w-full mb-4 align-top border-collapse border-gray-200 dark:border-white/40">
-                  <tbody>
-                    <tr className="dark:hover:bg-gray-500 hover:bg-gray-100 rounded-md">
-                      <td className="p-2 align-middle bg-transparent border-b w-4/5 whitespace-nowrap dark:border-white/40">
-                        <div className="flex items-center gap-2">
-                          <div className="flex h-12 w-12">
-                            <span
-                              className={` bg-${rand(
-                                colors
-                              )}-400  rounded-full h-full w-full`}
-                            ></span>
-                          </div>
-                          <div className="text-start">
-                            <h1 className=" text-slate-400 text-sm">
-                              Category:
-                            </h1>
-                            <h1 className=" font-semibold dark:text-white">
-                              Mid Term
-                            </h1>
-                          </div>
-                        </div>
-                      </td>
-                      {/* <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                        <div className="text-center">
-                          <h1 className=" text-slate-400 text-sm">Accuracy:</h1>
-                          <h1 className=" font-semibold dark:text-white">
-                            53.61%
-                          </h1>
-                        </div>
-                      </td> */}
-                      <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                        <div className="text-center">
-                          <h1 className=" text-slate-400 text-sm">Quiz:</h1>
-                          <h1 className=" font-semibold dark:text-white">2</h1>
-                        </div>
-                      </td>
+                  <thead className=" align-bottom    ">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"
+                      >
+                        Title
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"
+                      >
+                        Points
+                      </th>
                     </tr>
+                  </thead>
+                  <tbody>
+                    {categorys.map((x: any, index: any) => {
+                      return (
+                        <DashboardTable
+                          category={x}
+                          key={index}
+                          data={q_static[index]}
+                          index={index}
+                        />
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -195,11 +186,27 @@ export const getServerSideProps = async ({ req, res }: any) => {
     const data1 = await res1.json();
     const quiz = data1.findQuiz;
 
+    const promises = quiz.map(async (x: any) => {
+      const url = `https://mango-cmu.instructure.com/api/v1/courses/1306/quizzes/${x.id}/statistics`;
+      const res = await fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${user.quizToken}`,
+        },
+      });
+      const data = await res.json();
+
+      return data.quiz_statistics;
+    });
+
+    const responses = await Promise.all(promises);
+
     return {
       props: {
         token: token,
         user: user,
         quiz: quiz,
+        q_static: responses,
       },
     };
   } else {

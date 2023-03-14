@@ -5,11 +5,11 @@ import { BsPlusLg } from "react-icons/bs";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import Table from "../../components/Table";
-import Card from "../../components/Card";
+import Card from "../../components/quizChoice/Card";
 
 import { MdOutlineNotStarted } from "react-icons/md";
 import { RiQuestionAnswerFill } from "react-icons/ri";
-import HeadQuizz from "../../components/HeadQuizz";
+import HeadQuizz from "../../components/quizChoice/HeadQuizz";
 import Footer from "../../components/Footer";
 import { getSession, signIn } from "next-auth/react";
 import { NextRequest } from "next/server";
@@ -17,19 +17,19 @@ import { getToken } from "next-auth/jwt";
 import { getCookie } from "cookies-next";
 import { QuizPayload } from "../../../types/QuizPayload";
 import Head from "next/head";
+import Group from "../../components/quizChoice/Group";
 
 const Quizz = ({ user, quiz }: any) => {
   const router = useRouter();
   const [myquizz, Setmyquizz] = useState<QuizPayload>();
   const id = router.query.id;
 
-  const choice = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+  const choice = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
   useEffect(() => {
     if (quiz) {
-      const quizIdx = quiz.findIndex((x: any) => x.id === id);
+      const quizIdx = quiz.findIndex((x: any) => x._id.$oid === id);
       Setmyquizz({ ...quiz[quizIdx] });
-      console.log(quiz);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -37,7 +37,7 @@ const Quizz = ({ user, quiz }: any) => {
   return (
     <div className=" flex leading-default bg-gray-100 dark:bg-gray-600 h-fit min-h-screen    w-full   ">
       <Head>
-        <title>EasyQ - {myquizz?.title}</title>
+        <title>EasyQ - {myquizz?.category}</title>
         <meta
           property="og:title"
           content={`EasyQ - ${myquizz?.title}`}
@@ -59,7 +59,7 @@ const Quizz = ({ user, quiz }: any) => {
       >
         <Navbar
           prePath={"My Quizzes"}
-          pathName={"Quiz " + myquizz?.title}
+          pathName={"Quiz " + myquizz?.category}
           user={user}
         />
         {/* Quizz*/}
@@ -73,9 +73,11 @@ const Quizz = ({ user, quiz }: any) => {
               </div> */}
 
               <HeadQuizz
-                title={myquizz?.title}
-                auth={myquizz?.auth}
-                category={myquizz?.category}
+                title={myquizz?.category}
+                author={myquizz?.author}
+                choice={
+                  myquizz?.qData.quiz_groups[0]["quiz_groups[][pick_count]"]
+                }
               />
               <div className="flex flex-row gap-2">
                 <button className=" bg-indigo-600 flex text-center justify-center hover:bg-indigo-500 border-b-4 border-indigo-800 rounded-md p-4 w-1/2 text-white text-xl">
@@ -94,9 +96,9 @@ const Quizz = ({ user, quiz }: any) => {
                 </div>
               </div> */}
 
-              <div className=" flex flex-col gap-4">
-                {choice.map((value, index) => {
-                  return <Card key={index} id={index + 1} />;
+              <div className=" flex flex-col gap-2">
+                {myquizz?.qData.quiz_questions.map((value: any, index: any) => {
+                  return <Card value={value} id={index + 1} />;
                 })}
               </div>
             </div>
@@ -122,13 +124,9 @@ export const getServerSideProps = async ({ req, res }: any) => {
     const data = await res.json();
     const user = data.user;
 
-    const res1 = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+    const res1 = await fetch(`https://sebackend.vercel.app/api/Quiz/work_zaa`);
     const data1 = await res1.json();
-    const quiz = data1.findQuiz;
+    const quiz = data1;
 
     return {
       props: {

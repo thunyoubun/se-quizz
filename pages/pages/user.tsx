@@ -322,7 +322,7 @@ const User = ({ user, quiz, token }: any) => {
                       <div className="flex gap-2">
                         <div className="w-full">
                           <label className=" text-sm font-bold text-gray-700 dark:text-white tracking-wide">
-                            Quiz`&apos;s token
+                            Quiz&apos;s token
                           </label>
                           <input
                             className=" w-full text-base px-4 py-2 border  border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
@@ -335,7 +335,7 @@ const User = ({ user, quiz, token }: any) => {
                       </div>
 
                       <button
-                        /*  onClick={() => callPutUser()} */
+                        onClick={() => callPutUser()}
                         className="w-full opacity-0 flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600  hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
                       >
                         SUBMIT

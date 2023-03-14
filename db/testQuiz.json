@@ -1,0 +1,39 @@
+{
+  "_id": { "$oid": "64085b6506a5c9f0418716a3" },
+  "author": "work_zaa",
+  "category": "testdocx2",
+  "createDate": { "$date": "2023-03-08T09:54:45Z" },
+  "qData": [
+    {
+      "group": "G{type1}",
+      "questions": [
+        {
+          "question": "question1.1,what is mod?",
+          "random": true,
+          "choices": [
+            {
+              "c1": [{ "title": "ant", "isAns": false }],
+              "c2": [{ "title": "ant", "isAns": false }],
+              "c3": [{ "title": "ant", "isAns": true }],
+              "c4": [{ "title": "ant", "isAns": false }]
+            }
+          ]
+        },
+        {
+          "question": "question1.2,what is mod?",
+          "random": false,
+          "choices": [
+            {
+              "c1": [{ "title": "ant", "isAns": false }],
+              "c2": [{ "title": "ant", "isAns": false }],
+              "c3": [{ "title": "ant", "isAns": true }],
+              "c4": [{ "title": "ant", "isAns": false }]
+            }
+          ],
+          "answer": "chioce3"
+        }
+      ]
+    }
+  ],
+  "status": "ready to import"
+}
