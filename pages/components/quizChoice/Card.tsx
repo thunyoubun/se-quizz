@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 import { BsCheckCircle, BsListCheck } from "react-icons/bs";
 import { QuestionPayload } from "../../../types/QuestionType";
 
@@ -25,7 +26,7 @@ const Card = ({ id, value }: props) => {
         </div>
       </div>
       <div className="p-2 dark:text-white">
-        <h1>{value?.["question[question_name]"]}</h1>
+        <h1>{value?.["question[question_text]"]}</h1>
       </div>
       <hr className=" my-4 dark:text-white" />
 
@@ -41,11 +42,15 @@ const Card = ({ id, value }: props) => {
                   value="email"
                 />
                 {value?.["question[answers][0][answer_weight]"] === 100 ? (
-                  <label htmlFor="ans1" className="text-green-500 text-base">
+                  <label
+                    htmlFor="ans1"
+                    className="text-green-500 text-base font-semibold flex gap-2"
+                  >
                     {value?.["question[answers][0][answer_text]"]}
+                    <AiOutlineCheckCircle size={25} />
                   </label>
                 ) : (
-                  <label htmlFor="ans1" className=" text-base">
+                  <label htmlFor="ans1" className="dark:text-white  text-base">
                     {value?.["question[answers][0][answer_text]"]}
                   </label>
                 )}
@@ -58,11 +63,15 @@ const Card = ({ id, value }: props) => {
                   value="email"
                 />
                 {value?.["question[answers][1][answer_weight]"] === 100 ? (
-                  <label htmlFor="ans1" className="text-green-500 text-base">
+                  <label
+                    htmlFor="ans1"
+                    className="text-green-500 text-base font-semibold flex gap-2"
+                  >
                     {value?.["question[answers][1][answer_text]"]}
+                    <AiOutlineCheckCircle size={25} />
                   </label>
                 ) : (
-                  <label htmlFor="ans1" className=" text-base">
+                  <label htmlFor="ans1" className="dark:text-white text-base">
                     {value?.["question[answers][1][answer_text]"]}
                   </label>
                 )}
@@ -77,11 +86,15 @@ const Card = ({ id, value }: props) => {
                   value="email"
                 />
                 {value?.["question[answers][2][answer_weight]"] === 100 ? (
-                  <label htmlFor="ans1" className="text-green-500 text-base">
+                  <label
+                    htmlFor="ans1"
+                    className="text-green-500 text-base font-semibold flex gap-2"
+                  >
                     {value?.["question[answers][2][answer_text]"]}
+                    <AiOutlineCheckCircle size={25} />
                   </label>
                 ) : (
-                  <label htmlFor="ans1" className=" text-base">
+                  <label htmlFor="ans1" className="dark:text-white  text-base">
                     {value?.["question[answers][2][answer_text]"]}
                   </label>
                 )}
@@ -94,11 +107,15 @@ const Card = ({ id, value }: props) => {
                   value="email"
                 />
                 {value?.["question[answers][3][answer_weight]"] === 100 ? (
-                  <label htmlFor="ans1" className="text-green-500 text-base">
+                  <label
+                    htmlFor="ans1"
+                    className="text-green-500 text-base font-semibold flexgap-2"
+                  >
                     {value?.["question[answers][3][answer_text]"]}
+                    <AiOutlineCheckCircle size={25} />
                   </label>
                 ) : (
-                  <label htmlFor="ans1" className=" text-base">
+                  <label htmlFor="ans1" className="dark:text-white  text-base">
                     {value?.["question[answers][3][answer_text]"]}
                   </label>
                 )}

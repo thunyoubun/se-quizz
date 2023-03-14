@@ -82,9 +82,9 @@ function DashboardTable({ index, category, data }: props) {
               <span
                 className={` bg-blue-500  rounded-full h-full w-full`}
               ></span>
-              <h1 className=" absolute text-center text-white dark:text-gray-800 align-middle text-3xl pt-1 h-full w-full font-semibold">
+              {/* <h1 className=" absolute text-center text-white dark:text-gray-800 align-middle text-3xl pt-1 h-full w-full font-semibold">
                 {category.slice(0, 1)}
-              </h1>
+              </h1> */}
             </div>
             <div className="text-start">
               <h1 className=" text-slate-400 text-sm">Title:</h1>
