@@ -148,7 +148,7 @@ const Myquiz = ({ user, quiz, q_static }: any) => {
                         <DashboardTable
                           category={x}
                           key={index}
-                          data={q_static[index][0]}
+                          data={q_static[index]}
                           index={index}
                         />
                       );
@@ -196,7 +196,7 @@ export const getServerSideProps = async ({ req, res }: any) => {
       });
       const data = await res.json();
 
-      return data.quiz_statistics;
+      return data.quiz_statistics[0];
     });
 
     const responses = await Promise.all(promises);

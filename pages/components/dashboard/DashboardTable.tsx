@@ -40,14 +40,26 @@ function DashboardTable({ index, category, data }: props) {
       setCollap("collapsed");
     }
   };
-  let labels = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+  let labels = [
+    "0",
+    "10",
+    "20",
+    "30",
+    "40",
+    "50",
+    "60",
+    "70",
+    "80",
+    "90",
+    "100",
+  ];
 
   const [userData, setUserData] = useState({
-    labels: null,
+    labels: labels,
     datasets: [
       {
         label: "Scores",
-        data: [data?.submission_statistics?.scores],
+        data: data?.submission_statistics?.scores,
         backgroundColor: "#6210e6",
         borderColor: "#05bbed",
         borderWidth: 2,
@@ -84,7 +96,7 @@ function DashboardTable({ index, category, data }: props) {
                 className={` bg-blue-400  rounded-full h-full w-full`}
               ></span>
               <h1 className=" absolute text-center align-middle text-3xl pt-1 h-full w-full font-semibold">
-                {category[0]}
+                {category.slice(0, 1)}
               </h1>
             </div>
             <div className="text-start">
