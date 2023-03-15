@@ -12,7 +12,68 @@ type QuestionGroup = {
   "quiz_groups[][pick_count]": number;
   "quiz_groups[][question_points]": number;
 };
-
+const testData = {
+  "author": "test_user",
+  "createDate": "Wed, 15 Mar 2023 19:42:06 GMT",
+  "deviloperID": "64121f8e1338125802458111",
+  "qData": {
+    "quiz_groups": [],
+    "quiz_questions": [
+      {
+        "question[answers][0][answer_text]": "Redhat",
+        "question[answers][0][answer_weight]": 100,
+        "question[answers][1][answer_text]": "Virus",
+        "question[answers][1][answer_weight]": 0,
+        "question[answers][2][answer_text]": "Trojan",
+        "question[answers][2][answer_weight]": 0,
+        "question[answers][3][answer_text]": "Security Killer",
+        "question[answers][3][answer_weight]": 0,
+        "question[points_possible]": 1,
+        "question[question_name]": "1A",
+        "question[question_text]": "ข้อใดไม่ใช้ซอฟต์แวร์ประสงค์ร้าย?",
+        "question[question_type]": "multiple_choice_question"
+      },
+      {
+        "question[answers][0][answer_text]": "Virus,www=* Keylogger , Security killer* Spyware , Ransomware* Virus , Trojan",
+        "question[answers][0][answer_weight]": 0,
+        "question[points_possible]": 5,
+        "question[question_name]": "1B",
+        "question[question_text]": "Software ประสงค์ร้าย ข้อใดไม่ถูกต้อง?",
+        "question[question_type]": "multiple_choice_question"
+      },
+      {
+        "question[answers][0][answer_text]": "Worms",
+        "question[answers][0][answer_weight]": 100,
+        "question[answers][1][answer_text]": "Virus",
+        "question[answers][1][answer_weight]": 0,
+        "question[answers][2][answer_text]": "Security  Killer",
+        "question[answers][2][answer_weight]": 0,
+        "question[answers][3][answer_text]": "Ransomware",
+        "question[answers][3][answer_weight]": 0,
+        "question[points_possible]": 2,
+        "question[question_name]": "2A",
+        "question[question_text]": "Malwareที่สามารถขยายตัวเพื่อกินพื้นที่บนอุปกรณ์ทําให้พื้นที่เต็มคืออะไร?",
+        "question[question_type]": "multiple_choice_question"
+      },
+      {
+        "question[answers][0][answer_text]": "จอยโดนเก็บข้อมูลส่วนตัวส่งไปให้เเฮกเกอร์",
+        "question[answers][0][answer_weight]": 100,
+        "question[answers][1][answer_text]": "จินโดนบันทึกการกดเเป้นพิม",
+        "question[answers][1][answer_weight]": 0,
+        "question[answers][2][answer_text]": "เเจคสันคอมของเค้าโดนทําลายระบบป้องกัน",
+        "question[answers][2][answer_weight]": 0,
+        "question[answers][3][answer_text]": "จินยองคอมของเค้าโดนไวรัส",
+        "question[answers][3][answer_weight]": 0,
+        "question[points_possible]": 6,
+        "question[question_name]": "2B",
+        "question[question_text]": "ข้อใดต่อไปนีโดนซอฟเเวร์ประสงค์ร้ายเเบบ Spyware?",
+        "question[question_type]": "multiple_choice_question"
+      }
+    ]
+  },
+  "status": "ready to import",
+  "title": "testdocx3"
+}
 const CreateClassicQuiz = async (param: LMSparam, body: ClassicQuiz) => {
   var options = {
     method: "POST",
@@ -78,12 +139,12 @@ const CreatQuestion = async (param: LMSparam, body: unknown) => {
   return response;
 };
 
-const test = (
+export const oneStopQuiz = (
   TOKEN: string,
   courseID: string | number,
-  ClassicQuizBody: ClassicQuiz,
-  QuestionGroupBody: QuestionGroup,
-  QuestionBody: unknown
+  ClassicQuizBody: ClassicQuiz, //{'title':title}
+  QuestionGroupBody: Array<QuestionGroup>, //testData.qData.quiz_groups
+  QuestionBody: Array<any> //testData.qData.quiz_questions
 ) => {
   let quizID = 0;
   CreateClassicQuiz(
@@ -92,41 +153,58 @@ const test = (
       quizID: null,
       TOKEN: TOKEN,
     },
-    ClassicQuizBody //{ "quiz[title]": "chain then quiz" }
+    ClassicQuizBody //{ "quiz[title]": "" }
   ).then((data) => {
     console.log(data);
     quizID = data.id;
-    // call in then
-    CreateQuestionGroup(
-      {
-        courseID: courseID,
-        quizID: quizID,
-        TOKEN: TOKEN,
-      },
-      QuestionGroupBody //{"quiz_groups[][name]": "group from ts","quiz_groups[][pick_count]": 1,"quiz_groups[][question_points]": 1,}
-    ).then((data) => {
-      console.log(data);
-      groupID.push({
-        quiz_group_id: data.quiz_groups[0].id,
-        quiz_group_name: data.quiz_groups[0].name,
+    let IndexMem = []; //เนื่องจากออกแบบapi ผิดพลาด
+    // create group and question in group
+    for (let i = 0; i < QuestionGroupBody.length; i++) {
+      const questiongroup = QuestionGroupBody[i];
+      CreateQuestionGroup(
+        {
+          courseID: courseID,
+          quizID: quizID,
+          TOKEN: TOKEN,
+        },
+        questiongroup
+      ).then((data) => {
+        console.log(data);
+
+        const quiz_group_id = data.quiz_groups[0].id;
+        const quiz_group_name = data.quiz_groups[0].name;
+        for (let i = 0; i < QuestionBody.length; i++) {
+          if (QuestionBody[i].group_belong_to === quiz_group_name) {
+            IndexMem.push(i);
+            delete QuestionBody[i].group_belong_to;
+            QuestionBody[i]["question[quiz_group_id]"] = quiz_group_id;
+            CreatQuestion(
+              { courseID: courseID, quizID: quizID, TOKEN: TOKEN },
+              QuestionBody[i] //QuestionBody
+            ).then((data) => console.log(data));
+          }
+        }
       });
-      // call in then
-      CreatQuestion(
-        { courseID: courseID, quizID: quizID, TOKEN: TOKEN },
-        { "question[quiz_group_id]": groupID[0].quiz_group_id } //QuestionBody
-      ).then((data) => console.log(data));
-    });
+    }
+    for (let index = 0; index < QuestionBody.length; index++) {
+      const element = QuestionBody[index];
+      if (index in IndexMem) {
+        continue;
+      } else {
+        CreatQuestion(
+          { courseID: courseID, quizID: quizID, TOKEN: TOKEN },
+          element //QuestionBody
+        ).then((data) => console.log(data));
+      }
+    }
   });
+  return { quizID: quizID };
 };
-let groupID: Array<{
-  quiz_group_id: string | number;
-  quiz_group_name: string;
-}> = [];
-test(
+
+oneStopQuiz(
   "21123~Ci16eEjIuU2RnkZW4iPgSMq5cSOWgIiLUqFNdtUUCMaHhNFjSjMOb6IYRkHC62ZP",
   "1306",
-  { "quiz[title]": "chain then quiz" },
-  {"quiz_groups[][name]": "group from ts","quiz_groups[][pick_count]": 1,"quiz_groups[][question_points]": 1,},
-  {  },
-
+  { "quiz[title]": "2group2question" }, //from uesr input
+  testData.qData.quiz_groups, 
+  testData.qData.quiz_questions
 );
