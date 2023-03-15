@@ -35,7 +35,7 @@ const CreateClassicQuiz = async (param: LMSparam, body: ClassicQuiz) => {
   return response;
 };
 
-const CreateQuizGroup = async (param: LMSparam, body: QuestionGroup) => {
+const CreateQuestionGroup = async (param: LMSparam, body: QuestionGroup) => {
   var options = {
     method: "POST",
     url: `https://mango-cmu.instructure.com/api/v1/courses/${param.courseID}/quizzes/${param.quizID}/groups/`,
@@ -78,51 +78,55 @@ const CreatQuestion = async (param: LMSparam, body: unknown) => {
   return response;
 };
 
-const test = (TOKEN:string,courseID:string|number) => {
-  
+const test = (
+  TOKEN: string,
+  courseID: string | number,
+  ClassicQuizBody: ClassicQuiz,
+  QuestionGroupBody: QuestionGroup,
+  QuestionBody: unknown
+) => {
   let quizID = 0;
-  let groupID: Array<{
-    quiz_group_id: string | number;
-    quiz_group_name: string;
-  }> = [];
-
   CreateClassicQuiz(
     {
-      courseID: "1306",
+      courseID: courseID,
       quizID: null,
       TOKEN: TOKEN,
     },
-    { "quiz[title]": "chain then quiz" }
+    ClassicQuizBody //{ "quiz[title]": "chain then quiz" }
   ).then((data) => {
     console.log(data);
     quizID = data.id;
-
-    CreateQuizGroup(
+    // call in then
+    CreateQuestionGroup(
       {
-        courseID: "1306",
+        courseID: courseID,
         quizID: quizID,
         TOKEN: TOKEN,
       },
-      {
-        "quiz_groups[][name]": "group from ts",
-        "quiz_groups[][pick_count]": 1,
-        "quiz_groups[][question_points]": 1,
-      }
+      QuestionGroupBody //{"quiz_groups[][name]": "group from ts","quiz_groups[][pick_count]": 1,"quiz_groups[][question_points]": 1,}
     ).then((data) => {
       console.log(data);
       groupID.push({
         quiz_group_id: data.quiz_groups[0].id,
         quiz_group_name: data.quiz_groups[0].name,
       });
-
+      // call in then
       CreatQuestion(
-        { courseID: 1306, quizID: quizID, TOKEN: TOKEN },
-        { "question[quiz_group_id]": groupID[0].quiz_group_id }
+        { courseID: courseID, quizID: quizID, TOKEN: TOKEN },
+        { "question[quiz_group_id]": groupID[0].quiz_group_id } //QuestionBody
       ).then((data) => console.log(data));
-
     });
   });
 };
+let groupID: Array<{
+  quiz_group_id: string | number;
+  quiz_group_name: string;
+}> = [];
+test(
+  "21123~Ci16eEjIuU2RnkZW4iPgSMq5cSOWgIiLUqFNdtUUCMaHhNFjSjMOb6IYRkHC62ZP",
+  "1306",
+  { "quiz[title]": "chain then quiz" },
+  {"quiz_groups[][name]": "group from ts","quiz_groups[][pick_count]": 1,"quiz_groups[][question_points]": 1,},
+  {  },
 
-
-test("21123~Ci16eEjIuU2RnkZW4iPgSMq5cSOWgIiLUqFNdtUUCMaHhNFjSjMOb6IYRkHC62ZP",1306)
+);
