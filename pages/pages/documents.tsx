@@ -139,16 +139,20 @@ export default function Documents({ user }: any) {
           </ul>
         )}
       </div>
-      <div className="h-full px-10 py-10">
-        <div className="bg-white w-full h-full rounded-md p-10 ">
-          <div className=" px-20 ">
+      <div className="h-full sm:px-10 px-4 sm:py-10 py-4">
+        <div className="bg-white w-full h-full rounded-md sm:p-10 p-4 ">
+          <div className=" sm:px-20 px-10 ">
             <div className=" flex justify-center mb-10">
               <h1 className=" text-3xl font-bold">Documents</h1>
             </div>
-            <div className=" flex flex-col justify-start gap-4">
-              <h1 className=" text-lg font-semibold underline">
-                วิธีการใช้งาน EasyQ
-              </h1>
+            <div className=" flex flex-col justify-center gap-4">
+              <div className="flex flex-col items-center  gap-4 justify-center">
+                <div className="flex flex-col text-center sm:text-start gap-4">
+                  <h1 className=" font-semibold underline">
+                    วิธีการใช้งานของระบบ LMS Quiz Importer
+                  </h1>
+                </div>
+              </div>
               <div className="flex flex-col items-center gap-4 justify-center">
                 <Image
                   src="/assets/howto/6.png"
@@ -169,9 +173,9 @@ export default function Documents({ user }: any) {
                 <h1 className="font-semibold">Import Quiz </h1>
               </div>
               <div className="flex flex-col items-center gap-4 justify-center">
-                <div className="flex flex-col text-start gap-4">
-                  <h1 className=" font-semibold underline">
-                    วิธีการใช้งานของระบบ LMS Quiz Importer
+                <div className="flex flex-col text-start gap-4 ">
+                  <h1 className=" font-semibold underline px-14">
+                    วิธีการเขียน Syntax
                   </h1>
                   <div className="flex flex-col px-20">
                     <h1 className=" font-semibold">
