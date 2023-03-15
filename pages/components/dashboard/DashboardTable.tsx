@@ -55,7 +55,6 @@ function DashboardTable({ index, category, data }: props) {
 
   useEffect(() => {
     setStatic(data);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 

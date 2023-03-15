@@ -37,7 +37,7 @@ const Quizz = ({ user, quiz }: any) => {
   return (
     <div className=" flex leading-default bg-gray-100 dark:bg-gray-600 h-fit min-h-screen    w-full   ">
       <Head>
-        <title>EasyQ - {myquizz?.category}</title>
+        <title>EasyQ - {myquizz?.title}</title>
         <meta
           property="og:title"
           content={`EasyQ - ${myquizz?.title}`}

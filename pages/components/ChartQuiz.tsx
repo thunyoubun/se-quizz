@@ -27,6 +27,7 @@ function BarChart({ chartData }: any) {
   useEffect(() => {
     setUserData(Object.assign(userData, chartData));
     console.log(userData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <Bar data={userData} />;
