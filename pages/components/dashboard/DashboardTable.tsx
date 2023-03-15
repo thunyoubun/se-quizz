@@ -96,7 +96,7 @@ function DashboardTable({ index, category, data }: props) {
         <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
           <div className="text-center">
             <h1 className=" font-semibold dark:text-white">
-              {quizStatic.points_possible}
+              {quizStatic?.points_possible}
             </h1>
           </div>
         </td>
