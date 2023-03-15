@@ -80,13 +80,9 @@ const Quizz = ({ user, quiz }: any) => {
                 }
               />
               <div className="flex flex-row gap-2">
-                <button className=" bg-indigo-600 flex text-center justify-center hover:bg-indigo-500 border-b-4 border-indigo-800 rounded-md p-4 w-1/2 text-white text-xl">
+                <button className=" bg-indigo-600 flex text-center justify-center hover:bg-indigo-500 border-b-4 border-indigo-800 rounded-md p-4 w-full text-white text-xl">
                   <MdOutlineNotStarted size={30} className="mr-2" />
                   Submit Quiz
-                </button>
-                <button className=" bg-indigo-600 hover:bg-indigo-500 flex text-center justify-center border-b-4 border-indigo-800 rounded-md p-4 w-1/2 text-white text-xl">
-                  <RiQuestionAnswerFill size={30} className="mr-2" />
-                  Edit Quiz
                 </button>
               </div>
 
@@ -126,7 +122,9 @@ export const getServerSideProps = async ({ req, res }: any) => {
     const data = await res.json();
     const user = data.user;
 
-    const res1 = await fetch(`https://sebackend.vercel.app/api/Quiz/work_zaa`);
+    const res1 = await fetch(
+      `https://sebackend.vercel.app/api/Quiz/${user?.firstName}_${user?.lastName}`
+    );
     const data1 = await res1.json();
     const quiz = data1;
 

@@ -196,7 +196,7 @@ export default function Home({ user }: any) {
                 </li>
                 <li>
                   <Link
-                    href="/documents"
+                    href="pages/documents"
                     className=" bg-white text-xl py-6 hover:scale-105  shadow-lg rounded-xl text-indigo-500 font-semibold inline-flex items-center md:px-8 px-5"
                   >
                     <RiBookMarkLine className=" mr-2" />
