@@ -8,7 +8,6 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { useAuth } from "../../../contexts/auth";
-import { title } from "process";
 
 export declare type props = {
   user: any;
@@ -19,7 +18,7 @@ const ModalQuiz = ({ user }: props) => {
   const { loading, token, isAuthenticated } = useAuth();
   const [author, setAuthor] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [quizText, setQuizText] = useState("");
+  const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [quizFile, setQuizFile] = useState<File>();
   const [quizs, setQuizs] = useState([]);
@@ -33,7 +32,7 @@ const ModalQuiz = ({ user }: props) => {
 
   useEffect(() => {
     if (user != null || user != undefined) {
-      setAuthor(user?.firstName + "_" + user?.lastName);
+      setAuthor(user?.firstName + " " + user?.lastName);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
@@ -67,7 +66,7 @@ const ModalQuiz = ({ user }: props) => {
         },
         data: {
           title: title,
-          author: author,
+          author: user?.firstName + "_" + user?.lastName,
           files: quizFile,
         },
       };
@@ -112,7 +111,7 @@ const ModalQuiz = ({ user }: props) => {
   };
 
   return (
-    <div>
+    <>
       <button
         className="z-10 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white"
         type="button"
@@ -155,9 +154,9 @@ const ModalQuiz = ({ user }: props) => {
                         id="subject"
                         required
                         onChange={(e) => {
-                          if (e) setQuizText(e.target.value);
+                          if (e) setTitle(e.target.value);
                         }}
-                        value={quizText}
+                        value={title}
                         type="text"
                         className="appearance-none focus:outline-none focus:shadow-outline  focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
                       />
@@ -179,7 +178,7 @@ const ModalQuiz = ({ user }: props) => {
                       </label>
                       <input
                         id="author"
-                        value={author}
+                        value={user?.firstName + "_" + user?.lastName}
                         disabled
                         className="appearance-none focus:outline-none  focus:shadow-outline focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
                       />
@@ -243,7 +242,7 @@ const ModalQuiz = ({ user }: props) => {
           </div>
         </div>
       ) : null}
-    </div>
+    </>
   );
 };
 

@@ -73,7 +73,7 @@ const Quizz = ({ user, quiz }: any) => {
               </div> */}
 
               <HeadQuizz
-                title={myquizz?.category}
+                title={myquizz?.title}
                 author={myquizz?.author}
                 choice={
                   myquizz?.qData?.quiz_groups[0]?.["quiz_groups[][pick_count]"]
@@ -97,9 +97,11 @@ const Quizz = ({ user, quiz }: any) => {
               </div> */}
 
               <div className=" flex flex-col gap-2">
-                {myquizz?.qData?.quiz_questions?.map((value: any, index: any) => {
-                  return <Card value={value} id={index + 1} key={index} />;
-                })}
+                {myquizz?.qData?.quiz_questions?.map(
+                  (value: any, index: any) => {
+                    return <Card value={value} id={index + 1} key={index} />;
+                  }
+                )}
               </div>
             </div>
           </div>
