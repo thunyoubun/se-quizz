@@ -137,7 +137,7 @@ export default function QuizzesTable({ data }: any) {
                       </td> */}
                       <td className="p-2 px-6 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                         <p className="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
-                          {x.author}
+                          {x.author.replace("_", " ")}
                         </p>
                       </td>
 

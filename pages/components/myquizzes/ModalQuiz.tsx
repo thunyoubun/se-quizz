@@ -21,7 +21,7 @@ const ModalQuiz = ({ user }: props) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [quizFile, setQuizFile] = useState<File>();
-  const [quizs, setQuizs] = useState([]);
+  const [quizId, setQuizId] = useState("");
   const route = useRouter();
   const [isLoading, setLoading] = useState(false);
   const date = new Date().toLocaleDateString("en-US", {
@@ -32,7 +32,7 @@ const ModalQuiz = ({ user }: props) => {
 
   useEffect(() => {
     if (user != null || user != undefined) {
-      setAuthor(user?.firstName + " " + user?.lastName);
+      setAuthor(user?.firstName + "_" + user?.lastName);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
@@ -47,10 +47,22 @@ const ModalQuiz = ({ user }: props) => {
     }
   };
 
-  const callGetQuiz = async () => {
+  const saveQuiz = async () => {
     try {
-      const resp = await axios.get("/api/quiz");
-      if (resp.data.ok) setQuizs(resp.data.quiz);
+      const url = `/api/quiz`;
+      const data = {
+        id: quizId,
+        title: title,
+        auth: user?.firstName + " " + user?.lastName,
+      };
+      const resp = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const res = await resp.json();
     } catch (err: any) {
       console.log(err.response.data.mesasge);
     }
@@ -70,11 +82,10 @@ const ModalQuiz = ({ user }: props) => {
           files: quizFile,
         },
       };
+
       const resp = await axios
         .request(options)
         .then((res) => {
-          console.log(res);
-          console.log(res.data);
           return res;
         })
         .catch(function (error) {
@@ -82,7 +93,8 @@ const ModalQuiz = ({ user }: props) => {
         });
 
       if (resp?.data.status) {
-        /*  await callGetQuiz(); */
+        setQuizId("5140");
+        await saveQuiz();
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
@@ -113,7 +125,7 @@ const ModalQuiz = ({ user }: props) => {
   return (
     <>
       <button
-        className="z-10 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white"
+        className="z-40 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white"
         type="button"
         onClick={() => updateMenu()}
       >
@@ -160,7 +172,7 @@ const ModalQuiz = ({ user }: props) => {
                         type="text"
                         className="appearance-none focus:outline-none focus:shadow-outline  focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
                       />
-                      <label className="block text-black dark:text-white text-sm font-bold mb-1">
+                      {/* <label className="block text-black dark:text-white text-sm font-bold mb-1">
                         Category
                       </label>
                       <input
@@ -172,7 +184,7 @@ const ModalQuiz = ({ user }: props) => {
                         }}
                         value={category}
                         className="appearance-none focus:outline-none focus:shadow-outline focus:border-blue-500 leading-tight border-2  rounded w-full my-2 p-2 text-black"
-                      />
+                      /> */}
                       <label className="block text-black dark:text-white text-sm font-bold mb-1">
                         Author
                       </label>
