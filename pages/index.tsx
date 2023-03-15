@@ -36,7 +36,7 @@ export default function Home({ user }: any) {
               <Link href="/pages/myquizz">Product</Link>
             </li> */}
             <li className="p-4  hover:text-gray-900">
-              <Link href="/pages/document">Document</Link>
+              <Link href="/pages/documents">Document</Link>
             </li>
             <li className="p-4  hover:text-gray-900">
               <Link href="https://deviloper-se.vercel.app/contact">
