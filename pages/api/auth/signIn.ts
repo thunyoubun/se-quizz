@@ -117,7 +117,7 @@ export default async function handler(
       studentId: cmuBasicInfo.student_id,
       itaccounttype_id: cmuBasicInfo.itaccounttype_id,
       organization_name_EN: cmuBasicInfo.organization_name_EN,
-      quizToken: null,
+      quizToken: "",
     };
     users.push(newUser);
     writeUsersDB(users);
