@@ -183,6 +183,7 @@ export const getServerSideProps = async ({ req, res }: any) => {
     });
     const data1 = await res1.json();
     const quiz = data1.findQuiz;
+    console.log(quiz);
 
     const promises = quiz.map(async (x: any) => {
       try {
