@@ -93,7 +93,7 @@ const ModalQuiz = ({ user }: props) => {
         });
 
       if (resp?.data.status) {
-        setQuizId("5140");
+        setQuizId(resp.data.quizID);
         await saveQuiz();
         setLoading(true);
         setTimeout(() => {

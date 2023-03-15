@@ -64,9 +64,9 @@ export default function QuizzesTable({ data }: any) {
   };
 
   return (
-    <div className="w-full  mt-10 ">
-      <div className="w-full  h-max md:px-7 px-3  ">
-        <div className=" border-3 border-black rounded-md p-4 overflow-x-auto shadow-xl bg-white dark:bg-gray-800 ">
+    <div className="w-full h-full mt-10 ">
+      <div className="w-full  h-full md:px-7 px-3  ">
+        <div className=" border-3 border-black rounded-md p-4 overflow-x-auto overflow-y-auto mb-2 shadow-xl bg-white dark:bg-gray-800 ">
           <div className=" mt-3 px-4 w-full flex justify-between relative">
             <h1 className="flex gap-2 text-lg font-semibold text-gray-600 dark:text-white">
               <BiCodeBlock size={30} />
@@ -113,7 +113,7 @@ export default function QuizzesTable({ data }: any) {
                 ></th>
               </tr>
             </thead>
-            <tbody className="bg-white dark:bg-gray-800 ">
+            <tbody className="bg-white dark:bg-gray-800  ">
               {data
                 ?.map((x: any, index: any) => {
                   return (

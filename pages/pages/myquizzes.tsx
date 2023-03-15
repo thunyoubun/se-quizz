@@ -29,7 +29,7 @@ export default function Dashboard({ data, user }: any) {
       </div>
       <ModalQuiz user={user} />
       <div
-        className="z-10 container w-full overflow-y-auto relative
+        className="z-10 container w-full  overflow-y-auto overflow-x-auto  relative
         h-full max-h-screen transition-all duration-200 ease-in-out  rounded-xl "
       >
         <Navbar prePath="Pages" pathName="My Quizzes" user={user} />
