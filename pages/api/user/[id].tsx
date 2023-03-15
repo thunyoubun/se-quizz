@@ -28,6 +28,7 @@ export default function quizIdRoute(req: any, res: any) {
 
     const name = req.body.name;
     const Lname = req.body.Lname;
+    let quizToken = req.body.quizToken;
 
     //validate body
     if (
@@ -40,6 +41,7 @@ export default function quizIdRoute(req: any, res: any) {
       Lname.charAt(0).toUpperCase() === Lname.charAt(0)
     )
       return res.status(400).json({ ok: false, message: "Invalid last name" });
+    if (typeof quizToken == null) quizToken = "";
 
     //find and update name , Lname in DB
     const users = readUsersDB();
@@ -55,6 +57,7 @@ export default function quizIdRoute(req: any, res: any) {
     const userd = users[userIdx];
     userd.name = name;
     userd.Lname = Lname;
+    userd.quizToken = quizToken;
     users[userIdx] = userd;
 
     writeUsersDB(users);
@@ -64,6 +67,7 @@ export default function quizIdRoute(req: any, res: any) {
       ok: true,
       name: users[userIdx].name,
       Lname: users[userIdx].Lname,
+      quizToken: users[userIdx].quizToken,
     });
   }
 }

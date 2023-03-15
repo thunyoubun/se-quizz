@@ -54,6 +54,14 @@ const User = ({ user, quiz, token }: any) => {
           showConfirmButton: false,
           timer: 1500,
         });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: res.message,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (err: any) {
       Swal.fire({

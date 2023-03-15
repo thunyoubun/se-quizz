@@ -6,6 +6,8 @@ import { getCookie } from "cookies-next";
 import Head from "next/head";
 import DashboardTable from "../components/dashboard/DashboardTable";
 import { BiBarChartAlt, BiGridAlt } from "react-icons/bi";
+import ModalQuiz from "../components/myquizzes/ModalQuiz";
+import ModalToken from "../components/dashboard/ModalToken";
 
 const Myquiz = ({ user, quiz, q_static }: any) => {
   return (
@@ -20,6 +22,7 @@ const Myquiz = ({ user, quiz, q_static }: any) => {
       <div id="nav-sidebar" className="z-10 hidden md:flex  md:p-6 mb-2">
         <Sidebar quizCount={quiz.length.toString()} />
       </div>
+      <ModalToken user={user} />
       <div
         className="z-10 container w-full overflow-y-auto relative
         h-full max-h-screen transition-all duration-200 ease-in-out  rounded-xl "
@@ -133,16 +136,20 @@ const Myquiz = ({ user, quiz, q_static }: any) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {quiz.map((x: any, index: any) => {
-                      return (
-                        <DashboardTable
-                          category={x.title}
-                          key={index}
-                          data={q_static[index]}
-                          index={index}
-                        />
-                      );
-                    })}
+                    {q_static == "" ? (
+                      quiz.map((x: any, index: any) => {
+                        return (
+                          <DashboardTable
+                            category={x.title}
+                            key={index}
+                            data={q_static[index]}
+                            index={index}
+                          />
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -177,16 +184,23 @@ export const getServerSideProps = async ({ req, res }: any) => {
     const quiz = data1.findQuiz;
 
     const promises = quiz.map(async (x: any) => {
-      const url = `https://mango-cmu.instructure.com/api/v1/courses/1306/quizzes/${x.id}/statistics`;
-      const res = await fetch(url, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${user.quizToken}`,
-        },
-      });
-      const data = await res.json();
-
-      return data.quiz_statistics[0];
+      try {
+        const url = `https://mango-cmu.instructure.com/api/v1/courses/1306/quizzes/${x.id}/statistics`;
+        const res = await fetch(url, {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${user.quizToken}`,
+          },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          return data.quiz_statistics[0];
+        } else {
+          return null;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     });
 
     const responses = await Promise.all(promises);
