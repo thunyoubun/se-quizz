@@ -6,7 +6,7 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { useAuth } from "../../contexts/auth";
 
-const documents = ({ user }: any) => {
+export default function Documents({ user }: any) {
   const [nav, setNav] = useState(false);
   const { loading, isAuthenticated, login } = useAuth();
 
@@ -238,9 +238,7 @@ const documents = ({ user }: any) => {
       </div>
     </div>
   );
-};
-
-export default documents;
+}
 
 export const getServerSideProps = async ({ req, res }: any) => {
   const token = getCookie("cmu-oauth-example-token", { req, res });

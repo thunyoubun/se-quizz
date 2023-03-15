@@ -17,7 +17,7 @@ export declare type props = {
   data: any;
 };
 
-function DashboardTable({ index, category, data }: props) {
+export default function DashboardTable({ index, category, data }: props) {
   const [onClicked, setOnclicked] = useState(false);
   const [textColor, setTextColor] = useState("text-gray-800");
   const [collap, setCollap] = useState("collapsed");
@@ -55,6 +55,7 @@ function DashboardTable({ index, category, data }: props) {
 
   useEffect(() => {
     setStatic(data);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
@@ -160,5 +161,3 @@ function DashboardTable({ index, category, data }: props) {
     </>
   );
 }
-
-export default DashboardTable;
