@@ -119,7 +119,7 @@ function DashboardTable({ index, category, data }: props) {
                 </div>
                 <h1 className=" text-black font-semibold dark:text-white  text-3xl">
                   {(data?.submission_statistics?.score_average /
-                    quizStatic.points_possible) *
+                    quizStatic?.points_possible) *
                     100}
                   %
                 </h1>
@@ -131,7 +131,7 @@ function DashboardTable({ index, category, data }: props) {
                 </div>
                 <h1 className=" text-black font-semibold dark:text-white   text-3xl">
                   {(data?.submission_statistics?.score_high /
-                    quizStatic.points_possible) *
+                    quizStatic?.points_possible) *
                     100}
                   %
                 </h1>
@@ -143,7 +143,7 @@ function DashboardTable({ index, category, data }: props) {
                 </div>
                 <h1 className=" text-black font-semibold dark:text-white  text-3xl">
                   {(data?.submission_statistics?.score_high /
-                    quizStatic.points_possible) *
+                    quizStatic?.points_possible) *
                     100}
                   %
                 </h1>
