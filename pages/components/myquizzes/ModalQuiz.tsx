@@ -4,10 +4,11 @@ import { useSession } from "next-auth/react";
 import Swal from "sweetalert2";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { useAuth } from "../../../contexts/auth";
+import { title } from "process";
 
 export declare type props = {
   user: any;
@@ -20,7 +21,7 @@ const ModalQuiz = ({ user }: props) => {
   const [showModal, setShowModal] = useState(false);
   const [quizText, setQuizText] = useState("");
   const [category, setCategory] = useState("");
-  const [quizFile, setQuizFile] = useState("");
+  const [quizFile, setQuizFile] = useState<File>();
   const [quizs, setQuizs] = useState([]);
   const route = useRouter();
   const [isLoading, setLoading] = useState(false);
@@ -58,20 +59,38 @@ const ModalQuiz = ({ user }: props) => {
 
   const callPostQuiz = async () => {
     try {
-      const resp = await axios.post("https://sebackend.vercel.app/api/upload", {
-        category: category,
-        author: user?.firstName + "_" + user?.lastName,
-        files: quizFile,
-        token: user?.quizToken,
-      });
-      if (resp.data.status) {
+     
+      var options = {
+        method: "POST",
+        url: "https://sebackend.vercel.app/api/upload",
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+        data: {
+          'title':title,
+          'author':author,
+          'files':quizFile
+        },
+      };
+      const resp = await axios
+        .request(options)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+          return res;
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+
+      
+      if (resp?.data.status) {
         /*  await callGetQuiz(); */
-        setQuizFile("");
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
           setShowModal(false);
-          route.push(`/quiz/${resp.data.quiz.id}`);
+          route.push(`/quiz/${resp.data.deviloperID}`);
         }, 3000);
       } else {
         Swal.fire({
@@ -95,7 +114,7 @@ const ModalQuiz = ({ user }: props) => {
   };
 
   return (
-    <>
+    <div>
       <button
         className="z-10 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white"
         type="button"
@@ -168,20 +187,19 @@ const ModalQuiz = ({ user }: props) => {
                       />
                       <label className="block text-black dark:text-white text-sm font-bold mb-1">
                         Files
-                        <span className="ml-2 text-red-500">(.doc,.docx)</span>
+                        <span className="ml-2 text-red-500">(.docx)</span>
                       </label>
                       <input
                         id="file"
                         type="file"
-                        onChange={(e) => {
-                          if (e) {
-                            setQuizFile(e.target.value);
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                          if (e.target.files) {
+                            setQuizFile(e.target.files[0]);
                             console.warn("Upload!!!");
                           }
                         }}
                         onDrop={(e) => e.preventDefault()}
-                        value={quizFile}
-                        accept=".docx,.doc"
+                        accept=".docx"
                         className=" w-full py-2 px-1 text-black dark:text-white"
                         required
                       />
@@ -227,7 +245,7 @@ const ModalQuiz = ({ user }: props) => {
           </div>
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 
