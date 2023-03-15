@@ -114,9 +114,13 @@ const ModalToken = ({ user }: props) => {
                       className=" rounded px-8 pt-6 pb-8 w-full"
                       method="POST"
                     >
-                      <div className="my-4 border-2 bg-gray-100 border-slate-200 p-2 rounded-md">
-                        <h1>Look like this is your first time.</h1>
-                        <h1>You have to set token before upload quizs.</h1>
+                      <div className="my-4 border-2 bg-gray-100 dark:bg-gray-800 border-slate-200 p-2 rounded-md">
+                        <h1 className=" dark:text-white">
+                          Look like this is your first time.
+                        </h1>
+                        <h1 className=" dark:text-white">
+                          You have to set token before upload quizs.
+                        </h1>
                         <a
                           href="https://mango-cmu.instructure.com/profile/settings"
                           className=" text-blue-500 hover:text-blue-600 underline"

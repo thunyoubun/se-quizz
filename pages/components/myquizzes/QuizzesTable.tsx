@@ -125,7 +125,7 @@ export default function QuizzesTable({ data }: any) {
                         <div className="flex  py-1">
                           <div className="flex flex-col justify-center">
                             <h6 className="mb-0 text-sm font-semibold leading-normal dark:text-white">
-                              {x.category}
+                              {x.title}
                             </h6>
                           </div>
                         </div>

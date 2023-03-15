@@ -61,7 +61,9 @@ export const getServerSideProps = async ({ req, res }: any) => {
     const data2 = await res2.json();
     const user = data2.user;
 
-    const res = await fetch(`https://sebackend.vercel.app/api/Quiz/work_zaa`);
+    const res = await fetch(
+      `https://sebackend.vercel.app/api/Quiz/${user?.firstName}_${user?.lastName}`
+    );
     const data = await res.json();
     const quiz = data;
     console.log(quiz);

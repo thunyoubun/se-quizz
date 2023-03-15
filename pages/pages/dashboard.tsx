@@ -8,6 +8,7 @@ import DashboardTable from "../components/dashboard/DashboardTable";
 import { BiBarChartAlt, BiGridAlt } from "react-icons/bi";
 import ModalQuiz from "../components/myquizzes/ModalQuiz";
 import ModalToken from "../components/dashboard/ModalToken";
+import { BsBarChartLineFill } from "react-icons/bs";
 
 const Myquiz = ({ user, quiz, q_static }: any) => {
   return (
@@ -111,7 +112,7 @@ const Myquiz = ({ user, quiz, q_static }: any) => {
           <div className="w-full  h-max px-3 mt-2 md:mt-0  ">
             <div className="  rounded-md p-4 overflow-x-auto shadow-xl bg-white dark:bg-gray-800 ">
               <div className=" my-3 px-4  flex gap-2 justify-start relative dark:text-white">
-                <BiBarChartAlt size={30} />
+                <BsBarChartLineFill size={30} />
                 <h1 className=" text-lg font-semibold text-gray-600 dark:text-white">
                   Quizzes
                 </h1>
@@ -136,7 +137,7 @@ const Myquiz = ({ user, quiz, q_static }: any) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {q_static == "" ? (
+                    {q_static != "" ? (
                       quiz.map((x: any, index: any) => {
                         return (
                           <DashboardTable

@@ -33,7 +33,7 @@ const ModalQuiz = ({ user }: props) => {
 
   useEffect(() => {
     if (user != null || user != undefined) {
-      setAuthor(user?.firstName + " " + user?.lastName);
+      setAuthor(user?.firstName + "_" + user?.lastName);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
@@ -59,7 +59,6 @@ const ModalQuiz = ({ user }: props) => {
 
   const callPostQuiz = async () => {
     try {
-     
       var options = {
         method: "POST",
         url: "https://sebackend.vercel.app/api/upload",
@@ -67,9 +66,9 @@ const ModalQuiz = ({ user }: props) => {
           "content-type": "multipart/form-data",
         },
         data: {
-          'title':title,
-          'author':author,
-          'files':quizFile
+          title: title,
+          author: author,
+          files: quizFile,
         },
       };
       const resp = await axios
@@ -83,7 +82,6 @@ const ModalQuiz = ({ user }: props) => {
           console.error(error);
         });
 
-      
       if (resp?.data.status) {
         /*  await callGetQuiz(); */
         setLoading(true);
