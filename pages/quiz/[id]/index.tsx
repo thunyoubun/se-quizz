@@ -59,7 +59,7 @@ const Quizz = ({ user, quiz }: any) => {
       >
         <Navbar
           prePath={"My Quizzes"}
-          pathName={"Quiz " + myquizz?.category}
+          pathName={"Quiz " + myquizz?.title}
           user={user}
         />
         {/* Quizz*/}
