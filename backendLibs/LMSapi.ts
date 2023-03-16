@@ -94,6 +94,7 @@ const CreateClassicQuiz = async (param: LMSparam, body: ClassicQuiz) => {
     params: body,
     headers: {
       Accept: "*/*",
+      "Access-Control-Allow-Origin": true,
       Authorization: "Bearer " + param.TOKEN,
     },
   };
@@ -116,6 +117,7 @@ const CreateQuestionGroup = async (param: LMSparam, body: QuestionGroup) => {
     params: body,
     headers: {
       Accept: "*/*",
+      "Access-Control-Allow-Origin": true,
       Authorization: "Bearer " + param.TOKEN,
     },
   };
@@ -137,6 +139,7 @@ const CreatQuestion = async (param: LMSparam, body: unknown) => {
     params: body,
     headers: {
       Accept: "*/*",
+      "Access-Control-Allow-Origin": true,
       Authorization: "Bearer " + param.TOKEN,
     },
   };
