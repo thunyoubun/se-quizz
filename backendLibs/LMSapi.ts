@@ -169,7 +169,7 @@ export const oneStopQuiz = (
     ClassicQuizBody //{ "quiz[title]": "" }
   ).then((data) => {
     console.log(data);
-    quizID = data.id;
+    quizID = data!.id;
     let IndexMem: number[] = []; //เนื่องจากออกแบบapi ผิดพลาด
     // create group and question in group
     for (let i = 0; i < QuestionGroupBody.length; i++) {
@@ -183,17 +183,11 @@ export const oneStopQuiz = (
         questiongroup
       ).then((data) => {
         console.log(data);
-<<<<<<< HEAD
-
-        const quiz_group_id = data["quiz_groups[0]"].id;
-        const quiz_group_name = data.quiz_groups[0].name;
-=======
         return data
        
       }).then(data=>{
-        const quiz_group_id = data.quiz_groups[i].id;
-        const quiz_group_name = data.quiz_groups[i].name;
->>>>>>> 8c32ac641f1c754149b4f95cf095867341efaed4
+        const quiz_group_id = data!.quiz_groups[i].id;
+        const quiz_group_name = data!.quiz_groups[i].name;
         for (let i = 0; i < QuestionBody.length; i++) {
           if (QuestionBody[i].group_belong_to === quiz_group_name) {
             IndexMem.push(i);
