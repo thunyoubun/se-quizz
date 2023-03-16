@@ -14,10 +14,16 @@ type QuestionGroup = {
 };
 const testData = {
   "author": "test_user",
-  "createDate": "Wed, 15 Mar 2023 19:42:06 GMT",
-  "deviloperID": "64121f8e1338125802458111",
+  "createDate": "Wed, 15 Mar 2023 19:45:59 GMT",
+  "deviloperID": "641220771338125802458112",
   "qData": {
-    "quiz_groups": [],
+    "quiz_groups": [
+      {
+        "quiz_groups[][name]": "2",
+        "quiz_groups[][pick_count]": 2,
+        "quiz_groups[][question_points]": 2
+      }
+    ],
     "quiz_questions": [
       {
         "question[answers][0][answer_text]": "Redhat",
@@ -42,6 +48,7 @@ const testData = {
         "question[question_type]": "multiple_choice_question"
       },
       {
+        "group_belong_to": "2",
         "question[answers][0][answer_text]": "Worms",
         "question[answers][0][answer_weight]": 100,
         "question[answers][1][answer_text]": "Virus",
@@ -50,12 +57,13 @@ const testData = {
         "question[answers][2][answer_weight]": 0,
         "question[answers][3][answer_text]": "Ransomware",
         "question[answers][3][answer_weight]": 0,
-        "question[points_possible]": 2,
         "question[question_name]": "2A",
         "question[question_text]": "Malwareที่สามารถขยายตัวเพื่อกินพื้นที่บนอุปกรณ์ทําให้พื้นที่เต็มคืออะไร?",
-        "question[question_type]": "multiple_choice_question"
+        "question[question_type]": "multiple_choice_question",
+        "question[quiz_group_id]": 0
       },
       {
+        "group_belong_to": "2",
         "question[answers][0][answer_text]": "จอยโดนเก็บข้อมูลส่วนตัวส่งไปให้เเฮกเกอร์",
         "question[answers][0][answer_weight]": 100,
         "question[answers][1][answer_text]": "จินโดนบันทึกการกดเเป้นพิม",
@@ -64,10 +72,10 @@ const testData = {
         "question[answers][2][answer_weight]": 0,
         "question[answers][3][answer_text]": "จินยองคอมของเค้าโดนไวรัส",
         "question[answers][3][answer_weight]": 0,
-        "question[points_possible]": 6,
         "question[question_name]": "2B",
         "question[question_text]": "ข้อใดต่อไปนีโดนซอฟเเวร์ประสงค์ร้ายเเบบ Spyware?",
-        "question[question_type]": "multiple_choice_question"
+        "question[question_type]": "multiple_choice_question",
+        "question[quiz_group_id]": 0
       }
     ]
   },
@@ -171,7 +179,7 @@ export const oneStopQuiz = (
       ).then((data) => {
         console.log(data);
 
-        const quiz_group_id = data.quiz_groups[0].id;
+        const quiz_group_id = data['quiz_groups[0]'].id;
         const quiz_group_name = data.quiz_groups[0].name;
         for (let i = 0; i < QuestionBody.length; i++) {
           if (QuestionBody[i].group_belong_to === quiz_group_name) {
@@ -204,7 +212,7 @@ export const oneStopQuiz = (
 oneStopQuiz(
   "21123~Ci16eEjIuU2RnkZW4iPgSMq5cSOWgIiLUqFNdtUUCMaHhNFjSjMOb6IYRkHC62ZP",
   "1306",
-  { "quiz[title]": "2group2question" }, //from uesr input
+  { "quiz[title]": "groupandnogroup" }, //from uesr input
   testData.qData.quiz_groups, 
   testData.qData.quiz_questions
 );
