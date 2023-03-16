@@ -10,7 +10,7 @@ import ModalQuiz from "../components/myquizzes/ModalQuiz";
 import ModalToken from "../components/dashboard/ModalToken";
 import { BsBarChartLineFill } from "react-icons/bs";
 
-const Myquiz = ({ user, quiz, q_static }: any) => {
+const Myquiz = ({ user, quiz, q_static, token }: any) => {
   return (
     <div className=" flex leading-default bg-gray-100 dark:bg-gray-600 h-fit min-h-screen   w-full   ">
       <Head>
@@ -23,7 +23,7 @@ const Myquiz = ({ user, quiz, q_static }: any) => {
       <div id="nav-sidebar" className="z-10 hidden md:flex  md:p-6 mb-2">
         <Sidebar quizCount={quiz.length.toString()} />
       </div>
-      <ModalToken user={user} />
+      <ModalToken user={user} token={token} />
       <div
         className="z-10 container w-full overflow-y-auto relative
         h-full max-h-screen transition-all duration-200 ease-in-out  rounded-xl "
