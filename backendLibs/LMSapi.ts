@@ -150,8 +150,8 @@ const CreatQuestion = async (param: LMSparam, body: unknown) => {
 export const oneStopQuiz = (
   TOKEN: string,
   courseID: string | number,
-  ClassicQuizBody: ClassicQuiz, //{'title':title}
-  QuestionGroupBody: Array<QuestionGroup>, //testData.qData.quiz_groups
+  ClassicQuizBody: any, //{'title':title}
+  QuestionGroupBody: Array<any>, //testData.qData.quiz_groups
   QuestionBody: Array<any> //testData.qData.quiz_questions
 ) => {
   let quizID = 0;
@@ -178,9 +178,11 @@ export const oneStopQuiz = (
         questiongroup
       ).then((data) => {
         console.log(data);
-
-        const quiz_group_id = data['quiz_groups[0]'].id;
-        const quiz_group_name = data.quiz_groups[0].name;
+        return data
+       
+      }).then(data=>{
+        const quiz_group_id = data.quiz_groups[i].id;
+        const quiz_group_name = data.quiz_groups[i].name;
         for (let i = 0; i < QuestionBody.length; i++) {
           if (QuestionBody[i].group_belong_to === quiz_group_name) {
             IndexMem.push(i);
