@@ -83,6 +83,9 @@ const Quizz = ({ user, quiz }: any) => {
               <div className="flex flex-row gap-2">
                 <button
                   onClick={() =>
+                    {
+                      console.log(myquizz?.qData.quiz_groups)
+                      console.log( myquizz?.qData.quiz_questions);
                     oneStopQuiz(
                       user.quizToken,
                       "1306",
@@ -90,6 +93,7 @@ const Quizz = ({ user, quiz }: any) => {
                       myquizz?.qData.quiz_groups,
                       myquizz?.qData.quiz_questions
                     )
+                  }
                   }
                   className=" bg-indigo-600 flex text-center justify-center hover:bg-indigo-500 border-b-4 border-indigo-800 rounded-md p-4 w-full text-white text-xl"
                 >

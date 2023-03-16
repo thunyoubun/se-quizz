@@ -94,7 +94,10 @@ const CreateClassicQuiz = async (param: LMSparam, body: ClassicQuiz) => {
     params: body,
     headers: {
       Accept: "*/*",
-      "Access-Control-Allow-Origin": true,
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods':' GET, POST, PATCH, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+
       Authorization: "Bearer " + param.TOKEN,
     },
   };
@@ -117,7 +120,9 @@ const CreateQuestionGroup = async (param: LMSparam, body: QuestionGroup) => {
     params: body,
     headers: {
       Accept: "*/*",
-      "Access-Control-Allow-Origin": true,
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods':' GET, POST, PATCH, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
       Authorization: "Bearer " + param.TOKEN,
     },
   };
@@ -139,7 +144,9 @@ const CreatQuestion = async (param: LMSparam, body: unknown) => {
     params: body,
     headers: {
       Accept: "*/*",
-      "Access-Control-Allow-Origin": true,
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods':' GET, POST, PATCH, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
       Authorization: "Bearer " + param.TOKEN,
     },
   };
@@ -190,8 +197,8 @@ export const oneStopQuiz = (
           return data;
         })
         .then((data) => {
-          const quiz_group_id = data?.quiz_groups[i].id;
-          const quiz_group_name = data?.quiz_groups[i].name;
+          const quiz_group_id = data?.quiz_groups[i]?.id;
+          const quiz_group_name = data?.quiz_groups[i]?.name;
           for (let i = 0; i < QuestionBody.length; i++) {
             if (QuestionBody[i].group_belong_to === quiz_group_name) {
               IndexMem.push(i);
