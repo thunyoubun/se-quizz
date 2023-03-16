@@ -1,3 +1,3 @@
 export type ClassicQuiz = {
-  "quiz[title]": string;
+  "quiz[title]": any;
 };

@@ -18,6 +18,7 @@ import { getCookie } from "cookies-next";
 import { QuizPayload } from "../../../types/QuizPayload";
 import Head from "next/head";
 import Group from "../../components/quizChoice/Group";
+import { oneStopQuiz } from "../../../backendLibs/LMSapi";
 
 const Quizz = ({ user, quiz }: any) => {
   const router = useRouter();
@@ -80,7 +81,18 @@ const Quizz = ({ user, quiz }: any) => {
                 }
               />
               <div className="flex flex-row gap-2">
-                <button className=" bg-indigo-600 flex text-center justify-center hover:bg-indigo-500 border-b-4 border-indigo-800 rounded-md p-4 w-full text-white text-xl">
+                <button
+                  onClick={() =>
+                    oneStopQuiz(
+                      user.quizToken,
+                      "1306",
+                      { "quiz[title]": myquizz?.title },
+                      myquizz?.qData.quiz_groups,
+                      myquizz?.qData.quiz_questions
+                    )
+                  }
+                  className=" bg-indigo-600 flex text-center justify-center hover:bg-indigo-500 border-b-4 border-indigo-800 rounded-md p-4 w-full text-white text-xl"
+                >
                   <MdOutlineNotStarted size={30} className="mr-2" />
                   Submit Quiz
                 </button>

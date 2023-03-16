@@ -49,8 +49,7 @@ let users = [
     organization_name_EN: "Faculty of Engineering",
     name: "THUN",
     Lname: "ANANTARAT",
-    quizToken:
-      "21123~DEEQG3b7x4Udjn3Dz8iH4DqQYz2tLfuh2NRPjidrP2kuFxN0PEKRxFiIP5aiLvdJ",
+    quizToken: "",
   },
   {
     id: "2",
@@ -60,7 +59,7 @@ let users = [
     studentId: "630610759",
     itaccounttype_id: "StdAcc",
     organization_name_EN: "Faculty of Engineering",
-    quizToken: "ddddd",
+    quizToken: "",
   },
 ];
 

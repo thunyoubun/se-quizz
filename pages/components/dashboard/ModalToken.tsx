@@ -54,6 +54,8 @@ const ModalToken = ({ user }: props) => {
     try {
       const url = `/api/user`;
       const data = {
+        name: user.firstName,
+        Lname: user.lastName,
         quizToken: userToken,
       };
       const resp = await fetch(url, {

@@ -5,7 +5,7 @@ type LMSparam = {
   TOKEN: string;
 };
 type ClassicQuiz = {
-  "quiz[title]": string;
+  "quiz[title]": string | undefined;
 };
 type QuestionGroup = {
   "quiz_groups[][name]": string;
@@ -13,18 +13,18 @@ type QuestionGroup = {
   "quiz_groups[][question_points]": number;
 };
 const testData = {
-  "author": "test_user",
-  "createDate": "Wed, 15 Mar 2023 19:45:59 GMT",
-  "deviloperID": "641220771338125802458112",
-  "qData": {
-    "quiz_groups": [
+  author: "test_user",
+  createDate: "Wed, 15 Mar 2023 19:45:59 GMT",
+  deviloperID: "641220771338125802458112",
+  qData: {
+    quiz_groups: [
       {
         "quiz_groups[][name]": "2",
         "quiz_groups[][pick_count]": 2,
-        "quiz_groups[][question_points]": 2
-      }
+        "quiz_groups[][question_points]": 2,
+      },
     ],
-    "quiz_questions": [
+    quiz_questions: [
       {
         "question[answers][0][answer_text]": "Redhat",
         "question[answers][0][answer_weight]": 100,
@@ -37,18 +37,19 @@ const testData = {
         "question[points_possible]": 1,
         "question[question_name]": "1A",
         "question[question_text]": "ข้อใดไม่ใช้ซอฟต์แวร์ประสงค์ร้าย?",
-        "question[question_type]": "multiple_choice_question"
+        "question[question_type]": "multiple_choice_question",
       },
       {
-        "question[answers][0][answer_text]": "Virus,www=* Keylogger , Security killer* Spyware , Ransomware* Virus , Trojan",
+        "question[answers][0][answer_text]":
+          "Virus,www=* Keylogger , Security killer* Spyware , Ransomware* Virus , Trojan",
         "question[answers][0][answer_weight]": 0,
         "question[points_possible]": 5,
         "question[question_name]": "1B",
         "question[question_text]": "Software ประสงค์ร้าย ข้อใดไม่ถูกต้อง?",
-        "question[question_type]": "multiple_choice_question"
+        "question[question_type]": "multiple_choice_question",
       },
       {
-        "group_belong_to": "2",
+        group_belong_to: "2",
         "question[answers][0][answer_text]": "Worms",
         "question[answers][0][answer_weight]": 100,
         "question[answers][1][answer_text]": "Virus",
@@ -58,30 +59,34 @@ const testData = {
         "question[answers][3][answer_text]": "Ransomware",
         "question[answers][3][answer_weight]": 0,
         "question[question_name]": "2A",
-        "question[question_text]": "Malwareที่สามารถขยายตัวเพื่อกินพื้นที่บนอุปกรณ์ทําให้พื้นที่เต็มคืออะไร?",
+        "question[question_text]":
+          "Malwareที่สามารถขยายตัวเพื่อกินพื้นที่บนอุปกรณ์ทําให้พื้นที่เต็มคืออะไร?",
         "question[question_type]": "multiple_choice_question",
-        "question[quiz_group_id]": 0
+        "question[quiz_group_id]": 0,
       },
       {
-        "group_belong_to": "2",
-        "question[answers][0][answer_text]": "จอยโดนเก็บข้อมูลส่วนตัวส่งไปให้เเฮกเกอร์",
+        group_belong_to: "2",
+        "question[answers][0][answer_text]":
+          "จอยโดนเก็บข้อมูลส่วนตัวส่งไปให้เเฮกเกอร์",
         "question[answers][0][answer_weight]": 100,
         "question[answers][1][answer_text]": "จินโดนบันทึกการกดเเป้นพิม",
         "question[answers][1][answer_weight]": 0,
-        "question[answers][2][answer_text]": "เเจคสันคอมของเค้าโดนทําลายระบบป้องกัน",
+        "question[answers][2][answer_text]":
+          "เเจคสันคอมของเค้าโดนทําลายระบบป้องกัน",
         "question[answers][2][answer_weight]": 0,
         "question[answers][3][answer_text]": "จินยองคอมของเค้าโดนไวรัส",
         "question[answers][3][answer_weight]": 0,
         "question[question_name]": "2B",
-        "question[question_text]": "ข้อใดต่อไปนีโดนซอฟเเวร์ประสงค์ร้ายเเบบ Spyware?",
+        "question[question_text]":
+          "ข้อใดต่อไปนีโดนซอฟเเวร์ประสงค์ร้ายเเบบ Spyware?",
         "question[question_type]": "multiple_choice_question",
-        "question[quiz_group_id]": 0
-      }
-    ]
+        "question[quiz_group_id]": 0,
+      },
+    ],
   },
-  "status": "ready to import",
-  "title": "testdocx3"
-}
+  status: "ready to import",
+  title: "testdocx3",
+};
 const CreateClassicQuiz = async (param: LMSparam, body: ClassicQuiz) => {
   var options = {
     method: "POST",
@@ -165,7 +170,7 @@ export const oneStopQuiz = (
   ).then((data) => {
     console.log(data);
     quizID = data.id;
-    let IndexMem = []; //เนื่องจากออกแบบapi ผิดพลาด
+    let IndexMem: number[] = []; //เนื่องจากออกแบบapi ผิดพลาด
     // create group and question in group
     for (let i = 0; i < QuestionGroupBody.length; i++) {
       const questiongroup = QuestionGroupBody[i];
@@ -179,7 +184,7 @@ export const oneStopQuiz = (
       ).then((data) => {
         console.log(data);
 
-        const quiz_group_id = data['quiz_groups[0]'].id;
+        const quiz_group_id = data["quiz_groups[0]"].id;
         const quiz_group_name = data.quiz_groups[0].name;
         for (let i = 0; i < QuestionBody.length; i++) {
           if (QuestionBody[i].group_belong_to === quiz_group_name) {
@@ -213,6 +218,6 @@ oneStopQuiz(
   "21123~Ci16eEjIuU2RnkZW4iPgSMq5cSOWgIiLUqFNdtUUCMaHhNFjSjMOb6IYRkHC62ZP",
   "1306",
   { "quiz[title]": "groupandnogroup" }, //from uesr input
-  testData.qData.quiz_groups, 
+  testData.qData.quiz_groups,
   testData.qData.quiz_questions
 );

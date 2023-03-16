@@ -37,7 +37,7 @@ export default function depositRoute(req: any, res: any) {
     const Lname = req.body.Lname;
     const quizToken = req.body.quizToken;
     //validate body
-    if (
+    /* if (
       typeof name !== "string" &&
       name.charAt(0).toUpperCase() === name.charAt(0)
     )
@@ -46,7 +46,7 @@ export default function depositRoute(req: any, res: any) {
       typeof Lname !== "string" &&
       Lname.charAt(0).toUpperCase() === Lname.charAt(0)
     )
-      return res.status(400).json({ ok: false, message: "Invalid last name" });
+      return res.status(400).json({ ok: false, message: "Invalid last name" }); */
     if (typeof quizToken !== "string" || quizToken.length === 0)
       return res
         .status(400)
@@ -58,8 +58,6 @@ export default function depositRoute(req: any, res: any) {
       (x: any) => x.cmuAccount === user.cmuAccount
     );
     const userd = users[userIdx];
-    userd.name = name;
-    userd.Lname = Lname;
     userd.quizToken = quizToken;
     users[userIdx] = userd;
 
@@ -68,8 +66,6 @@ export default function depositRoute(req: any, res: any) {
     //return response
     return res.json({
       ok: true,
-      name: users[userIdx].name,
-      Lname: users[userIdx].Lname,
     });
   } else {
     return res.status(400).json({ ok: false, message: "Invalid HTTP Method" });
