@@ -139,16 +139,20 @@ export default function Documents({ user }: any) {
           </ul>
         )}
       </div>
-      <div className="h-full px-10 py-10">
-        <div className="bg-white w-full h-full rounded-md p-10 ">
-          <div className=" px-20 ">
+      <div className="h-full sm:px-10 px-4 sm:py-10 py-4">
+        <div className="bg-white w-full h-full rounded-md sm:p-10 p-4 ">
+          <div className=" sm:px-20 px-10 ">
             <div className=" flex justify-center mb-10">
               <h1 className=" text-3xl font-bold">Documents</h1>
             </div>
-            <div className=" flex flex-col justify-start gap-4">
-              <h1 className=" text-lg font-semibold underline">
-                วิธีการใช้งาน EasyQ
-              </h1>
+            <div className=" flex flex-col justify-center gap-4">
+              <div className="flex flex-col items-center  gap-4 justify-center">
+                <div className="flex flex-col text-center sm:text-start gap-4">
+                  <h1 className=" font-semibold underline">
+                    วิธีการใช้งานของระบบ LMS Quiz Importer
+                  </h1>
+                </div>
+              </div>
               <div className="flex flex-col items-center gap-4 justify-center">
                 <Image
                   src="/assets/howto/6.png"
@@ -169,9 +173,9 @@ export default function Documents({ user }: any) {
                 <h1 className="font-semibold">Import Quiz </h1>
               </div>
               <div className="flex flex-col items-center gap-4 justify-center">
-                <div className="flex flex-col text-start gap-4">
-                  <h1 className=" font-semibold underline">
-                    วิธีการใช้งานของระบบ LMS Quiz Importer
+                <div className="flex flex-col text-start gap-4 ">
+                  <h1 className=" font-semibold underline px-14">
+                    วิธีการเขียน Syntax
                   </h1>
                   <div className="flex flex-col px-20">
                     <h1 className=" font-semibold">
@@ -205,7 +209,7 @@ export default function Documents({ user }: any) {
                     <span>[*Choice1*Choice2*Choice3=*Choice4]</span>
 
                     <span className=" font-semibold"> คำอธิบาย</span>
-                    <span>Q- ตามด้วยชื่อของคำถามแล้วใส่* P-</span>
+                    <span>Q- ตามด้วยชื่อของคำถามแล้วใส่*</span>
                     <span>P- ตามด้วยคะแนนของแต่ละคำถามในกลุ่มแล้วใส่*</span>
                     <span>
                       [*ตามด้วยตัวเลือก] และ ใส่ = หลังตัวเลือกที่เป็นคำตอบ
@@ -219,10 +223,10 @@ export default function Documents({ user }: any) {
                     <span>Q-....1A....*</span>
                     <span>……ข้อใดไม่ใช่ซอฟแวร์ประสงค์ร้าย?…..</span>
                     <span>[*Redhat=*Virus *Trojan*Security Killer]</span>
-                    <span>Q-....1B....,</span>
+                    <span>Q-....1B....*</span>
                     <span> ……ซอฟแวร์ประสงค์ร้ายข้อใดไม่ถูกต้อง?….. </span>
                     <span> [*www=*Security Killer*Spyware*Ransomware]</span>
-                    <span> end,</span>
+                    <span> end*</span>
                     <span>Q-....2....* </span>
                     <span>P-....5....* </span>
                     <span>……จริยธรรมคืออะไร?…..</span>
