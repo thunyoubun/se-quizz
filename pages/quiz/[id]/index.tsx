@@ -20,7 +20,7 @@ import Head from "next/head";
 import Group from "../../components/quizChoice/Group";
 import { oneStopQuiz } from "../../../backendLibs/LMSapi";
 
-const Quizz = ({ user, quiz }: any) => {
+const Quizz = (user: any, quiz: any) => {
   const router = useRouter();
   const [myquizz, Setmyquizz] = useState<QuizPayload>();
   const id = router.query.id;
@@ -35,7 +35,7 @@ const Quizz = ({ user, quiz }: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const saveQuiz = async ({ quizId, title }: any) => {
+  const saveQuiz = async (quizId: any, title: any) => {
     try {
       const url = `/api/quiz`;
       const data = {
@@ -103,7 +103,7 @@ const Quizz = ({ user, quiz }: any) => {
               />
               <div className="flex flex-row gap-2">
                 <button
-                  onClick={() =>
+                  onClick={() => {
                     saveQuiz(
                       oneStopQuiz(
                         user.quizToken,
@@ -113,8 +113,8 @@ const Quizz = ({ user, quiz }: any) => {
                         myquizz?.qData.quiz_questions
                       ).quizID,
                       myquizz?.title
-                    )
-                  }
+                    );
+                  }}
                   className=" bg-indigo-600 flex text-center justify-center hover:bg-indigo-500 border-b-4 border-indigo-800 rounded-md p-4 w-full text-white text-xl"
                 >
                   <MdOutlineNotStarted size={30} className="mr-2" />
