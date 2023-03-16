@@ -169,7 +169,7 @@ export const oneStopQuiz = (
     ClassicQuizBody //{ "quiz[title]": "" }
   ).then((data) => {
     console.log(data);
-    quizID = data!.id;
+    quizID = data?.id;
     let IndexMem: number[] = []; //เนื่องจากออกแบบapi ผิดพลาด
     // create group and question in group
     for (let i = 0; i < QuestionGroupBody.length; i++) {
@@ -187,8 +187,8 @@ export const oneStopQuiz = (
           return data;
         })
         .then((data) => {
-          const quiz_group_id = data.quiz_groups[i].id;
-          const quiz_group_name = data.quiz_groups[i].name;
+          const quiz_group_id = data?.quiz_groups[i].id;
+          const quiz_group_name = data?.quiz_groups[i].name;
           for (let i = 0; i < QuestionBody.length; i++) {
             if (QuestionBody[i].group_belong_to === quiz_group_name) {
               IndexMem.push(i);
@@ -217,10 +217,10 @@ export const oneStopQuiz = (
   return { quizID: quizID };
 };
 
-oneStopQuiz(
-  "21123~Ci16eEjIuU2RnkZW4iPgSMq5cSOWgIiLUqFNdtUUCMaHhNFjSjMOb6IYRkHC62ZP",
-  "1306",
-  { "quiz[title]": "groupandnogroup" }, //from uesr input
-  testData.qData.quiz_groups,
-  testData.qData.quiz_questions
-);
+// oneStopQuiz(
+//   "21123~Ci16eEjIuU2RnkZW4iPgSMq5cSOWgIiLUqFNdtUUCMaHhNFjSjMOb6IYRkHC62ZP",
+//   "1306",
+//   { "quiz[title]": "groupandnogroup" }, //from uesr input
+//   testData.qData.quiz_groups,
+//   testData.qData.quiz_questions
+// );
