@@ -70,7 +70,7 @@ const Quizz = (user: any, quiz: any) => {
         <span className="absolute top-0 left-0 w-full h-full bg-blue-500 opacity-50 "></span>
       </div>
       <div id="nav-sidebar" className="z-10 hidden md:flex  md:p-6 mb-2">
-        <Sidebar quizCount={quiz.length.toString()} />
+        <Sidebar quizCount={quiz} />
       </div>
       {/* <div className=" z-20 flex fixed right-12 bottom-10  shadow-xl  rounded-full p-3 cursor-pointer hover:bg-blue-700 bg-blue-600 ho text-white">
         <BsPlusLg size={20} />
@@ -104,15 +104,12 @@ const Quizz = (user: any, quiz: any) => {
               <div className="flex flex-row gap-2">
                 <button
                   onClick={() => {
-                    saveQuiz(
-                      oneStopQuiz(
-                        user.quizToken,
-                        "1306",
-                        { "quiz[title]": myquizz?.title },
-                        myquizz?.qData.quiz_groups,
-                        myquizz?.qData.quiz_questions
-                      ).quizID,
-                      myquizz?.title
+                    oneStopQuiz(
+                      user.quizToken,
+                      "1306",
+                      { "quiz[title]": myquizz?.title },
+                      myquizz?.qData.quiz_groups,
+                      myquizz?.qData.quiz_questions
                     );
                   }}
                   className=" bg-indigo-600 flex text-center justify-center hover:bg-indigo-500 border-b-4 border-indigo-800 rounded-md p-4 w-full text-white text-xl"
