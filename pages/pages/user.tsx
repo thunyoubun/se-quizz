@@ -382,13 +382,11 @@ export const getServerSideProps = async ({ req, res }: any) => {
     const data = await res.json();
     const user = data.user;
 
-    const res1 = await fetch(`${process.env.NEXTAUTH_URL}api/quiz`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-    const data1 = await res1.json();
-    const quiz = data1.findQuiz;
+    const res2 = await fetch(
+      `https://sebackend.vercel.app/api/Quiz/${user?.firstName}_${user?.lastName}`
+    );
+    const data2 = await res2.json();
+    const quiz = data2;
 
     return {
       props: {

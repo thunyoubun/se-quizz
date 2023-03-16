@@ -10,32 +10,6 @@ let quizz = [
     date: "1/16/2023",
     status: "Ready",
   },
-  {
-    id: "5140",
-    title: "Networks",
-    category: "Mid Term",
-    auth: "THUN ANANTARAT",
-    date: "2/15/2023",
-    status: "Ready",
-  },
-  {
-    id: "5140",
-    title: "test1",
-    category: "test1",
-    auth: "LATTHAPHOL LAOHAPIBOONRATTANA",
-    file: "C:\\fakepath\\ENG 101 Make-up Exam Request Form.docx",
-    date: "2/15/2023",
-    status: "Ready",
-  },
-  {
-    id: "5140",
-    title: "Test",
-    category: "Mid Term",
-    auth: "THUN ANANTARAT",
-    file: "C:\\fakepath\\259192-แบบฟอร์มขอชั่วโมงกิจกรรมเสริม-แบบรายบุคคล.docx",
-    date: "3/1/2023",
-    status: "Ready",
-  },
 ];
 
 let users = [
