@@ -181,25 +181,26 @@ export const oneStopQuiz = (
           TOKEN: TOKEN,
         },
         questiongroup
-      ).then((data) => {
-        console.log(data);
-        return data
-       
-      }).then(data=>{
-        const quiz_group_id = data!.quiz_groups[i].id;
-        const quiz_group_name = data!.quiz_groups[i].name;
-        for (let i = 0; i < QuestionBody.length; i++) {
-          if (QuestionBody[i].group_belong_to === quiz_group_name) {
-            IndexMem.push(i);
-            delete QuestionBody[i].group_belong_to;
-            QuestionBody[i]["question[quiz_group_id]"] = quiz_group_id;
-            CreatQuestion(
-              { courseID: courseID, quizID: quizID, TOKEN: TOKEN },
-              QuestionBody[i] //QuestionBody
-            ).then((data) => console.log(data));
+      )
+        .then((data) => {
+          console.log(data);
+          return data;
+        })
+        .then((data) => {
+          const quiz_group_id = data.quiz_groups[i].id;
+          const quiz_group_name = data.quiz_groups[i].name;
+          for (let i = 0; i < QuestionBody.length; i++) {
+            if (QuestionBody[i].group_belong_to === quiz_group_name) {
+              IndexMem.push(i);
+              delete QuestionBody[i].group_belong_to;
+              QuestionBody[i]["question[quiz_group_id]"] = quiz_group_id;
+              CreatQuestion(
+                { courseID: courseID, quizID: quizID, TOKEN: TOKEN },
+                QuestionBody[i] //QuestionBody
+              ).then((data) => console.log(data));
+            }
           }
-        }
-      });
+        });
     }
     for (let index = 0; index < QuestionBody.length; index++) {
       const element = QuestionBody[index];

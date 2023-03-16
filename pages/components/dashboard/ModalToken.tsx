@@ -11,11 +11,12 @@ import { useAuth } from "../../../contexts/auth";
 
 export declare type props = {
   user: any;
+  token: any;
 };
 
-const ModalToken = ({ user }: props) => {
+const ModalToken = ({ user, token }: props) => {
   /* const { data: session, status } = useSession(); */
-  const { loading, token, isAuthenticated } = useAuth();
+
   const [author, setAuthor] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [userToken, setUserToken] = useState("");
