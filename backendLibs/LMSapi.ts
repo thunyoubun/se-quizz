@@ -170,9 +170,9 @@ export const oneStopQuiz = (
       TOKEN: TOKEN,
     },
     ClassicQuizBody //{ "quiz[title]": "" }
-  ).then((data) => {
-    console.log(data);
-    quizID = data?.id;
+  ).then((classicdata) => {
+    console.log(classicdata);
+    quizID = classicdata?.id;
     let IndexMem: number[] = []; //เนื่องจากออกแบบapi ผิดพลาด
     // create group and question in group
     for (let i = 0; i < QuestionGroupBody.length; i++) {
@@ -185,13 +185,13 @@ export const oneStopQuiz = (
         },
         questiongroup
       )
-        .then((data) => {
-          console.log(data);
-          return data;
+        .then((groupdata) => {
+          console.log(groupdata);
+          return groupdata;
         })
         .then((data) => {
-          const quiz_group_id = data?.quiz_groups[i].id;
-          const quiz_group_name = data?.quiz_groups[i].name;
+          const quiz_group_id = data?.quiz_groups[0].id;
+          const quiz_group_name = data?.quiz_groups[0].name;
           for (let i = 0; i < QuestionBody.length; i++) {
             if (QuestionBody[i].group_belong_to === quiz_group_name) {
               IndexMem.push(i);

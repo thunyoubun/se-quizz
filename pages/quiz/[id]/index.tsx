@@ -35,6 +35,27 @@ const Quizz = ({ user, quiz }: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const saveQuiz = async ({ quizId, title }: any) => {
+    try {
+      const url = `/api/quiz`;
+      const data = {
+        id: quizId,
+        title: title,
+        auth: user?.firstName + " " + user?.lastName,
+      };
+      const resp = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const res = await resp.json();
+    } catch (err: any) {
+      console.log(err.response.data.mesasge);
+    }
+  };
+
   return (
     <div className=" flex leading-default bg-gray-100 dark:bg-gray-600 h-fit min-h-screen    w-full   ">
       <Head>
@@ -83,12 +104,15 @@ const Quizz = ({ user, quiz }: any) => {
               <div className="flex flex-row gap-2">
                 <button
                   onClick={() =>
-                    oneStopQuiz(
-                      user.quizToken,
-                      "1306",
-                      { "quiz[title]": myquizz?.title },
-                      myquizz?.qData.quiz_groups,
-                      myquizz?.qData.quiz_questions
+                    saveQuiz(
+                      oneStopQuiz(
+                        user.quizToken,
+                        "1306",
+                        { "quiz[title]": myquizz?.title },
+                        myquizz?.qData.quiz_groups,
+                        myquizz?.qData.quiz_questions
+                      ).quizID,
+                      myquizz?.title
                     )
                   }
                   className=" bg-indigo-600 flex text-center justify-center hover:bg-indigo-500 border-b-4 border-indigo-800 rounded-md p-4 w-full text-white text-xl"
