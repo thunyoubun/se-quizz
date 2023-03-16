@@ -209,7 +209,7 @@ export default function Documents({ user }: any) {
                     <span>[*Choice1*Choice2*Choice3=*Choice4]</span>
 
                     <span className=" font-semibold"> คำอธิบาย</span>
-                    <span>Q- ตามด้วยชื่อของคำถามแล้วใส่* P-</span>
+                    <span>Q- ตามด้วยชื่อของคำถามแล้วใส่*</span>
                     <span>P- ตามด้วยคะแนนของแต่ละคำถามในกลุ่มแล้วใส่*</span>
                     <span>
                       [*ตามด้วยตัวเลือก] และ ใส่ = หลังตัวเลือกที่เป็นคำตอบ
@@ -223,10 +223,10 @@ export default function Documents({ user }: any) {
                     <span>Q-....1A....*</span>
                     <span>……ข้อใดไม่ใช่ซอฟแวร์ประสงค์ร้าย?…..</span>
                     <span>[*Redhat=*Virus *Trojan*Security Killer]</span>
-                    <span>Q-....1B....,</span>
+                    <span>Q-....1B....*</span>
                     <span> ……ซอฟแวร์ประสงค์ร้ายข้อใดไม่ถูกต้อง?….. </span>
                     <span> [*www=*Security Killer*Spyware*Ransomware]</span>
-                    <span> end,</span>
+                    <span> end*</span>
                     <span>Q-....2....* </span>
                     <span>P-....5....* </span>
                     <span>……จริยธรรมคืออะไร?…..</span>
